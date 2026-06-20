@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<!--
+FRONTMATTER
+───────────────────────────────────────────────
+title: "Owner Profile — {{owner_name}}"
+doc_type: owner_profile
+category: internal
+audience: internal_team, agent, direccion
+purpose: "Consolidar información operativa del propietario y su relación con el inmueble."
+source:
+  - owners.csv
+  - properties.csv
+  - brand_board_v1
+status: template
+version: v01
+date: 2026-06-14
+entity: owner
+language: es
+tags:
+  - meridiana
+  - owner_profile
+  - propietario
+  - interno
+  - restringido
+summary: "Expediente interno de propietario: identidad, contacto, condiciones, historial y propiedades activas."
+owner: "direccion"
+related_docs:
+  - internal_property_strategy_memo
+doc_id: doc-owner-001
+───────────────────────────────────────────────
+NAMING CONVENTION: internal_owner_profile_{{owner_slug}}_{{yyyymmdd}}_v01
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridiana — Owner Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --ink-soft:   #3D3529;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --gutter: clamp(24px, 5vw, 64px);
+    --inner: 800px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { background: var(--paper-deep); font-family: var(--sans); color: var(--ink); line-height: 1.5; }
+
+  .ph  { color: var(--gold);      font-style: italic; border-bottom: 1px dashed var(--gold);      padding-bottom: 1px; }
+  .ph-d{ color: var(--gold-dark); font-style: italic; border-bottom: 1px dashed var(--gold-dark); padding-bottom: 1px; }
+
+  .page {
+    max-width: var(--inner);
+    margin: 32px auto;
+    background: var(--paper);
+    box-shadow: 0 4px 40px rgba(23,18,13,.18);
+  }
+  @media (max-width: 840px) { .page { margin: 0; box-shadow: none; } }
+
+  /* ─── HEADER ─────────────────────────────── */
+  .hd {
+    background: var(--ink);
+    padding: clamp(22px, 4vw, 36px) var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 24px;
+    align-items: start;
+  }
+  .hd__type { font-size: 9px; letter-spacing: .36em; text-transform: uppercase; color: var(--stone); font-weight: 600; margin-bottom: 6px; }
+  .hd__name { font-family: var(--serif); font-size: clamp(28px, 5vw, 52px); color: var(--paper); line-height: .9; letter-spacing: -.012em; }
+  .hd__sub {
+    margin-top: 12px;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  .type-badge {
+    font-size: 9px; letter-spacing: .24em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 10px; border: 1px solid rgba(184,145,84,.45); color: var(--gold-dark);
+  }
+  .hd__right { display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
+  .badge-int {
+    background: rgba(156,123,64,.15);
+    border: 1px solid rgba(184,145,84,.4);
+    color: var(--gold-dark);
+    font-size: 8.5px; letter-spacing: .32em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 9px;
+  }
+  .hd__meta { font-size: 10.5px; color: var(--stone); letter-spacing: .06em; text-align: right; line-height: 1.6; }
+  .hd__wm { font-family: var(--serif); font-size: 13px; color: rgba(243,236,223,.28); margin-top: 4px; }
+  .hd__wm .dot { color: var(--gold-dark); opacity: .4; }
+
+  /* ─── CONFIDENTIALITY BAR ────────────────── */
+  .conf-bar {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: clamp(12px, 2vw, 18px) var(--gutter);
+    border-bottom: 2px solid var(--ink);
+    background: var(--paper-mid);
+  }
+  .conf-label { font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); font-weight: 600; white-space: nowrap; }
+  .conf-levels { display: flex; gap: 6px; align-items: center; }
+  .conf-seg {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .conf-seg .bar {
+    width: 48px; height: 8px; background: var(--paper-deep);
+    border-radius: 1px;
+  }
+  .conf-seg .bar.on-std  { background: #4A7C5C; }
+  .conf-seg .bar.on-high { background: var(--gold); }
+  .conf-seg .bar.on-max  { background: #7A3F30; }
+  .conf-seg .clbl { font-size: 8px; letter-spacing: .14em; text-transform: uppercase; color: var(--stone); }
+  .conf-seg .clbl.active { color: var(--ink); font-weight: 700; }
+  .conf-bar .sep { width: 1px; height: 20px; background: var(--paper-deep); }
+  .conf-bar .conf-note { font-size: 11.5px; color: var(--stone); font-style: italic; }
+
+  /* ─── SECTION ────────────────────────────── */
+  .section {
+    padding: clamp(20px, 3.5vw, 36px) var(--gutter);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .section--alt { background: var(--paper-mid); }
+  .sec-hd {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: clamp(14px, 2.5vw, 24px);
+  }
+  .sec-n { font-family: var(--serif); font-size: 12px; color: var(--gold); flex-shrink: 0; }
+  .sec-lbl { font-weight: 700; font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); white-space: nowrap; }
+  .sec-rule { flex: 1; height: 1px; background: var(--paper-deep); }
+
+  /* ─── FIELD GRIDS ────────────────────────── */
+  .fgrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--paper-deep);
+  }
+  .fgrid--3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 540px) { .fgrid, .fgrid--3 { grid-template-columns: 1fr; } }
+
+  .field {
+    padding: clamp(12px, 2.2vw, 20px) clamp(14px, 2.5vw, 20px);
+    border-right: 1px solid var(--paper-deep);
+    border-bottom: 1px solid var(--paper-deep);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .field:nth-child(2n)     { border-right: 0; }
+  .fgrid--3 .field:nth-child(2n)  { border-right: 1px solid var(--paper-deep); }
+  .fgrid--3 .field:nth-child(3n)  { border-right: 0; }
+  .field--full { grid-column: 1 / -1; border-right: 0; }
+  @media (max-width: 540px) { .field { border-right: 0; } }
+  /* remove bottom border from last row */
+  .fgrid > .field:last-child,
+  .fgrid > .field--full:last-child { border-bottom: 0; }
+
+  .field label { font-size: 8px; letter-spacing: .26em; text-transform: uppercase; color: var(--stone); font-weight: 600; }
+  .field .fval { font-size: 13.5px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+  .field .fsub { font-size: 11px; color: var(--stone); line-height: 1.4; margin-top: 2px; }
+
+  /* ─── YES/NO FIELDS ──────────────────────── */
+  .yn { display: inline-flex; gap: 8px; align-items: center; }
+  .yn-val {
+    font-size: 9px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700;
+    padding: 2px 9px; border: 1px solid currentColor;
+  }
+  .yn-val.yes { color: #4A7C5C; }
+  .yn-val.no  { color: #7A3F30; }
+  .yn-val.tbd { color: var(--stone); }
+
+  /* ─── CHANNEL PILLS ──────────────────────── */
+  .channel-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cpill {
+    font-size: 10px; font-weight: 600; letter-spacing: .08em;
+    padding: 4px 11px; border: 1px solid var(--paper-deep);
+    color: var(--stone); background: var(--paper);
+  }
+  .cpill.pref { border-color: var(--gold); color: var(--gold); background: rgba(156,123,64,.07); }
+
+  /* ─── HISTORY ────────────────────────────── */
+  .history { display: flex; flex-direction: column; gap: 0; }
+  .h-item {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 12px 20px; align-items: baseline;
+    padding: clamp(10px, 1.8vw, 15px) 0;
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .h-item:last-child { border-bottom: 0; }
+  .h-date { font-size: 11.5px; color: var(--stone); font-weight: 600; letter-spacing: .04em; line-height: 1.4; }
+  .h-txt  { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* ─── NOTES ──────────────────────────────── */
+  .notes-block {
+    border-left: 2px solid var(--gold);
+    padding-left: clamp(16px, 3vw, 24px);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .notes-block label {
+    font-size: 9px; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--gold); font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .notes-block .badge-sm {
+    font-size: 8px; letter-spacing: .2em; padding: 2px 7px;
+    border: 1px solid currentColor; opacity: .7;
+  }
+  .notes-block .ntext { font-size: 13.5px; line-height: 1.68; color: var(--ink-soft); }
+
+  /* ─── PROPERTY LIST ──────────────────────── */
+  .prop-list { display: flex; flex-direction: column; gap: 0; }
+  .prop-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 12px 20px; align-items: center;
+    padding: clamp(12px, 2vw, 18px) 0;
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .prop-row:last-child { border-bottom: 0; }
+  @media (max-width: 560px) {
+    .prop-row { grid-template-columns: 1fr auto; }
+    .prop-code, .prop-status { grid-column: 1; }
+  }
+  .prop-code { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; white-space: nowrap; }
+  .prop-title { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+  .prop-title .psub { font-size: 11px; color: var(--stone); font-weight: 400; }
+  .prop-type { font-size: 11px; color: var(--stone); white-space: nowrap; }
+  .prop-status {
+    font-size: 9px; letter-spacing: .2em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 9px; border: 1px solid currentColor; white-space: nowrap;
+  }
+  .ps-activa   { color: #4A7C5C; }
+  .ps-apartada { color: var(--gold); }
+  .ps-vendida  { color: var(--stone); }
+  .ps-borrador { color: var(--stone); opacity: .6; }
+
+  /* ─── DOC FOOT ───────────────────────────── */
+  .foot {
+    padding: 10px var(--gutter);
+    background: var(--paper-mid);
+    border-top: 1px solid var(--paper-deep);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 6px;
+  }
+  .foot .fn { font-size: 9px; letter-spacing: .13em; color: var(--stone); font-style: italic; font-family: var(--serif); }
+  .foot .fs { font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: rgba(131,125,114,.55); font-weight: 600; }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+    .section { page-break-inside: avoid; }
+    .prop-row { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ HEADER ══ -->
+  <div class="hd" data-screen-label="Header">
+    <div>
+      <div class="hd__type">Meridiana · Expediente de propietario · Interno</div>
+      <div class="hd__name"><span class="ph-d" title="{{owner_name}}">{{Nombre del<br />propietario}}</span></div>
+      <div class="hd__sub">
+        <span class="type-badge"><span class="ph-d" title="{{owner_type}}">Persona física</span></span>
+      </div>
+    </div>
+    <div class="hd__right">
+      <span class="badge-int">Interno · Confidencial</span>
+      <div class="hd__meta">
+        ID: <span class="ph-d" title="{{owner_id}}">OWN-0000</span><br />
+        Actualizado: <span class="ph-d" title="{{updated_at}}">2026-06-14</span><br />
+        Versión: v01
+      </div>
+      <div class="hd__wm">Meridiana<span class="dot">.</span></div>
+    </div>
+  </div>
+
+  <!-- ══ CONFIDENTIALITY BAR ══ -->
+  <div class="conf-bar" data-screen-label="Nivel de confidencialidad">
+    <span class="conf-label">Confidencialidad · Level</span>
+    <div class="conf-levels">
+      <!-- Activar el nivel correspondiente coloreando la clase on-std / on-high / on-max -->
+      <div class="conf-seg">
+        <div class="bar on-std"></div>
+        <div class="clbl">Estándar</div>
+      </div>
+      <div class="conf-seg">
+        <div class="bar"></div><!-- on-high cuando aplique -->
+        <div class="clbl">Alto</div>
+      </div>
+      <div class="conf-seg">
+        <div class="bar"></div><!-- on-max cuando aplique -->
+        <div class="clbl">Máximo</div>
+      </div>
+    </div>
+    <span class="sep"></span>
+    <span class="conf-note"><span class="ph" title="{{confidentiality_level}}">Estándar — sin restricciones especiales de comunicación</span></span>
+  </div>
+
+  <!-- ══ 01 DATOS DEL PROPIETARIO ══ -->
+  <div class="section" data-screen-label="Datos del propietario">
+    <div class="sec-hd">
+      <span class="sec-n">01</span>
+      <span class="sec-lbl">Datos del propietario · Identity</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="fgrid">
+      <div class="field">
+        <label>Nombre completo / Razón social</label>
+        <div class="fval"><span class="ph" title="{{owner_name}}">{{Nombre completo o razón social}}</span></div>
+      </div>
+      <div class="field">
+        <label>Tipo de titularidad</label>
+        <div class="fval"><span class="ph" title="{{owner_type}}">{{Persona física · Persona moral · Fideicomiso}}</span></div>
+      </div>
+      <div class="field">
+        <label>País de residencia</label>
+        <div class="fval"><span class="ph" title="{{residency_country}}">{{México · EUA · Otro}}</span></div>
+      </div>
+      <div class="field">
+        <label>Representante legal</label>
+        <div class="fval"><span class="ph" title="{{legal_representative}}">{{Nombre o "No aplica"}}</span></div>
+        <div class="fsub"><span class="ph" title="Rol del representante">{{Apoderado · Notario · Fideicomisario}}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 02 CONTACTO Y CANAL ══ -->
+  <div class="section section--alt" data-screen-label="Contacto y canal preferido">
+    <div class="sec-hd">
+      <span class="sec-n">02</span>
+      <span class="sec-lbl">Contacto y canal preferido · Contact</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="fgrid">
+      <div class="field">
+        <label>Correo electrónico</label>
+        <div class="fval"><span class="ph" title="{{contact_email}}">{{<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c2ced3d3c4cee1c4cbc4ccd1cdce8fc2cecc">[email&#160;protected]</a>}}</span></div>
+      </div>
+      <div class="field">
+        <label>Teléfono / WhatsApp</label>
+        <div class="fval"><span class="ph" title="{{contact_phone}}">{{+52 999 000 0000}}</span></div>
+      </div>
+      <div class="field--full field">
+        <label>Canal preferido · Preferred channel</label>
+        <div class="channel-pills" style="margin-top:6px;">
+          <!-- Marcar con clase "pref" el canal preferido -->
+          <span class="cpill pref"><span class="ph" title="{{preferred_contact_channel}}">WhatsApp</span></span>
+          <span class="cpill">Email</span>
+          <span class="cpill">Llamada</span>
+          <span class="cpill">Presencial</span>
+        </div>
+        <div class="fsub" style="margin-top:8px;"><span class="ph" title="Notas de contacto">{{Notas de horario o restricciones: ej. "No llamar antes de las 10am." · "Prefiere comunicación escrita." · Sin restricciones.}}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 03 RELACIÓN CON LA PROPIEDAD ══ -->
+  <div class="section" data-screen-label="Condiciones de comercialización">
+    <div class="sec-hd">
+      <span class="sec-n">03</span>
+      <span class="sec-lbl">Condiciones de comercialización · Terms</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="fgrid fgrid--3">
+      <div class="field">
+        <label>Fotos públicas autorizadas</label>
+        <div class="fval">
+          <div class="yn">
+            <!-- Activar la clase "yes" o "no" según corresponda -->
+            <span class="yn-val yes"><span class="ph" title="{{allow_public_photos}}">Sí</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Open house autorizado</label>
+        <div class="fval">
+          <div class="yn">
+            <span class="yn-val no"><span class="ph" title="{{allow_open_house}}">No</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Letrero en fachada</label>
+        <div class="fval">
+          <div class="yn">
+            <span class="yn-val tbd"><span class="ph" title="{{allow_signage}}">Por definir</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Precio mínimo aceptable</label>
+        <div class="fval"><span class="ph" title="{{min_acceptable_price}}">{{MXN $00,000,000 · Confidencial}}</span></div>
+        <div class="fsub">No compartir con compradores</div>
+      </div>
+      <div class="field">
+        <label>Tiempo en mercado esperado</label>
+        <div class="fval"><span class="ph" title="{{expected_time_on_market}}">{{Sin prisa · 3–6 meses · Urgente}}</span></div>
+      </div>
+      <div class="field">
+        <label>Motivación de venta</label>
+        <div class="fval"><span class="ph" title="{{sale_motivation}}">{{Liquidez · Mudanza · Inversión · No declarada}}</span></div>
+        <div class="fsub">Uso estrictamente interno</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 04 HISTORIAL ══ -->
+  <div class="section section--alt" data-screen-label="Historial resumido">
+    <div class="sec-hd">
+      <span class="sec-n">04</span>
+      <span class="sec-lbl">Historial resumido · Relationship history</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="history">
+      <div class="h-item">
+        <div class="h-date"><span class="ph" title="Fecha del evento">{{Fecha}}</span></div>
+        <div class="h-txt"><span class="ph" title="Evento 1">{{Primer contacto o alta en el sistema. Canal. Quién inició.}}</span></div>
+      </div>
+      <div class="h-item">
+        <div class="h-date"><span class="ph" title="Fecha del evento">{{Fecha}}</span></div>
+        <div class="h-txt"><span class="ph" title="Evento 2">{{Evento relevante: firma de mandato, listado de propiedad, visita de valuación, cambio de condiciones.}}</span></div>
+      </div>
+      <div class="h-item">
+        <div class="h-date"><span class="ph" title="Fecha del evento">{{Fecha}}</span></div>
+        <div class="h-txt"><span class="ph" title="Evento 3">{{Evento más reciente: oferta recibida, cambio de precio, estado actual de la relación.}}</span></div>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:11.5px; color:var(--stone); font-style:italic; border-top:1px dashed rgba(131,125,114,.3); padding-top:12px;">
+      Agregar o eliminar filas según el historial real. Una línea por evento. Fecha + hecho. Sin interpretación.
+    </p>
+  </div>
+
+  <!-- ══ 05 NOTAS INTERNAS ══ -->
+  <div class="section" data-screen-label="Notas internas">
+    <div class="sec-hd">
+      <span class="sec-n">05</span>
+      <span class="sec-lbl">Notas internas · Internal notes</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="notes-block">
+      <label>Observaciones del asesor <span class="badge-sm">Privado · No compartir</span></label>
+      <div class="ntext">
+        <span class="ph" title="{{notes_internal}}">{{Contexto sobre el carácter del propietario, sus prioridades reales, sensibilidades en la comunicación, relación con otros asesores o con el mercado. Cualquier información que ayude al equipo a gestionar la relación con discreción. Sin juicios de valor. Hechos y observaciones.}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 06 PROPIEDADES ACTIVAS ══ -->
+  <div class="section section--alt" data-screen-label="Propiedades activas">
+    <div class="sec-hd">
+      <span class="sec-n">06</span>
+      <span class="sec-lbl">Propiedades vinculadas · Linked properties</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="prop-list">
+      <!-- Repetir prop-row por cada propiedad del propietario — fuente: properties.csv -->
+      <div class="prop-row">
+        <div class="prop-code"><span class="ph" title="{{property_code}}">MRD-0000</span></div>
+        <div class="prop-title">
+          <span class="ph" title="{{property_title}}">{{Nombre de la propiedad}}</span>
+          <div class="psub"><span class="ph" title="{{location}}">{{Zona · Colonia}}</span></div>
+        </div>
+        <div class="prop-type"><span class="ph" title="{{property_type}}">{{Casa · Depto · Hacienda}}</span></div>
+        <div class="prop-status ps-activa"><span class="ph" title="{{listing_status}}">Activa</span></div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-code"><span class="ph" title="{{property_code}}">MRD-0000</span></div>
+        <div class="prop-title">
+          <span class="ph" title="{{property_title}}">{{Nombre de la propiedad}}</span>
+          <div class="psub"><span class="ph" title="{{location}}">{{Zona · Colonia}}</span></div>
+        </div>
+        <div class="prop-type"><span class="ph" title="{{property_type}}">{{Casa · Depto · Hacienda}}</span></div>
+        <div class="prop-status ps-vendida"><span class="ph" title="{{listing_status}}">Vendida</span></div>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:11.5px; color:var(--stone); font-style:italic; border-top:1px dashed rgba(131,125,114,.3); padding-top:12px;">
+      Fuente: properties.csv filtrado por owner_id. Incluir activas, apartadas y vendidas para tener historial completo.
+    </p>
+  </div>
+
+  <div class="foot">
+    <span class="fn">internal_owner_profile_<span class="ph" title="{{owner_slug}}">{{owner_slug}}</span>_20260614_v01</span>
+    <span class="fs">Interno · Solo equipo y dirección</span>
+  </div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

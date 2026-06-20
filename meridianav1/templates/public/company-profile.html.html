@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<!--
+FRONTMATTER
+───────────────────────────────────────────────
+title: "Company Profile — Meridiana"
+doc_type: company_profile
+category: public
+audience: client, owner, commercial_partner
+purpose: "Presentar Meridiana como firma boutique de real estate premium en Mérida, Yucatán."
+source:
+  - agents.csv
+  - properties.csv
+  - owners.csv
+  - brand_board_v1
+status: template
+version: v01
+date: 2026-06-14
+entity: company
+language: es
+tags:
+  - meridiana
+  - company_profile
+  - institucional
+  - public
+summary: "Documento institucional para prospectos, propietarios y aliados comerciales."
+owner: "direccion"
+doc_id: doc-cp-001
+───────────────────────────────────────────────
+NAMING CONVENTION: public_company_profile_meridiana_20260614_v01
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{brand_name}} — Company Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ─── TOKENS ────────────────────────────────────── */
+  :root {
+    --ink:    #17120D;
+    --paper:  #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --gold:   #9C7B40;
+    --gold-on-dark: #B89154;
+    --stone:  #837D72;
+    --serif:  'Instrument Serif', 'Times New Roman', serif;
+    --sans:   'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --gutter: clamp(48px, 9vw, 128px);
+    --inner:  720px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    background: var(--paper-deep);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  /* ─── PLACEHOLDER STYLE ─────────────────────────── */
+  .ph {
+    color: var(--gold);
+    font-style: italic;
+    border-bottom: 1px dashed var(--gold);
+    padding-bottom: 1px;
+  }
+  .ph-block {
+    display: block;
+    color: var(--stone);
+    font-style: italic;
+    border: 1px dashed rgba(131,125,114,.5);
+    padding: 16px 18px;
+    font-size: 13px;
+    letter-spacing: .02em;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+
+  /* ─── PAGE SHELL ─────────────────────────────────── */
+  .page {
+    max-width: 860px;
+    margin: 32px auto;
+    background: var(--paper);
+    box-shadow: 0 4px 40px rgba(23,18,13,.18);
+  }
+  @media (max-width: 900px) {
+    .page { margin: 0; box-shadow: none; }
+  }
+
+  /* ─── COVER ──────────────────────────────────────── */
+  .cover {
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: clamp(40px, 7vw, 80px) var(--gutter);
+  }
+  .cover__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8vh 0 6vh;
+  }
+  .cover__eyebrow {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: clamp(36px, 6vh, 64px);
+  }
+  .cover__wordmark {
+    font-family: var(--serif);
+    font-size: clamp(62px, 14vw, 200px);
+    line-height: .88;
+    letter-spacing: -.012em;
+    color: var(--paper);
+  }
+  .cover__wordmark .accent { color: var(--gold-on-dark); }
+  .cover__rule {
+    width: clamp(60px, 12vw, 120px);
+    height: 1px;
+    background: var(--gold);
+    margin: clamp(28px, 4vh, 48px) 0 clamp(20px, 3vh, 36px);
+  }
+  .cover__tagline {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.22;
+    color: var(--paper);
+    max-width: 22ch;
+  }
+  .cover__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(131,125,114,.28);
+  }
+  .cover__city {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(13px, 1.4vw, 15px);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .cover__year {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--stone);
+  }
+
+  /* ─── SECTION SHELL ──────────────────────────────── */
+  .section {
+    padding: clamp(64px, 11vw, 120px) var(--gutter);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .section:last-of-type { border-bottom: 0; }
+  .section--alt { background: #F8F3EA; }
+
+  /* ─── SECTION HEADER ─────────────────────────────── */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: clamp(36px, 6vw, 64px);
+  }
+  .sec-num {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--gold);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .sec-label {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--stone);
+    white-space: nowrap;
+  }
+  .sec-line {
+    flex: 1;
+    height: 1px;
+    background: var(--paper-deep);
+  }
+
+  /* ─── TYPOGRAPHY ─────────────────────────────────── */
+  .display {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.03;
+    letter-spacing: -.01em;
+    font-size: clamp(32px, 5vw, 58px);
+    color: var(--ink);
+  }
+  .display + .body-text { margin-top: clamp(24px, 4vw, 40px); }
+  .body-text {
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 58ch;
+  }
+  .body-text + .body-text { margin-top: 1.1em; }
+  .body-text .en {
+    display: block;
+    margin-top: .6em;
+    color: var(--stone);
+    font-style: italic;
+    font-size: .9em;
+    line-height: 1.55;
+  }
+  .body-text a { color: var(--ink); text-underline-offset: 3px; }
+
+  /* ─── TWO-COL GRID ───────────────────────────────── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 5vw, 64px);
+    align-items: start;
+  }
+  @media (max-width: 680px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  /* ─── HOW WE WORK — STEPS ────────────────────────── */
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 24px;
+    align-items: start;
+    padding: clamp(20px,3.2vw,32px) 0;
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .step:last-child { border-bottom: 0; }
+  .step__n {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--gold);
+    padding-top: 2px;
+    line-height: 1;
+  }
+  .step__body h3 {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .step__body p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--stone);
+  }
+
+  /* ─── TEAM CARDS ─────────────────────────────────── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-deep);
+    margin-top: clamp(32px, 5vw, 52px);
+  }
+  .agent-card {
+    background: var(--paper);
+    padding: 28px 26px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .agent-card .photo-ph {
+    width: 52px; height: 52px;
+    background: var(--ink);
+    border-radius: 50%;
+    margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .agent-card .photo-ph span {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--paper);
+  }
+  .agent-card .name {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .agent-card .role {
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-top: 2px;
+  }
+  .agent-card .spec {
+    font-size: 13px;
+    color: var(--stone);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* ─── CONTACT CLOSE ──────────────────────────────── */
+  .closing {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(64px, 11vw, 120px) var(--gutter);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 7vw, 72px);
+  }
+  .closing__seal {
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-on-dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .closing__seal::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,145,84,.3);
+  }
+  .closing__seal .m {
+    font-family: var(--serif);
+    font-size: 52px;
+    color: var(--paper);
+    line-height: 1;
+  }
+  .closing__wordmark {
+    font-family: var(--serif);
+    font-size: clamp(36px, 7vw, 80px);
+    line-height: .9;
+    letter-spacing: -.012em;
+  }
+  .closing__wordmark .accent { color: var(--gold-on-dark); }
+  .closing__contact {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 32px 48px;
+  }
+  .cfield label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 8px;
+  }
+  .cfield p {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.8vw, 20px);
+    line-height: 1.3;
+    color: var(--paper);
+  }
+  .cfield p .ph { color: var(--gold-on-dark); border-bottom-color: var(--gold-on-dark); }
+  .closing__rule {
+    height: 1px;
+    background: rgba(131,125,114,.3);
+    width: 100%;
+  }
+  .closing__foot {
+    font-size: 11px;
+    letter-spacing: .14em;
+    color: var(--stone);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* ─── PRINT ──────────────────────────────────────── */
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+    .cover { min-height: 100vh; page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .closing { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══════════════ COVER ═══════════════ -->
+  <div class="cover" data-screen-label="Portada">
+    <div class="cover__body">
+      <div class="cover__eyebrow">Company Profile · Perfil institucional</div>
+      <div class="cover__wordmark"><span class="ph" title="{{brand_name}}">Meridiana</span><span class="accent">.</span></div>
+      <div class="cover__rule"></div>
+      <p class="cover__tagline"><span class="ph" title="{{tagline}}">No vende metros cuadrados.<br />Vende pertenencia.</span></p>
+    </div>
+    <div class="cover__footer">
+      <span class="cover__city"><span class="ph" title="{{city}}">Mérida, Yucatán</span></span>
+      <span class="cover__year">MMXXVI</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 01 — QUIÉNES SOMOS ═══════════════ -->
+  <div class="section" data-screen-label="Quiénes somos">
+    <div class="sec-header">
+      <span class="sec-num">01</span>
+      <span class="sec-label">Quiénes somos · Who we are</span>
+      <span class="sec-line"></span>
+    </div>
+
+    <div class="two-col">
+      <h2 class="display">Una firma que sabe exactamente quién es.</h2>
+      <div>
+        <p class="body-text">
+          <span class="ph" title="{{brand_name}}">Meridiana</span> es una inmobiliaria boutique con sede en <span class="ph" title="{{city}}">Mérida, Yucatán</span>. Trabajamos con un número reducido de propiedades y clientes para poder ofrecer algo que el mercado masivo no puede: atención sin prisa, criterio editorial en la selección del inventario y discreción como parte del servicio.
+          <span class="en">Meridiana is a boutique real estate firm based in Mérida, Yucatán. We work with a select number of properties and clients to offer what mass-market agencies cannot: unhurried attention, editorial judgment in inventory curation, and discretion as a service standard.</span>
+        </p>
+        <p class="body-text" style="margin-top:1.1em;">
+          Nuestro cliente no busca una casa. Busca confirmar quién es. Entendemos esa diferencia. Y construimos cada operación desde ahí.
+          <span class="en">Our client is not looking for a house. They are looking to confirm who they are. We understand that difference. Every transaction is built from that premise.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 02 — QUÉ HACEMOS ═══════════════ -->
+  <div class="section section--alt" data-screen-label="Qué hacemos">
+    <div class="sec-header">
+      <span class="sec-num">02</span>
+      <span class="sec-label">Qué hacemos · What we do</span>
+      <span class="sec-line"></span>
+    </div>
+
+    <h2 class="display">Compra, venta y arrendamiento de propiedades selectas.</h2>
+    <div style="margin-top: clamp(32px,5vw,52px);">
+      <div class="two-col">
+        <div>
+          <p class="body-text">
+            Representamos compradores y vendedores en operaciones residenciales de alto valor. Nuestro trabajo comienza antes de publicar una propiedad: seleccionamos el inventario, definimos el perfil del comprador adecuado y construimos una estrategia de comercialización sobria, sin urgencia artificial.
+          </p>
+          <p class="body-text">
+            No listamos cualquier propiedad. Esa restricción es parte de nuestro valor.
+            <span class="en">We do not list every property. That restriction is part of our value.</span>
+          </p>
+        </div>
+        <div>
+          <p class="body-text">
+            Operamos en el mercado residencial: casas, departamentos, villas y propiedades de hacienda en la región yucateca. También acompañamos operaciones de arrendamiento para clientes que eligen <span class="ph" title="{{city}}">Mérida</span> como residencia transitoria antes de comprar.
+            <span class="en">We operate in the residential market: houses, apartments, villas and hacienda-style properties in the Yucatán region. We also manage leases for clients who choose Mérida as a transitional residence before purchasing.</span>
+          </p>
+
+          <span class="ph-block" title="{{service_area}}">Área de servicio: definir zonas específicas — ej. Altabrisa, Temozón Norte, Santa Gertrudis Copó, Centro Histórico, corredor haciendas.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 03 — DÓNDE OPERAMOS ═══════════════ -->
+  <div class="section" data-screen-label="Dónde operamos">
+    <div class="sec-header">
+      <span class="sec-num">03</span>
+      <span class="sec-label">Dónde operamos · Where we operate</span>
+      <span class="sec-line"></span>
+    </div>
+
+    <h2 class="display"><span class="ph" title="{{city}}">Mérida</span> y la región yucateca.</h2>
+    <p class="body-text" style="margin-top: clamp(28px,4vw,44px);">
+      Conocemos la ciudad con profundidad. Sabemos qué calle cambia de valor en tres años. Sabemos qué colonia tiene silencio real y cuál tiene ruido de fin de semana. Ese conocimiento no se produce desde una oficina en otra ciudad. Se construye viviendo aquí y trabajando aquí durante años.
+      <span class="en">We know this city deeply. We know which street changes value in three years. We know which neighborhood has real quiet and which has weekend noise. That knowledge is not produced from an office in another city. It is built by living here and working here for years.</span>
+    </p>
+
+    <span class="ph-block" title="{{service_area}}">Insertar aquí las zonas específicas de operación: colonias, corredores, municipios o mercados que Meridiana atiende activamente. Ejemplo: Centro Histórico · Paseo de Montejo · Temozón Norte · Altabrisa · Corredor de Haciendas.</span>
+  </div>
+
+  <!-- ═══════════════ 04 — CÓMO TRABAJAMOS ═══════════════ -->
+  <div class="section section--alt" data-screen-label="Cómo trabajamos">
+    <div class="sec-header">
+      <span class="sec-num">04</span>
+      <span class="sec-label">Cómo trabajamos · How we work</span>
+      <span class="sec-line"></span>
+    </div>
+
+    <h2 class="display">Sin urgencia artificial. Con criterio claro.</h2>
+    <p class="body-text" style="margin-top: clamp(24px,4vw,40px); margin-bottom: clamp(32px,5vw,52px);">
+      Cada operación sigue el mismo proceso. Escucha primero, propuesta después. Sin propiedades que no encajan, sin visitas de relleno.
+    </p>
+
+    <ol class="steps" style="list-style:none;">
+      <li class="step">
+        <span class="step__n">1</span>
+        <div class="step__body">
+          <h3>Escucha inicial</h3>
+          <p>Antes de mostrar cualquier propiedad, entendemos qué busca el cliente con precisión. No el número de recámaras. El tipo de vida que quiere confirmar. <span style="font-style:italic;">Before showing any property, we understand what the client is truly looking for.</span></p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step__n">2</span>
+        <div class="step__body">
+          <h3>Selección editorial</h3>
+          <p>Presentamos entre una y tres propiedades que encajan de forma real. No listados de veinte opciones. Esa disciplina es parte del servicio. <span style="font-style:italic;">We present one to three properties that genuinely fit. Not a list of twenty options.</span></p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step__n">3</span>
+        <div class="step__body">
+          <h3>Acompañamiento discreto</h3>
+          <p>Gestionamos negociación, documentación y cierre sin ruido. La información sobre la operación queda entre las partes. <span style="font-style:italic;">We manage negotiation, documentation and closing without noise. Transaction details stay between the parties.</span></p>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step__n">4</span>
+        <div class="step__body">
+          <h3>Relación de largo plazo</h3>
+          <p>El trabajo no termina con la firma. Mantenemos contacto con propietarios y compradores de forma continua. No para vender más. Para sostener la confianza. <span style="font-style:italic;">The relationship does not end at signing. Trust is maintained over the long term.</span></p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- ═══════════════ 05 — EQUIPO ═══════════════ -->
+  <div class="section" data-screen-label="Equipo">
+    <div class="sec-header">
+      <span class="sec-num">05</span>
+      <span class="sec-label">Equipo · Team</span>
+      <span class="sec-line"></span>
+    </div>
+
+    <h2 class="display">Pocos. Buenos. Constantes.</h2>
+    <p class="body-text" style="margin-top:clamp(24px,4vw,40px);">
+      <span class="ph" title="{{team_summary}}">Meridiana opera con un equipo pequeño por decisión. Cada asesor conoce el inventario, la ciudad y el perfil del cliente con profundidad. No hay practicantes. No hay subagentes. Hay personas que llevan años aquí y que responden con nombre y apellido.</span>
+      <span class="en">Meridiana operates with a small team by design. Every advisor knows the inventory, the city and the client profile in depth. No interns, no sub-agents — people who have been here for years and are accountable by name.</span>
+    </p>
+
+    <div class="team-grid">
+      <!-- Agent card 1 -->
+      <div class="agent-card">
+        <div class="photo-ph"><span>M</span></div>
+        <div class="name"><span class="ph" title="{{agent_name}}">{{Nombre Agente}}</span></div>
+        <div class="role"><span class="ph" title="{{agent_role}}">{{Rol}}</span></div>
+        <div class="spec"><span class="ph" title="{{agent_specialty}}">{{Especialidad / zona / idiomas}}</span></div>
+      </div>
+      <!-- Agent card 2 -->
+      <div class="agent-card">
+        <div class="photo-ph"><span>M</span></div>
+        <div class="name"><span class="ph" title="{{agent_name}}">{{Nombre Agente}}</span></div>
+        <div class="role"><span class="ph" title="{{agent_role}}">{{Rol}}</span></div>
+        <div class="spec"><span class="ph" title="{{agent_specialty}}">{{Especialidad / zona / idiomas}}</span></div>
+      </div>
+      <!-- Agent card 3 — duplicar o eliminar según tamaño del equipo -->
+      <div class="agent-card">
+        <div class="photo-ph"><span>M</span></div>
+        <div class="name"><span class="ph" title="{{agent_name}}">{{Nombre Agente}}</span></div>
+        <div class="role"><span class="ph" title="{{agent_role}}">{{Rol}}</span></div>
+        <div class="spec"><span class="ph" title="{{agent_specialty}}">{{Especialidad / zona / idiomas}}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CIERRE / CONTACTO ═══════════════ -->
+  <div class="closing" data-screen-label="Contacto">
+    <div style="display:flex; gap:24px; align-items:center;">
+      <div class="closing__seal"><span class="m">M</span></div>
+      <div class="closing__wordmark">Meridian<span class="accent">a</span></div>
+    </div>
+
+    <div class="closing__rule"></div>
+
+    <div class="closing__contact">
+      <div class="cfield">
+        <label>Ciudad · City</label>
+        <p><span class="ph" title="{{city}}">Mérida, Yucatán</span></p>
+      </div>
+      <div class="cfield">
+        <label>Correo · Email</label>
+        <p><span class="ph" title="{{contact_email}}"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8dbd7d6ccd9dbccd7f8d5ddcad1dcd1d9d6d996d5c0">[email&#160;protected]</a></span></p>
+      </div>
+      <div class="cfield">
+        <label>Teléfono · Phone</label>
+        <p><span class="ph" title="{{contact_phone}}">+52 999 000 0000</span></p>
+      </div>
+      <div class="cfield">
+        <label>Sitio · Website</label>
+        <p><span class="ph" title="{{website}}">meridiana.mx</span></p>
+      </div>
+    </div>
+
+    <div class="closing__rule"></div>
+
+    <div class="closing__foot">
+      <span>© MMXXVI <span class="ph" title="{{brand_name}}">Meridiana</span> · Todos los derechos reservados</span>
+      <span style="font-family:var(--serif); font-style:italic; letter-spacing:.04em;">public_company_profile_meridiana_20260614_v01</span>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

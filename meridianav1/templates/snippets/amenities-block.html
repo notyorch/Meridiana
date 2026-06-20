@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<!--
+  snippets/amenities-block.html
+  ─────────────────────────────────────────────
+  Bloque modular de amenidades y características.
+  Tres variantes: grid · categorizado · destacados.
+  Fuente de datos: property_features.csv (is_public = true).
+  Insertar en brochures, listings y fichas de propiedad.
+  ─────────────────────────────────────────────
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridiana — Amenities Block · Snippet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ─── TOKENS ─────────────────────────────── */
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --ink-soft:   #3D3529;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--paper-deep);
+    font-family: var(--sans);
+    color: var(--ink);
+    padding: 40px clamp(16px, 5vw, 60px) 80px;
+  }
+
+  /* ─── SHOWCASE SHELL ─────────────────────── */
+  .showcase { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 3px; }
+  .showcase-hd {
+    background: var(--ink);
+    padding: 28px 36px 24px;
+    display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;
+  }
+  .showcase-hd .title { font-family: var(--serif); font-size: 28px; color: var(--paper); line-height: .9; letter-spacing: -.01em; }
+  .showcase-hd .title .dot { color: var(--gold-dark); }
+  .showcase-hd .sub { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); }
+
+  .variant-block { background: var(--paper); overflow: hidden; }
+  .variant-block--alt { background: var(--paper-mid); }
+  .variant-label {
+    padding: 8px 18px; background: var(--paper-mid);
+    border-bottom: 1px solid var(--paper-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .variant-block--alt .variant-label { background: var(--paper-deep); }
+  .variant-label .vlbl { font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); font-weight: 700; }
+  .variant-label .vtag { font-size: 8px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; padding: 2px 8px; border: 1px solid rgba(131,125,114,.35); color: var(--stone); }
+
+  /* ═══════════════════════════════════════════
+     THE ACTUAL AMENITY COMPONENTS
+  ═══════════════════════════════════════════ */
+
+  /* ─── SHARED SECTION HEADER ──────────────── */
+  .am-sec-hd {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: clamp(20px, 3.5vw, 34px);
+  }
+  .am-sec-hd .rule { flex: 1; height: 1px; background: var(--paper-deep); }
+  .am-sec-hd .lbl {
+    font-size: 9px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--stone); font-weight: 700; white-space: nowrap;
+  }
+  .am-title {
+    font-family: var(--serif);
+    font-size: clamp(22px, 3vw, 32px);
+    line-height: 1.06;
+    letter-spacing: -.008em;
+    color: var(--ink);
+    margin-bottom: clamp(6px, 1.2vw, 12px);
+  }
+  .am-intro {
+    font-size: clamp(13.5px, 1.2vw, 15px);
+    line-height: 1.65;
+    color: var(--stone);
+    max-width: 56ch;
+    margin-bottom: clamp(20px, 3.5vw, 32px);
+  }
+
+  /* ─── VARIANT 1: GRID ────────────────────── */
+  .am-grid-wrap {
+    padding: clamp(28px, 5vw, 52px) clamp(28px, 5vw, 52px);
+  }
+  .am-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--paper-deep);
+  }
+  @media (max-width: 600px) { .am-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 400px) { .am-grid { grid-template-columns: 1fr; } }
+  .am-grid__item {
+    padding: clamp(12px, 2vw, 18px) clamp(14px, 2.5vw, 20px);
+    border-right: 1px solid var(--paper-deep);
+    border-bottom: 1px solid var(--paper-deep);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .am-grid__item:nth-child(3n) { border-right: 0; }
+  @media (max-width: 600px) {
+    .am-grid__item:nth-child(2n) { border-right: 0; }
+    .am-grid__item:nth-child(3n) { border-right: 1px solid var(--paper-deep); }
+    .am-grid__item:nth-child(2n):not(:nth-child(3n)) { border-right: 0; }
+  }
+  .am-grid__item .dash { color: var(--gold); font-size: 11px; flex-shrink: 0; line-height: 1.4; }
+  .am-grid__item .itxt { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
+  .am-grid__item .itxt .ph { font-size: inherit; color: var(--gold); font-style: italic; border-bottom: 1px dashed var(--gold); }
+
+  /* ─── VARIANT 2: CATEGORIZED ─────────────── */
+  .am-cat-wrap {
+    padding: clamp(28px, 5vw, 52px);
+  }
+  .am-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 560px) { .am-cat-grid { grid-template-columns: 1fr; } }
+  .am-cat {
+    padding: clamp(18px, 3vw, 28px) clamp(18px, 3vw, 26px) clamp(18px, 3vw, 28px) 0;
+    border-right: 1px solid var(--paper-deep);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .am-cat:nth-child(2n) { padding-left: clamp(18px, 3vw, 26px); padding-right: 0; border-right: 0; }
+  @media (max-width: 560px) {
+    .am-cat, .am-cat:nth-child(2n) { padding-left: 0; padding-right: 0; border-right: 0; }
+  }
+  .am-cat__label {
+    font-size: 8.5px; letter-spacing: .30em; text-transform: uppercase;
+    color: var(--gold); font-weight: 700;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .am-cat__label .ph { font-size: inherit; color: var(--gold-dark); font-style: italic; border-bottom: 1px dashed var(--gold-dark); }
+  .am-cat__list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .am-cat__list li {
+    font-size: 13px; line-height: 1.5; color: var(--ink-soft);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(234,224,206,.9);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .am-cat__list li:last-child { border-bottom: 0; }
+  .am-cat__list li .dash { color: var(--gold); font-size: 10px; flex-shrink: 0; }
+  .am-cat__list li .ph { font-size: inherit; color: var(--gold); font-style: italic; border-bottom: 1px dashed var(--gold); }
+
+  /* ─── VARIANT 3: HIGHLIGHTS ──────────────── */
+  .am-hi-wrap {
+    padding: clamp(28px, 5vw, 52px);
+    background: var(--ink);
+  }
+  .am-hi-wrap .am-sec-hd .lbl { color: var(--stone); }
+  .am-hi-wrap .am-sec-hd .rule { background: rgba(131,125,114,.28); }
+  .am-hi-wrap .am-title { color: var(--paper); }
+  .am-hi-wrap .am-intro { color: var(--stone); }
+  .am-highlights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(131,125,114,.18);
+    border: 1px solid rgba(131,125,114,.18);
+  }
+  @media (max-width: 500px) { .am-highlights { grid-template-columns: 1fr; } }
+  .am-hi {
+    background: var(--ink);
+    padding: clamp(20px, 3.5vw, 32px) clamp(20px, 3.5vw, 28px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+  }
+  .am-hi::before {
+    content: "—";
+    color: var(--gold-dark);
+    font-size: 14px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .am-hi__name {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2vw, 22px);
+    color: var(--paper);
+    line-height: 1.1;
+    letter-spacing: -.005em;
+  }
+  .am-hi__name .ph { color: var(--gold-dark); font-style: italic; border-bottom: 1px dashed var(--gold-dark); padding-bottom: 1px; }
+  .am-hi__desc {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--stone);
+  }
+  .am-hi__desc .ph { font-size: inherit; color: rgba(184,145,84,.8); font-style: italic; border-bottom: 1px dashed rgba(184,145,84,.5); }
+
+  /* Note block below highlights */
+  .am-note {
+    margin-top: 18px;
+    font-size: 11.5px;
+    color: rgba(131,125,114,.65);
+    font-style: italic;
+    line-height: 1.55;
+  }
+  .am-note .ph { font-size: inherit; color: rgba(184,145,84,.7); font-style: italic; border-bottom: 1px dashed rgba(184,145,84,.4); }
+
+  /* ─── USAGE NOTES ────────────────────────── */
+  .usage-block {
+    background: var(--paper);
+    border-top: 2px solid var(--ink);
+    padding: 22px 28px;
+    display: flex; flex-direction: column; gap: 11px;
+  }
+  .usage-block .ulbl { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); font-weight: 700; margin-bottom: 3px; }
+  .usage-row { display: flex; gap: 12px; align-items: start; }
+  .usage-row .um { font-family: var(--serif); font-size: 14px; color: var(--gold); flex-shrink: 0; line-height: 1.1; }
+  .usage-row .ut { font-size: 12.5px; line-height: 1.6; color: var(--stone); }
+  .usage-row .ut strong { color: var(--ink-soft); font-weight: 600; }
+  .usage-foot { margin-top: 8px; padding-top: 13px; border-top: 1px solid var(--paper-deep); font-size: 9px; letter-spacing: .13em; color: var(--stone); font-family: var(--serif); font-style: italic; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+</style>
+</head>
+<body>
+<div class="showcase">
+
+  <!-- Header -->
+  <div class="showcase-hd">
+    <div>
+      <div class="title">Amenities Block<span class="dot">.</span></div>
+      <div class="sub" style="margin-top:6px;">snippets/amenities-block.html · 3 variantes · property_features.csv</div>
+    </div>
+    <div class="sub">Meridiana · MMXXVI</div>
+  </div>
+
+  <!-- ════ VARIANTE 1 — GRID ════ -->
+  <div class="variant-block">
+    <div class="variant-label">
+      <span class="vlbl">Variante 1 · Grid de amenidades</span>
+      <span class="vtag">Uso: brochure · listing longform · ficha técnica</span>
+    </div>
+    <!-- ── COPY FROM HERE ── -->
+    <div class="am-grid-wrap">
+      <div class="am-sec-hd">
+        <span class="lbl">Características · Features</span>
+        <span class="rule"></span>
+      </div>
+
+      <!-- Optional: title + intro -->
+      <!-- <div class="am-title">{{amenities_title}}</div> -->
+      <!-- <div class="am-intro">{{amenities_intro}}</div> -->
+
+      <div class="am-grid">
+        <!-- Repetir am-grid__item por cada feature con is_public = true -->
+        <!-- Fuente: property_features.csv → feature_name -->
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 1">Cenote privado de agua dulce</span></span></div>
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 2">Palapa de palma en patio central</span></span></div>
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 3">Doble altura en sala y comedor</span></span></div>
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 4">Cocina en granito negro con isla</span></span></div>
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 5">16 paneles solares (6 kW)</span></span></div>
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 6">Piso de cemento pulido</span></span></div>
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 7">Cuarto de servicio independiente</span></span></div>
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 8">Portón eléctrico doble</span></span></div>
+        <div class="am-grid__item"><span class="dash">—</span><span class="itxt"><span class="ph" title="{{amenity_items}} 9">Sistema de riego automatizado</span></span></div>
+        <!-- Agregar o eliminar ítems. Máximo recomendado: 12 ítems. -->
+      </div>
+
+      <!-- Optional note -->
+      <!-- <div style="margin-top:14px; font-size:11px; color:var(--stone); font-style:italic;">{{feature_note}}</div> -->
+    </div>
+    <!-- ── END COPY ── -->
+  </div>
+
+  <!-- ════ VARIANTE 2 — CATEGORIZED ════ -->
+  <div class="variant-block variant-block--alt">
+    <div class="variant-label">
+      <span class="vlbl">Variante 2 · Features por categoría</span>
+      <span class="vtag">Uso: listing longform · ficha técnica extendida</span>
+    </div>
+    <!-- ── COPY FROM HERE ── -->
+    <div class="am-cat-wrap">
+      <div class="am-sec-hd">
+        <span class="lbl">{{amenities_title}} <!-- Características y amenidades --></span>
+        <span class="rule"></span>
+      </div>
+      <div class="am-intro">{{amenities_intro}}<!-- Opcional: contexto breve sobre el tipo de propiedad. --></div>
+
+      <div class="am-cat-grid">
+        <!-- Categoría 1 — Fuente: property_features.csv → category = 'construccion' -->
+        <div class="am-cat">
+          <div class="am-cat__label"><span class="ph" title="{{feature_items}} categoría 1">Construcción</span></div>
+          <ul class="am-cat__list">
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Doble altura en sala y comedor</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Piso de cemento pulido</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Ventanas de piso a techo</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Techos de concreto aparente</span></li>
+          </ul>
+        </div>
+        <!-- Categoría 2 — category = 'exterior' -->
+        <div class="am-cat">
+          <div class="am-cat__label"><span class="ph" title="{{feature_items}} categoría 2">Exterior</span></div>
+          <ul class="am-cat__list">
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Cenote privado de agua dulce</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Palapa de palma</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Jardín lateral con árboles maduros</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Portón eléctrico acceso doble</span></li>
+          </ul>
+        </div>
+        <!-- Categoría 3 — category = 'tecnologia' -->
+        <div class="am-cat">
+          <div class="am-cat__label"><span class="ph" title="{{feature_items}} categoría 3">Tecnología</span></div>
+          <ul class="am-cat__list">
+            <li><span class="dash">—</span><span class="ph" title="feature_name">16 paneles solares (6 kW)</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Riego automatizado por zona</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Mini split por habitación</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Cableado estructurado CAT6</span></li>
+          </ul>
+        </div>
+        <!-- Categoría 4 — category = 'legal' -->
+        <div class="am-cat">
+          <div class="am-cat__label"><span class="ph" title="{{feature_items}} categoría 4">Legal</span></div>
+          <ul class="am-cat__list">
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Escritura individual</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Libre de gravamen</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Sin régimen de condominio</span></li>
+            <li><span class="dash">—</span><span class="ph" title="feature_name">Predial al corriente</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature note -->
+      <div style="margin-top:18px; font-size:11px; color:var(--stone); font-style:italic; border-top:1px dashed rgba(131,125,114,.3); padding-top:12px;">
+        <span class="ph" title="{{feature_note}}">Publicar solo características con is_public = true en property_features.csv. Eliminar categorías vacías.</span>
+      </div>
+    </div>
+    <!-- ── END COPY ── -->
+  </div>
+
+  <!-- ════ VARIANTE 3 — HIGHLIGHTS ════ -->
+  <div class="variant-block">
+    <div class="variant-label">
+      <span class="vlbl">Variante 3 · Destacados editoriales</span>
+      <span class="vtag">Uso: portada de brochure · sección hero de listing</span>
+    </div>
+    <!-- ── COPY FROM HERE ── -->
+    <div class="am-hi-wrap">
+      <div class="am-sec-hd">
+        <span class="lbl">Lo que define esta propiedad</span>
+        <span class="rule"></span>
+      </div>
+
+      <!-- Optional title and intro -->
+      <!-- <div class="am-title" style="color:var(--paper);">{{amenities_title}}</div> -->
+      <!-- <div class="am-intro">{{amenities_intro}}</div> -->
+
+      <div class="am-highlights">
+        <!-- 4 highlights máximo. Elegir los más diferenciales, no todos los features. -->
+        <div class="am-hi">
+          <div class="am-hi__name"><span class="ph" title="{{feature_items}} highlight 1">Cenote privado</span></div>
+          <div class="am-hi__desc"><span class="ph" title="Descripción breve">Agua dulce de nacimiento natural en patio central. El elemento que define la propiedad.</span></div>
+        </div>
+        <div class="am-hi">
+          <div class="am-hi__name"><span class="ph" title="{{feature_items}} highlight 2">Doble altura</span></div>
+          <div class="am-hi__desc"><span class="ph" title="Descripción breve">Sala y comedor con techo de 5.4 metros. Luz natural todo el día.</span></div>
+        </div>
+        <div class="am-hi">
+          <div class="am-hi__name"><span class="ph" title="{{feature_items}} highlight 3">Sustentabilidad</span></div>
+          <div class="am-hi__desc"><span class="ph" title="Descripción breve">16 paneles solares con capacidad de 6 kW. Sistema de captación y filtración de agua.</span></div>
+        </div>
+        <div class="am-hi">
+          <div class="am-hi__name"><span class="ph" title="{{feature_items}} highlight 4">Sin condominio</span></div>
+          <div class="am-hi__desc"><span class="ph" title="Descripción breve">Escritura individual, libre de gravamen. Sin cuota de mantenimiento obligatoria.</span></div>
+        </div>
+      </div>
+
+      <div class="am-note"><span class="ph" title="{{feature_note}}">Los destacados son editoriales, no técnicos. Elegir los 3–4 atributos que más impactan la decisión de compra para el perfil de comprador de esta propiedad.</span></div>
+    </div>
+    <!-- ── END COPY ── -->
+  </div>
+
+  <!-- ════ USAGE NOTES ════ -->
+  <div class="usage-block">
+    <div class="ulbl">Notas de uso · Implementation notes</div>
+    <div class="usage-row">
+      <span class="um">—</span>
+      <span class="ut"><strong>Fuente de datos:</strong> property_features.csv filtrado por <code style="font-size:11px; background:var(--paper-deep); padding:1px 4px;">is_public = true</code>. Nunca incluir features con is_public = false en documentos públicos.</span>
+    </div>
+    <div class="usage-row">
+      <span class="um">—</span>
+      <span class="ut"><strong>Variante 1 (grid):</strong> usar cuando hay 6–12 features del mismo nivel de importancia. Máximo 12 ítems antes de saturar.</span>
+    </div>
+    <div class="usage-row">
+      <span class="um">—</span>
+      <span class="ut"><strong>Variante 2 (categorizada):</strong> usar cuando las features tienen categorías claras desde el CSV. Eliminar categorías vacías — no dejar secciones con un solo ítem.</span>
+    </div>
+    <div class="usage-row">
+      <span class="um">—</span>
+      <span class="ut"><strong>Variante 3 (highlights):</strong> usar en portada o sección hero. Máximo 4 destacados, elegidos editorialmente, no automáticamente desde el CSV. Incluir descripción de 1–2 líneas por item.</span>
+    </div>
+    <div class="usage-row">
+      <span class="um">—</span>
+      <span class="ut"><strong>Sin iconografía:</strong> el guión dorado (—) es el único marcador visual. No agregar íconos, emojis ni símbolos adicionales. La elegancia está en el espacio, no en los adornos.</span>
+    </div>
+    <div class="usage-foot">
+      <span>snippets/amenities-block.html · Meridiana · MMXXVI</span>
+      <span style="font-family:var(--sans); font-weight:600; letter-spacing:.22em; text-transform:uppercase; font-style:normal;">No distribuir</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

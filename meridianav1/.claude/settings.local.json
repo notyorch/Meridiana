@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import csv; print\\('csv ok'\\)\")",
+      "Bash(python3 *)",
+      "Read(//home/yorch/Documentos/helm-hackathon/synthetic-data/**)",
+      "Bash(cp -r meridianav1 meridianav3)",
+      "Bash(echo \"EXIT CODE v1: $?\")",
+      "Bash(mkdir -p /home/yorch/Documentos/helm-hackathon/inmobiliaria-rag/vulnerable /home/yorch/Documentos/helm-hackathon/inmobiliaria-rag/secure /home/yorch/Documentos/helm-hackathon/inmobiliaria-rag/attacks/payloads /home/yorch/Documentos/helm-hackathon/inmobiliaria-rag/attacks/results /home/yorch/Documentos/helm-hackathon/inmobiliaria-rag/datasets /home/yorch/Documentos/helm-hackathon/inmobiliaria-rag/paper/sections /home/yorch/Documentos/helm-hackathon/inmobiliaria-rag/paper/figures /home/yorch/Documentos/helm-hackathon/inmobiliaria-rag/paper/refs)",
+      "Read(//home/yorch/Documentos/helm-hackathon/**)",
+      "Bash(ln -s ../../synthetic-data/meridianav1 meridianav1)",
+      "Bash(ln -s ../../synthetic-data/meridianav3 meridianav3)"
+    ]
+  }
+}

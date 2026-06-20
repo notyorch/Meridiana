@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<!--
+FRONTMATTER
+───────────────────────────────────────────────
+title: "Negotiation Notes — {{offer_id}}"
+doc_type: negotiation_notes
+category: internal
+audience: internal_team, agent, direccion
+purpose: "Registrar posiciones de las partes, estado de la negociación y siguiente acción."
+source:
+  - offers.csv
+  - properties.csv
+  - leads.csv
+  - agents.csv
+  - brand_board_v1
+status: template
+version: v01
+date: 2026-06-14
+entity: offer
+language: es
+tags:
+  - meridiana
+  - negotiation
+  - oferta
+  - interno
+  - restringido
+summary: "Memo interno de negociación. Estado de oferta, brecha, condiciones, alertas y próxima acción."
+owner: "direccion"
+related_docs:
+  - internal_lead_qualification_{{lead_id}}
+  - internal_viewing_summary
+doc_id: doc-offer-001
+───────────────────────────────────────────────
+NAMING CONVENTION: internal_offer_notes_{{offer_id}}_{{yyyymmdd}}_v01
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridiana — Negotiation Notes {{offer_id}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --ink-soft:   #3D3529;
+    --alert:      #7A3F30;
+    --alert-bg:   #F5EDE8;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --gutter: clamp(24px, 5vw, 64px);
+    --inner: 800px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { background: var(--paper-deep); font-family: var(--sans); color: var(--ink); line-height: 1.5; }
+
+  .ph  { color: var(--gold);      font-style: italic; border-bottom: 1px dashed var(--gold);      padding-bottom: 1px; }
+  .ph-d{ color: var(--gold-dark); font-style: italic; border-bottom: 1px dashed var(--gold-dark); padding-bottom: 1px; }
+
+  .page {
+    max-width: var(--inner);
+    margin: 32px auto;
+    background: var(--paper);
+    box-shadow: 0 4px 40px rgba(23,18,13,.18);
+  }
+  @media (max-width: 840px) { .page { margin: 0; box-shadow: none; } }
+
+  /* ─── HEADER ─────────────────────────────── */
+  .hd {
+    background: var(--ink);
+    padding: clamp(20px, 3.5vw, 32px) var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 24px;
+    align-items: start;
+  }
+  .hd__type { font-size: 9px; letter-spacing: .36em; text-transform: uppercase; color: var(--stone); font-weight: 600; margin-bottom: 6px; }
+  .hd__title { font-family: var(--serif); font-size: clamp(26px, 4.2vw, 40px); color: var(--paper); line-height: .92; letter-spacing: -.01em; }
+  .hd__right { display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
+  .badge-rest {
+    background: rgba(122,63,48,.25);
+    border: 1px solid rgba(180,100,80,.45);
+    color: #D4927A;
+    font-size: 8.5px; letter-spacing: .32em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 10px;
+  }
+  .hd__meta { font-size: 10.5px; color: var(--stone); text-align: right; line-height: 1.6; letter-spacing: .06em; }
+  .hd__wm { font-family: var(--serif); font-size: 13px; color: rgba(243,236,223,.28); margin-top: 4px; }
+  .hd__wm .dot { color: var(--gold-dark); opacity: .4; }
+
+  /* ─── PARTIES BAND ───────────────────────── */
+  .parties {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 2px solid var(--ink);
+    background: var(--paper-mid);
+  }
+  @media (max-width: 520px) { .parties { grid-template-columns: 1fr; } }
+  .party {
+    padding: clamp(14px, 2.5vw, 22px) var(--gutter);
+    border-right: 1px solid var(--paper-deep);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .party:last-child { border-right: 0; }
+  @media (max-width: 520px) { .party { border-right: 0; border-bottom: 1px solid var(--paper-deep); } }
+  .party label { font-size: 8px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); font-weight: 600; }
+  .party .pval { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.25; }
+  .party .psub { font-size: 11px; color: var(--stone); }
+
+  /* ─── STATUS STRIP ───────────────────────── */
+  .status-strip {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: clamp(12px, 2vw, 18px) var(--gutter);
+    border-bottom: 1px solid var(--paper-deep);
+    background: var(--paper);
+  }
+  .status-label { font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); font-weight: 600; }
+  .status-badge {
+    display: inline-block;
+    font-size: 9px; letter-spacing: .26em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 10px; border: 1px solid currentColor;
+  }
+  .st-pending    { color: var(--stone); }
+  .st-accepted   { color: #4A7C5C; }
+  .st-counter    { color: var(--gold); }
+  .st-rejected   { color: var(--alert); }
+  .st-closed     { color: #4A7C5C; }
+  .status-strip .sep { width: 1px; height: 16px; background: var(--paper-deep); }
+  .status-strip .date-field { display: flex; flex-direction: column; gap: 2px; }
+  .status-strip .date-field label { font-size: 8px; letter-spacing: .24em; text-transform: uppercase; color: var(--stone); font-weight: 600; }
+  .status-strip .date-field span { font-size: 13px; font-weight: 500; color: var(--ink); }
+
+  /* ─── SECTION ────────────────────────────── */
+  .section {
+    padding: clamp(22px, 3.8vw, 40px) var(--gutter);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .section--alt { background: var(--paper-mid); }
+  .sec-hd {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: clamp(16px, 2.8vw, 28px);
+  }
+  .sec-n { font-family: var(--serif); font-size: 12px; color: var(--gold); flex-shrink: 0; }
+  .sec-lbl { font-weight: 700; font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); white-space: nowrap; }
+  .sec-rule { flex: 1; height: 1px; background: var(--paper-deep); }
+
+  /* ─── OFFER COMPARISON ───────────────────── */
+  .offer-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0 clamp(16px, 3vw, 32px);
+    align-items: center;
+  }
+  @media (max-width: 520px) {
+    .offer-grid { grid-template-columns: 1fr; }
+    .offer-sep  { display: none; }
+  }
+  .offer-col { display: flex; flex-direction: column; gap: 8px; }
+  .offer-col label {
+    font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--stone); font-weight: 600;
+  }
+  .offer-col .amount {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4.5vw, 44px);
+    line-height: .95; letter-spacing: -.02em; color: var(--ink);
+  }
+  .offer-col .amount .currency { font-size: .42em; color: var(--stone); letter-spacing: .04em; }
+  .offer-col .note { font-size: 11px; color: var(--stone); line-height: 1.4; }
+  .offer-col.counter .amount { color: var(--ink-soft); }
+
+  .offer-sep {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 0 clamp(8px, 2vw, 20px);
+  }
+  .offer-sep .arr { font-size: 22px; color: var(--stone); line-height: 1; }
+
+  /* Gap indicator */
+  .gap-block {
+    margin-top: clamp(18px, 3vw, 28px);
+    padding: clamp(14px, 2.5vw, 20px);
+    background: var(--paper-mid);
+    border: 1px solid var(--paper-deep);
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  .gap-block label { font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: var(--stone); font-weight: 600; white-space: nowrap; }
+  .gap-block .gap-val { font-family: var(--serif); font-size: clamp(20px, 3vw, 28px); color: var(--ink); line-height: 1; letter-spacing: -.01em; }
+  .gap-block .gap-pct { font-size: 13px; color: var(--stone); }
+
+  /* ─── CONDITIONS ─────────────────────────── */
+  .cond-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--paper-deep);
+  }
+  @media (max-width: 520px) { .cond-grid { grid-template-columns: 1fr; } }
+  .cond-cell {
+    padding: clamp(14px, 2.5vw, 22px) clamp(14px, 2.5vw, 20px);
+    border-right: 1px solid var(--paper-deep);
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .cond-cell:last-child { border-right: 0; }
+  @media (max-width: 520px) { .cond-cell { border-right: 0; border-bottom: 1px solid var(--paper-deep); } }
+  .cond-cell label { font-size: 8px; letter-spacing: .26em; text-transform: uppercase; color: var(--stone); font-weight: 600; }
+  .cond-cell .cval { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.25; }
+  .cond-cell .csub { font-size: 11px; color: var(--stone); line-height: 1.4; }
+
+  /* ─── INTERNAL NOTES ─────────────────────── */
+  .notes-block {
+    border-left: 2px solid var(--gold);
+    padding-left: clamp(16px, 3vw, 24px);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .notes-block label {
+    font-size: 9px; letter-spacing: .26em; text-transform: uppercase;
+    color: var(--gold); font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .notes-block label .badge-sm {
+    font-size: 8px; letter-spacing: .2em; padding: 2px 7px;
+    border: 1px solid currentColor; opacity: .7;
+  }
+  .notes-block .ntext { font-size: 13.5px; line-height: 1.68; color: var(--ink-soft); }
+  .notes-block .ntext .ph { font-size: inherit; }
+
+  /* ─── ALERTS ─────────────────────────────── */
+  .alert-section {
+    background: var(--alert-bg);
+    border-top: 2px solid var(--alert);
+    padding: clamp(20px, 3.5vw, 34px) var(--gutter);
+    border-bottom: 1px solid rgba(122,63,48,.18);
+  }
+  .alert-hd {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: clamp(14px, 2.5vw, 24px);
+  }
+  .alert-hd .anum { font-family: var(--serif); font-size: 12px; color: var(--alert); flex-shrink: 0; }
+  .alert-hd .albl { font-weight: 700; font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--alert); white-space: nowrap; }
+  .alert-hd .arule { flex: 1; height: 1px; background: rgba(122,63,48,.25); }
+  .alert-list { display: flex; flex-direction: column; gap: 0; }
+  .alert-item {
+    display: grid; grid-template-columns: 18px 1fr;
+    gap: 12px; align-items: baseline;
+    padding: clamp(9px, 1.6vw, 14px) 0;
+    border-bottom: 1px solid rgba(122,63,48,.15);
+  }
+  .alert-item:last-child { border-bottom: 0; }
+  .alert-item .amk { font-size: 13px; color: var(--alert); font-weight: 700; line-height: 1; }
+  .alert-item .atxt { font-size: 13.5px; color: var(--alert); line-height: 1.55; }
+  .alert-item .atxt .ph { color: var(--alert); border-bottom-color: var(--alert); }
+
+  /* ─── NEXT ───────────────────────────────── */
+  .next {
+    background: var(--ink);
+    padding: clamp(22px, 3.8vw, 38px) var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px 32px;
+    align-items: center;
+  }
+  @media (max-width: 500px) { .next { grid-template-columns: 1fr; } }
+  .next__lbl { font-size: 9px; letter-spacing: .30em; text-transform: uppercase; color: var(--gold-dark); font-weight: 700; margin-bottom: 8px; }
+  .next__txt { font-family: var(--serif); font-size: clamp(16px, 2.2vw, 22px); color: var(--paper); line-height: 1.18; letter-spacing: -.005em; }
+  .next__right { display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
+  @media (max-width: 500px) { .next__right { align-items: flex-start; } }
+  .next__albl { font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--stone); }
+  .next__aname { font-family: var(--serif); font-size: clamp(16px, 2vw, 20px); color: var(--paper); line-height: 1; }
+  .next__adate { font-size: 11px; color: var(--stone); letter-spacing: .06em; }
+
+  /* ─── FOOT ───────────────────────────────── */
+  .foot {
+    padding: 10px var(--gutter);
+    background: var(--paper-mid);
+    border-top: 1px solid var(--paper-deep);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 6px;
+  }
+  .foot .fn { font-size: 9px; letter-spacing: .13em; color: var(--stone); font-style: italic; font-family: var(--serif); }
+  .foot .fs { font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: rgba(131,125,114,.55); font-weight: 600; }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+    .section, .alert-section, .next { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ HEADER ══ -->
+  <div class="hd" data-screen-label="Header">
+    <div>
+      <div class="hd__type">Meridiana · Notas de negociación · Restringido</div>
+      <div class="hd__title">Negotiation<br />Notes</div>
+    </div>
+    <div class="hd__right">
+      <span class="badge-rest">Restringido · Dirección</span>
+      <div class="hd__meta">
+        Oferta: <span class="ph-d" title="{{offer_id}}">O-0000</span><br />
+        Fecha: <span class="ph-d" title="{{offer_date}}">2026-06-14</span><br />
+        Versión: v01
+      </div>
+      <div class="hd__wm">Meridiana<span class="dot">.</span></div>
+    </div>
+  </div>
+
+  <!-- ══ PARTIES ══ -->
+  <div class="parties" data-screen-label="Partes">
+    <div class="party">
+      <label>Propiedad</label>
+      <div class="pval"><span class="ph" title="{{property_title}}">{{Nombre de la propiedad}}</span></div>
+      <div class="psub"><span class="ph" title="{{property_code}}">MRD-0000</span></div>
+    </div>
+    <div class="party">
+      <label>Comprador · Lead</label>
+      <div class="pval"><span class="ph" title="{{lead_name}}">{{Nombre del comprador}}</span></div>
+    </div>
+    <div class="party">
+      <label>Asesor responsable</label>
+      <div class="pval"><span class="ph" title="{{agent_name}}">{{Nombre del asesor}}</span></div>
+    </div>
+  </div>
+
+  <!-- ══ STATUS STRIP ══ -->
+  <div class="status-strip" data-screen-label="Estado">
+    <span class="status-label">Estado · Status</span>
+    <span class="status-badge st-counter"><span class="ph" title="{{offer_status}}">Contraoferta en curso</span></span>
+    <span class="sep"></span>
+    <div class="date-field">
+      <label>Fecha oferta</label>
+      <span><span class="ph" title="{{offer_date}}">{{Fecha}}</span></span>
+    </div>
+    <span class="sep"></span>
+    <div class="date-field">
+      <label>Ventana de cierre</label>
+      <span><span class="ph" title="{{closing_window_days}}">{{N}} días</span></span>
+    </div>
+  </div>
+
+  <!-- ══ 01 OFERTA ══ -->
+  <div class="section section--alt" data-screen-label="Oferta y contraoferta">
+    <div class="sec-hd">
+      <span class="sec-n">01</span>
+      <span class="sec-lbl">Oferta y contraoferta · Offer &amp; counteroffer</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="offer-grid">
+
+      <!-- Comprador -->
+      <div class="offer-col">
+        <label>Oferta del comprador</label>
+        <div class="amount">
+          <span class="currency">MXN $</span><span class="ph" title="{{offer_amount_mxn}}">12,800,000</span>
+        </div>
+        <div class="note"><span class="ph" title="Condiciones de la oferta">{{Condiciones: ej. contado, cierre en 45 días, sin muebles.}}</span></div>
+      </div>
+
+      <!-- Separador -->
+      <div class="offer-sep">
+        <span class="arr">↔</span>
+      </div>
+
+      <!-- Vendedor / Contraoferta -->
+      <div class="offer-col counter">
+        <label>Precio publicado / Contraoferta</label>
+        <div class="amount">
+          <span class="currency">MXN $</span><span class="ph" title="{{counteroffer_amount_mxn}}">14,500,000</span>
+        </div>
+        <div class="note"><span class="ph" title="Posición del vendedor">{{Posición del vendedor: ej. acepta bajar máx. 5%, requiere cierre en 60 días.}}</span></div>
+      </div>
+
+    </div>
+
+    <!-- Gap -->
+    <div class="gap-block">
+      <label>Brecha actual · Gap</label>
+      <div class="gap-val"><span class="ph" title="Diferencia en MXN">MXN $1,700,000</span></div>
+      <div class="gap-pct"><span class="ph" title="Brecha como porcentaje">≈ 11.7% sobre precio publicado</span></div>
+    </div>
+  </div>
+
+  <!-- ══ 02 CONDICIONES ══ -->
+  <div class="section" data-screen-label="Condiciones">
+    <div class="sec-hd">
+      <span class="sec-n">02</span>
+      <span class="sec-lbl">Condiciones clave · Key terms</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="cond-grid">
+      <div class="cond-cell">
+        <label>Forma de pago</label>
+        <div class="cval"><span class="ph" title="{{financing_type}}">{{Contado · Crédito · Mixto}}</span></div>
+        <div class="csub"><span class="ph" title="Detalle de financiamiento">{{Banco / monto del crédito si aplica}}</span></div>
+      </div>
+      <div class="cond-cell">
+        <label>Enganche / Depósito</label>
+        <div class="cval"><span class="ph" title="{{deposit_pct}}">{{%}} del precio acordado</span></div>
+        <div class="csub"><span class="ph" title="Fecha de depósito">{{Fecha acordada o por acordar}}</span></div>
+      </div>
+      <div class="cond-cell">
+        <label>Ventana de cierre</label>
+        <div class="cval"><span class="ph" title="{{closing_window_days}}">{{N}} días</span></div>
+        <div class="csub">Desde firma de promesa de compraventa</div>
+      </div>
+      <div class="cond-cell">
+        <label>Muebles / Equipo</label>
+        <div class="cval"><span class="ph" title="Incluidos o excluidos">{{Incluidos · Excluidos · Por negociar}}</span></div>
+      </div>
+      <div class="cond-cell">
+        <label>Fecha límite de oferta</label>
+        <div class="cval"><span class="ph" title="Fecha límite de respuesta">{{Fecha}}</span></div>
+        <div class="csub">Pasada esta fecha la oferta vence</div>
+      </div>
+      <div class="cond-cell">
+        <label>Notario preferido</label>
+        <div class="cval"><span class="ph" title="Notario">{{Por definir · Nombre del notario}}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 03 NOTAS INTERNAS ══ -->
+  <div class="section section--alt" data-screen-label="Notas internas">
+    <div class="sec-hd">
+      <span class="sec-n">03</span>
+      <span class="sec-lbl">Notas internas · Internal notes</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="notes-block">
+      <label>Contexto de negociación <span class="badge-sm">Privado · No compartir</span></label>
+      <div class="ntext">
+        <span class="ph" title="{{notes_internal}}">{{Contexto relevante para la negociación que no debe compartirse con ninguna de las partes: posición real del vendedor, margen disponible confirmado internamente, presión de tiempo de alguna de las partes, información sobre otras ofertas si las hay. Redactar con precisión y sin dramatismo.}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 04 RIESGOS / ALERTAS ══ -->
+  <div class="alert-section" data-screen-label="Riesgos y alertas">
+    <div class="alert-hd">
+      <span class="anum">04</span>
+      <span class="albl">Riesgos y alertas · Risks</span>
+      <span class="arule"></span>
+    </div>
+    <div class="alert-list">
+      <div class="alert-item">
+        <span class="amk">!</span>
+        <span class="atxt"><span class="ph" title="Riesgo 1">{{Riesgo o alerta 1: ej. "El comprador mencionó otra propiedad en proceso." · "El vendedor tiene presión para cerrar antes de fin de mes." Ser directo y preciso.}}</span></span>
+      </div>
+      <div class="alert-item">
+        <span class="amk">!</span>
+        <span class="atxt"><span class="ph" title="Riesgo 2">{{Riesgo 2 si existe. Si no hay, eliminar esta fila.}}</span></span>
+      </div>
+      <div class="alert-item">
+        <span class="amk">!</span>
+        <span class="atxt"><span class="ph" title="Riesgo 3">{{Riesgo 3 si existe. Si no hay, eliminar esta fila.}}</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SIGUIENTE ACCIÓN ══ -->
+  <div class="next" data-screen-label="Siguiente acción">
+    <div>
+      <div class="next__lbl">Siguiente acción · Next move</div>
+      <div class="next__txt">
+        <span class="ph-d" title="Siguiente acción concreta">{{Describir la acción exacta: presentar contraoferta al comprador · llamar al vendedor para ajustar posición · esperar respuesta hasta fecha X · preparar promesa de compraventa. Sin ambigüedad.}}</span>
+      </div>
+    </div>
+    <div class="next__right">
+      <div class="next__albl">Responsable</div>
+      <div class="next__aname"><span class="ph-d" title="{{agent_name}}">{{Asesor}}</span></div>
+      <div class="next__adate"><span class="ph-d" title="Fecha límite de acción">{{Fecha límite}}</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="fn">internal_offer_notes_<span class="ph" title="{{offer_id}}">O-0000</span>_20260614_v01</span>
+    <span class="fs">Restringido · Solo dirección y asesor</span>
+  </div>
+
+</div>
+</body>
+</html>

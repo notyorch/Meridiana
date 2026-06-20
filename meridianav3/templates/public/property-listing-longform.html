@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<!--
+FRONTMATTER
+───────────────────────────────────────────────
+title: "Property Listing Longform — {{property_title}}"
+doc_type: property_web_listing_longform
+category: public
+audience: client, lead
+purpose: "Ficha extensa para web o portal con descripción completa, zonas, features y ubicación."
+source:
+  - properties.csv
+  - property_features.csv
+  - agents.csv
+  - brand_board_v1
+status: template
+version: v01
+date: 2026-06-14
+entity: property
+language: es
+tags:
+  - meridiana
+  - listing
+  - longform
+  - web
+  - public
+summary: "Ficha larga de propiedad para web o PDF. Descripción por zonas, perfil del comprador, contacto."
+owner: "equipo comercial"
+related_docs:
+  - public_property_brochure_{{listing_code}}_20260614_v01
+doc_id: doc-listing-001
+───────────────────────────────────────────────
+NAMING CONVENTION: public_property_listing_longform_{{listing_code}}_{{yyyymmdd}}_v01
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{brand_name}} — {{property_title}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ─── TOKENS ─────────────────────────────── */
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --inner: 860px;
+    --gutter: clamp(24px, 6vw, 72px);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    background: var(--paper-deep);
+    font-family: var(--sans);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  /* ─── PLACEHOLDER ────────────────────────── */
+  .ph {
+    color: var(--gold);
+    font-style: italic;
+    border-bottom: 1px dashed var(--gold);
+    padding-bottom: 1px;
+  }
+  .ph-on-dark {
+    color: var(--gold-dark);
+    font-style: italic;
+    border-bottom: 1px dashed var(--gold-dark);
+    padding-bottom: 1px;
+  }
+  .ph-block {
+    display: block;
+    color: var(--stone);
+    font-style: italic;
+    border: 1px dashed rgba(131,125,114,.45);
+    padding: 13px 15px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin-top: 8px;
+  }
+
+  /* ─── PAGE ───────────────────────────────── */
+  .page {
+    max-width: var(--inner);
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 4px 48px rgba(23,18,13,.2);
+  }
+  @media (max-width: 900px) { .page { box-shadow: none; } }
+
+  /* ─── NAV BAR ────────────────────────────── */
+  .navbar {
+    background: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px var(--gutter);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .navbar .brand {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--paper);
+    letter-spacing: -.008em;
+    white-space: nowrap;
+  }
+  .navbar .brand .dot { color: var(--gold-dark); }
+  .navbar .nav-right {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .navbar .nav-code {
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .navbar .nav-status {
+    font-size: 10px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--gold-dark);
+    border: 1px solid var(--gold-dark);
+    padding: 3px 10px;
+  }
+
+  /* ─── HERO ───────────────────────────────── */
+  .hero {
+    position: relative;
+    background: var(--ink);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero .watermark {
+    font-family: var(--serif);
+    font-size: min(40vw, 380px);
+    color: rgba(243,236,223,.03);
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+  }
+  .hero .photo-label {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    font-size: 9px;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(131,125,114,.5);
+  }
+  .hero .price-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(23,18,13,.88);
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: flex-end;
+    backdrop-filter: blur(4px);
+  }
+  .hero .price-badge .plabel {
+    font-size: 8px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .hero .price-badge .pvalue {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--gold-dark);
+    line-height: 1;
+    letter-spacing: -.01em;
+  }
+  .hero .price-badge .pnote {
+    font-size: 9px;
+    color: rgba(131,125,114,.7);
+    letter-spacing: .04em;
+  }
+
+  /* Thumbnail strip */
+  .thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+    background: var(--ink);
+    padding: 3px;
+  }
+  .thumb {
+    aspect-ratio: 4/3;
+    background: #1E1710;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .thumb span {
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(131,125,114,.4);
+  }
+
+  /* ─── TITLE BAND ─────────────────────────── */
+  .title-band {
+    padding: clamp(32px, 5vw, 52px) var(--gutter) clamp(24px, 4vw, 40px);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .title-band .eyebrow {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .eyebrow-item {
+    font-size: 10px;
+    letter-spacing: .30em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 600;
+  }
+  .eyebrow-sep { width: 1px; height: 12px; background: rgba(131,125,114,.4); }
+  .main-title {
+    font-family: var(--serif);
+    font-size: clamp(30px, 5.5vw, 56px);
+    line-height: .96;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .summary-line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.3;
+    color: var(--stone);
+    max-width: 56ch;
+  }
+
+  /* ─── STATS GRID ─────────────────────────── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat {
+    padding: clamp(20px, 3.5vw, 32px) var(--gutter);
+    border-right: 1px solid var(--paper-deep);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .stat:last-child { border-right: 0; }
+  .stat__n {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4vw, 40px);
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -.02em;
+  }
+  .stat__n .unit { font-size: .5em; color: var(--stone); letter-spacing: 0; }
+  .stat__label {
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 600;
+  }
+
+  /* Details row */
+  .details-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: clamp(14px, 2.5vw, 22px) var(--gutter);
+    background: var(--paper-mid);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .detail-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 6px 28px 6px 0;
+    margin-right: 28px;
+    border-right: 1px solid var(--paper-deep);
+  }
+  .detail-chip:last-child { border-right: 0; padding-right: 0; margin-right: 0; }
+  .detail-chip .dlabel {
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 600;
+  }
+  .detail-chip .dval {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ─── CONTENT SECTIONS ───────────────────── */
+  .section {
+    padding: clamp(40px, 7vw, 72px) var(--gutter);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .section--alt { background: var(--paper-mid); }
+  .section:last-of-type { border-bottom: 0; }
+
+  .sec-hd {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: clamp(28px, 4vw, 44px);
+  }
+  .sec-num {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .sec-label {
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--stone);
+    white-space: nowrap;
+  }
+  .sec-rule { flex: 1; height: 1px; background: var(--paper-deep); }
+
+  /* Section display heading */
+  .sec-display {
+    font-family: var(--serif);
+    font-size: clamp(22px, 3.2vw, 34px);
+    line-height: 1.08;
+    letter-spacing: -.008em;
+    color: var(--ink);
+    margin-bottom: clamp(20px, 3vw, 32px);
+  }
+
+  /* Body text */
+  .body-text {
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.72;
+    color: var(--ink);
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+  .body-text + .body-text { margin-top: 1em; }
+
+  /* ─── ZONAS ──────────────────────────────── */
+  .zonas { display: flex; flex-direction: column; gap: 0; }
+  .zona {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px 36px;
+    align-items: start;
+    padding: clamp(20px, 3vw, 30px) 0;
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .zona:last-child { border-bottom: 0; }
+  @media (max-width: 600px) { .zona { grid-template-columns: 1fr; gap: 8px; } }
+  .zona__name {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.8vw, 20px);
+    line-height: 1.1;
+    color: var(--ink);
+    padding-top: 2px;
+  }
+  .zona__desc {
+    font-size: 14px;
+    line-height: 1.68;
+    color: #3D3529;
+  }
+
+  /* ─── FEATURES ───────────────────────────── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0;
+  }
+  .feature-group {
+    padding: clamp(18px, 3vw, 28px) clamp(18px, 3vw, 28px) clamp(18px, 3vw, 28px) 0;
+    border-right: 1px solid var(--paper-deep);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .feature-group:nth-child(2n) { padding-right: 0; padding-left: clamp(18px, 3vw, 28px); border-right: 0; }
+  @media (max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-group { border-right: 0; padding-left: 0; padding-right: 0; }
+    .feature-group:nth-child(2n) { padding-left: 0; }
+  }
+  .feature-group h4 {
+    font-size: 9px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+  .feature-list li {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(234,224,206,.8);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .feature-list li:last-child { border-bottom: 0; }
+  .feature-list li::before { content: "—"; color: var(--gold); font-size: 10px; flex-shrink: 0; }
+
+  /* ─── BUYER PROFILE ──────────────────────── */
+  .buyer-profile {
+    background: var(--ink);
+    padding: clamp(36px, 6vw, 60px) var(--gutter);
+  }
+  .buyer-profile .sec-hd .sec-num { color: var(--gold-dark); }
+  .buyer-profile .sec-hd .sec-label { color: var(--stone); }
+  .buyer-profile .sec-hd .sec-rule { background: rgba(131,125,114,.28); }
+  .buyer-profile .sec-display { color: var(--paper); }
+  .buyer-profile .body-text { color: rgba(243,236,223,.78); max-width: 60ch; }
+  .buyer-profile .body-text .en {
+    display: block;
+    margin-top: .6em;
+    font-style: italic;
+    color: var(--stone);
+    font-size: .9em;
+    line-height: 1.55;
+  }
+
+  /* ─── AGENT CARD ─────────────────────────── */
+  .agent-section {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+  }
+  @media (max-width: 600px) { .agent-section { grid-template-columns: 1fr; } }
+  .agent-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .agent-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid var(--paper-deep);
+  }
+  .agent-avatar span { font-family: var(--serif); font-size: 26px; color: var(--paper); line-height: 1; }
+  .agent-info {}
+  .agent-info .role {
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .agent-info .name {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.4vw, 26px);
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .agent-info .contacts { display: flex; flex-direction: column; gap: 4px; }
+  .agent-info .contacts span { font-size: 13.5px; color: var(--stone); line-height: 1.4; }
+  .cta-block { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+  @media (max-width: 600px) { .cta-block { align-items: flex-start; } }
+  .cta-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 28px;
+    font-size: 10px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .cta-secondary {
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    border-bottom: 1px solid var(--paper-deep);
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+  .listing-note {
+    font-size: 11px;
+    color: var(--stone);
+    line-height: 1.55;
+    max-width: 44ch;
+    font-style: italic;
+  }
+
+  /* ─── FOOTER ─────────────────────────────── */
+  .doc-footer {
+    background: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px var(--gutter);
+  }
+  .doc-footer .wm {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--paper);
+    letter-spacing: -.008em;
+  }
+  .doc-footer .wm .dot { color: var(--gold-dark); }
+  .doc-footer .fnote {
+    font-size: 9px;
+    letter-spacing: .18em;
+    color: var(--stone);
+    font-style: italic;
+    font-family: var(--serif);
+  }
+
+  /* ─── PRINT ──────────────────────────────── */
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; max-width: none; }
+    .section { page-break-inside: avoid; }
+    .zona { page-break-inside: avoid; }
+    .buyer-profile { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══════════ NAV BAR ══════════ -->
+  <nav class="navbar" data-screen-label="Navbar">
+    <span class="brand">Meridiana<span class="dot">.</span></span>
+    <div class="nav-right">
+      <span class="nav-code"><span class="ph-on-dark" title="{{listing_code}}">MRD-0000</span></span>
+      <span class="nav-status"><span class="ph-on-dark" title="{{status}}">Activa</span></span>
+    </div>
+  </nav>
+
+  <!-- ══════════ HERO ══════════ -->
+  <div class="hero" data-screen-label="Foto principal">
+    <div class="watermark">M</div>
+    <div class="photo-label">Fotografía principal · luz natural · sin personas · hora dorada</div>
+    <div class="price-badge">
+      <span class="plabel">Precio · Price</span>
+      <span class="pvalue"><span class="ph-on-dark" title="{{price_mxn}}">$14,500,000</span></span>
+      <span class="pnote">MXN</span>
+    </div>
+  </div>
+  <div class="thumbs">
+    <div class="thumb"><span>Foto 2</span></div>
+    <div class="thumb"><span>Foto 3</span></div>
+    <div class="thumb"><span>Foto 4</span></div>
+    <div class="thumb"><span>Foto 5</span></div>
+  </div>
+
+  <!-- ══════════ TITLE BAND ══════════ -->
+  <div class="title-band" data-screen-label="Título">
+    <div class="eyebrow">
+      <span class="eyebrow-item"><span class="ph" title="{{property_type}}">Casa</span></span>
+      <span class="eyebrow-sep"></span>
+      <span class="eyebrow-item"><span class="ph" title="{{listing_type}}">Venta</span></span>
+      <span class="eyebrow-sep"></span>
+      <span class="eyebrow-item"><span class="ph" title="{{location}}">Temozón Norte · Mérida, Yucatán</span></span>
+    </div>
+    <h1 class="main-title"><span class="ph" title="{{property_title}}">Casa de los naranjos</span></h1>
+    <p class="summary-line"><span class="ph" title="{{public_description}} — primera frase">Planta baja con doble altura. Patio central con palapa de palma y cenote privado. Cuatro recámaras. Silencio.</span></p>
+  </div>
+
+  <!-- ══════════ STATS ══════════ -->
+  <div class="stats" data-screen-label="Datos clave">
+    <div class="stat">
+      <div class="stat__n"><span class="ph" title="{{bedrooms}}">4</span></div>
+      <div class="stat__label">Recámaras</div>
+    </div>
+    <div class="stat">
+      <div class="stat__n"><span class="ph" title="{{bathrooms}}">4.5</span></div>
+      <div class="stat__label">Baños</div>
+    </div>
+    <div class="stat">
+      <div class="stat__n"><span class="ph" title="{{construction_m2}}">320</span><span class="unit"> m²</span></div>
+      <div class="stat__label">Construcción</div>
+    </div>
+    <div class="stat">
+      <div class="stat__n"><span class="ph" title="{{lot_m2}}">480</span><span class="unit"> m²</span></div>
+      <div class="stat__label">Terreno</div>
+    </div>
+  </div>
+
+  <!-- Details row -->
+  <div class="details-row">
+    <div class="detail-chip">
+      <span class="dlabel">Cajones</span>
+      <span class="dval"><span class="ph" title="{{parking_spaces}}">2</span></span>
+    </div>
+    <div class="detail-chip">
+      <span class="dlabel">Año</span>
+      <span class="dval"><span class="ph" title="{{year_built}}">2019</span></span>
+    </div>
+    <div class="detail-chip">
+      <span class="dlabel">Amueblado</span>
+      <span class="dval"><span class="ph" title="{{furnished}}">No</span></span>
+    </div>
+    <div class="detail-chip">
+      <span class="dlabel">Mascotas</span>
+      <span class="dval"><span class="ph" title="{{pet_friendly}}">Sí</span></span>
+    </div>
+    <div class="detail-chip">
+      <span class="dlabel">Mantenimiento</span>
+      <span class="dval"><span class="ph" title="{{maintenance_fee_mxn}}">Sin cuota</span></span>
+    </div>
+  </div>
+
+  <!-- ══════════ 01 — RESUMEN ══════════ -->
+  <div class="section" data-screen-label="Resumen ejecutivo">
+    <div class="sec-hd">
+      <span class="sec-num">01</span>
+      <span class="sec-label">Resumen ejecutivo · Overview</span>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="body-text">
+      <span class="ph" title="{{public_description}}">Casa de una planta con doble altura en sala y comedor, construida en 2019 sobre terreno de 480 m². El elemento central es un patio abierto con palapa de palma y cenote privado de agua dulce, que articula la circulación de todos los espacios. Cuatro recámaras con baño propio, cocina en granito negro y acceso vehicular con portón automático.</span>
+    </p>
+    <p class="body-text">
+      La propiedad está en escritura individual, libre de gravamen y sin régimen de condominio. El estado de conservación es excelente. No hay obra pendiente ni detalles por resolver.
+    </p>
+    <span class="ph-block" title="{{public_description}} adicional">Agregar aquí párrafos adicionales de descripción general si el espacio lo requiere. Máximo dos párrafos más. Sin adjetivos vacíos.</span>
+  </div>
+
+  <!-- ══════════ 02 — ZONAS ══════════ -->
+  <div class="section section--alt" data-screen-label="Descripción por zonas">
+    <div class="sec-hd">
+      <span class="sec-num">02</span>
+      <span class="sec-label">Descripción por zonas · Space by space</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="zonas">
+      <div class="zona">
+        <div class="zona__name">Sala y comedor</div>
+        <div class="zona__desc">Espacio unificado con doble altura. Piso de cemento pulido. Ventanas de piso a techo hacia el patio. Sin división entre sala y comedor. Luz natural durante todo el día.</div>
+      </div>
+      <div class="zona">
+        <div class="zona__name">Cocina</div>
+        <div class="zona__desc">Cocina abierta con isla en granito negro. Gabinetes de madera tono oscuro. Campana extractora vista. Conexiones para gas y eléctrico. Paso directo a la zona de lavandería.</div>
+      </div>
+      <div class="zona">
+        <div class="zona__name">Patio central</div>
+        <div class="zona__desc">Patio descubierto con palapa de palma y cenote privado de agua dulce. Área lounge techada. Circulación perimetral cubierta para conectar todas las alas de la casa sin exposición directa al sol.</div>
+      </div>
+      <div class="zona">
+        <div class="zona__name">Recámaras</div>
+        <div class="zona__desc">Cuatro recámaras con baño propio en cada una. La recámara principal tiene vestidor y acceso directo al patio. Las tres restantes, orientadas al jardín lateral. Todas con aire acondicionado de tipo mini split.</div>
+      </div>
+      <div class="zona">
+        <div class="zona__name">Áreas de servicio</div>
+        <div class="zona__desc">Cuarto de servicio con baño independiente, ubicado en ala separada con acceso propio. Lavandería cubierta. Bodega de uso general.</div>
+      </div>
+      <div class="zona">
+        <div class="zona__name">Accesos y estacionamiento</div>
+        <div class="zona__desc">Portón eléctrico con acceso para dos vehículos en paralelo. Cochera techada de concreto. Entrada peatonal independiente desde calle empedrada.</div>
+      </div>
+      <span class="ph-block" title="Agregar zonas adicionales según {{public_description}} y property_features.csv">Agregar o eliminar zonas según la propiedad real. Descripción de cada espacio: 2–3 líneas, preciso, sin adjetivos vacíos.</span>
+    </div>
+  </div>
+
+  <!-- ══════════ 03 — FEATURES ══════════ -->
+  <div class="section" data-screen-label="Características">
+    <div class="sec-hd">
+      <span class="sec-num">03</span>
+      <span class="sec-label">Características y amenidades · Features</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="features-grid">
+      <div class="feature-group">
+        <h4>Construcción</h4>
+        <ul class="feature-list">
+          <li>Doble altura en sala y comedor</li>
+          <li>Piso de cemento pulido en áreas sociales</li>
+          <li>Muros de block visto en exteriores</li>
+          <li>Techos de concreto aparente</li>
+          <li>Ventanas de piso a techo con herrería negra</li>
+        </ul>
+      </div>
+      <div class="feature-group">
+        <h4>Exterior</h4>
+        <ul class="feature-list">
+          <li>Cenote privado de agua dulce</li>
+          <li>Palapa de palma en patio central</li>
+          <li>Jardín lateral con árboles maduros</li>
+          <li>Portón eléctrico con acceso doble</li>
+          <li>Circulación cubierta perimetral</li>
+        </ul>
+      </div>
+      <div class="feature-group">
+        <h4>Tecnología y sustentabilidad</h4>
+        <ul class="feature-list">
+          <li>16 paneles solares (6 kW instalados)</li>
+          <li>Sistema de captación y filtración de agua</li>
+          <li>Riego automatizado por zona</li>
+          <li>Mini split por habitación</li>
+          <li>Cableado estructurado CAT6</li>
+        </ul>
+      </div>
+      <div class="feature-group">
+        <h4>Legal</h4>
+        <ul class="feature-list">
+          <li>Escritura individual</li>
+          <li>Libre de gravamen</li>
+          <li>Sin régimen de condominio</li>
+          <li>Predial al corriente</li>
+          <li>Sin ampliaciones sin permiso</li>
+        </ul>
+      </div>
+    </div>
+    <span class="ph-block" title="{{feature_list}} — property_features.csv">Reemplazar con las características reales del CSV property_features.csv. Organizar por categoría: Construcción, Exterior, Tecnología, Legal. Publicar solo features con is_public = true.</span>
+  </div>
+
+  <!-- ══════════ 04 — ENTORNO ══════════ -->
+  <div class="section section--alt" data-screen-label="Entorno y ubicación">
+    <div class="sec-hd">
+      <span class="sec-num">04</span>
+      <span class="sec-label">Entorno y ubicación · Surroundings</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="sec-display"><span class="ph" title="{{location_summary}} — primera línea">Temozón Norte. Colonia consolidada, calle empedrada, seguridad privada.</span></div>
+    <p class="body-text">
+      <span class="ph" title="{{location_summary}}">A 12 minutos del centro histórico de Mérida por Periférico Norte. La colonia es una de las más establecidas del corredor norte: baja densidad, trazo urbanístico de lotes amplios y presencia de vegetación madura. La calle tiene acceso controlado. Los servicios más cercanos —médicos, comercio de especialidad, restaurantes— están a menos de cinco minutos en auto.</span>
+    </p>
+    <p class="body-text">
+      Meridiana vende una ciudad, no solo un inmueble. El entorno es parte de lo que se está comprando.
+    </p>
+    <span class="ph-block" title="{{location_summary}} adicional">Complementar con descripción real del entorno inmediato, distancias clave y contexto de la zona. Sin adjetivos vacíos.</span>
+  </div>
+
+  <!-- ══════════ 05 — BUYER PROFILE ══════════ -->
+  <div class="buyer-profile" data-screen-label="Perfil del comprador">
+    <div class="sec-hd">
+      <span class="sec-num">05</span>
+      <span class="sec-label">Para quién es esta propiedad · Ideal buyer</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="sec-display">El vacío comunica que el siguiente habitante eres tú.</div>
+    <p class="body-text">
+      Esta casa es para alguien que ya tomó la decisión de vivir diferente. Que eligió Mérida con convicción: por el ritmo, por el clima, por la escala humana de la ciudad. Que no necesita un desarrollo con nombre en inglés para confirmar su posición.
+      <span class="en">This house is for someone who has already decided to live differently — who chose Mérida with conviction: for its pace, its climate, its human scale. Someone who does not need a development with an English name to confirm their standing.</span>
+    </p>
+    <p class="body-text">
+      Funciona bien para familia con hijos o para pareja sin ellos. El cenote no es decorativo: es el corazón de una casa pensada para vivirse de adentro hacia afuera.
+      <span class="en">It works well for a family with children or a couple without. The cenote is not decorative — it is the heart of a house designed to be lived from inside out.</span>
+    </p>
+    <span class="ph-block" style="border-color:rgba(156,123,64,.4); color:rgba(131,125,114,.8);" title="Perfil del comprador">Reemplazar con el perfil ideal real de esta propiedad. Sin lenguaje de marketing. Describir el estilo de vida, no el target demográfico.</span>
+  </div>
+
+  <!-- ══════════ 06 — CONTACTO ══════════ -->
+  <div class="section" data-screen-label="Contacto">
+    <div class="sec-hd">
+      <span class="sec-num">06</span>
+      <span class="sec-label">Siguiente paso · Next step</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="agent-section">
+      <div>
+        <div class="agent-card">
+          <div class="agent-avatar"><span>M</span></div>
+          <div class="agent-info">
+            <div class="role">Asesor de la propiedad · Agent</div>
+            <div class="name"><span class="ph" title="{{agent_name}}">{{Nombre del asesor}}</span></div>
+            <div class="contacts">
+              <span><span class="ph" title="{{agent_phone}}">+52 999 000 0000</span></span>
+              <span><span class="ph" title="{{agent_email}}"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="44253721372b36042921362d202d252a256a293c">[email&#160;protected]</a></span></span>
+            </div>
+          </div>
+        </div>
+        <p class="listing-note" style="margin-top:20px;">
+          No hay formulario. No hay asistente automático. Una llamada o mensaje es suficiente para agendar una visita.
+        </p>
+      </div>
+      <div class="cta-block">
+        <a href="#" class="cta-primary">Agendar visita · Book a viewing</a>
+        <a href="#" class="cta-secondary">Ver más propiedades</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <div class="doc-footer" data-screen-label="Footer">
+    <span class="wm">Meridiana<span class="dot">.</span></span>
+    <span class="fnote">public_property_listing_longform_<span class="ph-on-dark" title="{{listing_code}}">MRD-0000</span>_20260614_v01</span>
+  </div>
+
+</div><!-- /page -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

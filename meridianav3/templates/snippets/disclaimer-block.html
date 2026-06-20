@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<!--
+FRONTMATTER
+───────────────────────────────────────────────
+title: "Reusable Disclaimer Blocks — Meridiana"
+doc_type: disclaimer_blocks
+category: template
+audience: client, internal_team
+purpose: "Bloques reutilizables de descargo para pie de documento, portada o sección legal ligera."
+source:
+  - brand_board_v1
+status: template
+version: v01
+date: 2026-06-14
+entity: company
+language: es
+tags:
+  - meridiana
+  - disclaimer
+  - bloques
+  - plantilla
+  - legal
+summary: "Biblioteca de 6 bloques de descargo reutilizables para brochures, listings y documentos públicos."
+owner: "direccion"
+related_docs:
+  - public_property_brochure
+  - public_property_listing_longform
+doc_id: doc-disclaimer-001
+───────────────────────────────────────────────
+NAMING CONVENTION: template_disclaimer_blocks_20260614_v01
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridiana — Disclaimer Blocks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --ink-soft:   #3D3529;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --gutter: clamp(28px, 6vw, 80px);
+    --inner: 820px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { background: var(--paper-deep); font-family: var(--sans); color: var(--ink); line-height: 1.5; }
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  .ph  { color: var(--gold);      font-style: italic; border-bottom: 1px dashed var(--gold);      padding-bottom: 1px; }
+  .ph-d{ color: var(--gold-dark); font-style: italic; border-bottom: 1px dashed var(--gold-dark); padding-bottom: 1px; }
+
+  .page { max-width: var(--inner); margin: 32px auto; background: var(--paper); box-shadow: 0 4px 40px rgba(23,18,13,.2); }
+  @media (max-width: 860px) { .page { margin: 0; box-shadow: none; } }
+
+  /* ─── HEADER ─────────────────────────────── */
+  .hd {
+    background: var(--ink);
+    padding: clamp(36px, 7vw, 72px) var(--gutter) clamp(32px, 6vw, 60px);
+    display: grid; grid-template-columns: 1fr auto; gap: 20px 32px; align-items: end;
+  }
+  @media (max-width: 560px) { .hd { grid-template-columns: 1fr; } }
+  .hd__type { font-size: 9px; letter-spacing: .36em; text-transform: uppercase; color: var(--stone); font-weight: 600; margin-bottom: 10px; }
+  .hd__title { font-family: var(--serif); font-size: clamp(30px, 5.5vw, 60px); color: var(--paper); line-height: .9; letter-spacing: -.012em; }
+  .hd__sub { font-family: var(--serif); font-style: italic; font-size: clamp(14px, 1.6vw, 18px); color: var(--stone); margin-top: 14px; max-width: 38ch; line-height: 1.28; }
+  .hd__right { text-align: right; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .hd__wm { font-family: var(--serif); font-size: clamp(18px, 3.5vw, 30px); color: rgba(243,236,223,.4); letter-spacing: -.01em; line-height: .9; }
+  .hd__wm .dot { color: var(--gold-dark); opacity: .5; }
+  .badge-tpl { font-size: 8.5px; letter-spacing: .30em; text-transform: uppercase; font-weight: 700; padding: 3px 9px; background: rgba(156,123,64,.14); border: 1px solid rgba(184,145,84,.38); color: var(--gold-dark); }
+
+  /* ─── INTRO ──────────────────────────────── */
+  .intro { padding: clamp(28px, 5vw, 52px) var(--gutter); border-bottom: 1px solid var(--paper-deep); }
+  .intro p { font-size: clamp(14px, 1.2vw, 15.5px); line-height: 1.7; color: var(--ink-soft); max-width: 58ch; }
+  .intro p + p { margin-top: 1em; }
+
+  /* ─── SECTION ────────────────────────────── */
+  .section { padding: clamp(32px, 5.5vw, 60px) var(--gutter); border-bottom: 1px solid var(--paper-deep); }
+  .section--alt { background: var(--paper-mid); }
+  .sec-hd { display: flex; align-items: center; gap: 16px; margin-bottom: clamp(22px, 3.5vw, 38px); }
+  .sec-n { font-family: var(--serif); font-size: 12px; color: var(--gold); flex-shrink: 0; }
+  .sec-lbl { font-weight: 700; font-size: 9.5px; letter-spacing: .30em; text-transform: uppercase; color: var(--stone); white-space: nowrap; }
+  .sec-rule { flex: 1; height: 1px; background: var(--paper-deep); }
+
+  /* ─── BLOCK CARDS (reference view) ──────── */
+  .block-list { display: flex; flex-direction: column; gap: 14px; }
+  .block-card {
+    border: 1px solid var(--paper-deep);
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .block-card__label {
+    padding: 8px 16px;
+    background: var(--paper-mid);
+    border-bottom: 1px solid var(--paper-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .block-card__label .blbl { font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); font-weight: 700; }
+  .block-card__label .btag { font-size: 8px; letter-spacing: .20em; text-transform: uppercase; font-weight: 600; padding: 2px 8px; border: 1px solid rgba(131,125,114,.35); color: var(--stone); }
+  .block-card__content { padding: 16px 18px; }
+
+  /* ─── DISCLAIMER TEXT STYLE ──────────────── */
+  /* This is the actual style used in real documents */
+  .disc {
+    font-size: 10.5px;
+    line-height: 1.62;
+    color: var(--stone);
+    letter-spacing: .01em;
+    text-wrap: pretty;
+    max-width: 72ch;
+  }
+  .disc strong { font-weight: 600; color: var(--ink-soft); }
+  .disc .ph { font-size: inherit; }
+  .disc .ph-d { font-size: inherit; }
+
+  /* ─── COMBINED FOOTER EXAMPLE ────────────── */
+  .footer-example {
+    background: var(--ink);
+    padding: clamp(24px, 4vw, 40px) var(--gutter);
+  }
+  .footer-example .example-label {
+    font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(131,125,114,.5); font-weight: 600;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .footer-example .example-label::after { content: ""; flex: 1; height: 1px; background: rgba(131,125,114,.2); }
+
+  /* Gold hairline — the signature opening of a footer block */
+  .disc-footer { display: flex; flex-direction: column; gap: 0; }
+  .disc-footer__rule { height: 1px; background: var(--gold); width: clamp(32px, 6vw, 56px); margin-bottom: 16px; opacity: .7; }
+  .disc-block {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(131,125,114,.18);
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 8px 20px;
+    align-items: baseline;
+  }
+  .disc-block:last-child { border-bottom: 0; }
+  @media (max-width: 500px) { .disc-block { grid-template-columns: 1fr; } }
+  .disc-block .dlbl {
+    font-size: 8px; letter-spacing: .24em; text-transform: uppercase;
+    color: rgba(131,125,114,.55); font-weight: 600; line-height: 1.4;
+    padding-top: 1px;
+  }
+  .disc-block .dtxt {
+    font-size: 10px; line-height: 1.6;
+    color: rgba(131,125,114,.75);
+    letter-spacing: .01em;
+  }
+  .disc-block .dtxt .ph-d { font-size: inherit; }
+  .disc-footer__contact {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(131,125,114,.2);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .disc-footer__contact .wm { font-family: var(--serif); font-size: 14px; color: rgba(243,236,223,.35); letter-spacing: -.008em; }
+  .disc-footer__contact .wm .dot { color: var(--gold-dark); opacity: .4; }
+  .disc-footer__contact .contact-line { font-size: 9.5px; color: rgba(131,125,114,.6); letter-spacing: .08em; }
+
+  /* ─── USAGE NOTES ────────────────────────── */
+  .usage-note {
+    background: var(--paper-mid);
+    border: 1px solid var(--paper-deep);
+    padding: 16px 18px;
+    display: flex; gap: 14px; align-items: start;
+  }
+  .usage-note .un-mark { font-family: var(--serif); font-size: 16px; color: var(--gold); flex-shrink: 0; line-height: 1.1; padding-top: 1px; }
+  .usage-note .un-txt { font-size: 12.5px; line-height: 1.6; color: var(--stone); }
+  .usage-note .un-txt strong { color: var(--ink-soft); font-weight: 600; }
+
+  /* ─── FOOT ───────────────────────────────── */
+  .foot { background: var(--ink); padding: 11px var(--gutter); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .foot .fn { font-size: 9px; letter-spacing: .13em; color: var(--stone); font-style: italic; font-family: var(--serif); }
+  .foot .wm { font-family: var(--serif); font-size: 14px; color: rgba(243,236,223,.3); letter-spacing: -.008em; }
+  .foot .wm .dot { color: var(--gold-dark); opacity: .4; }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+    .section { page-break-inside: avoid; }
+    .block-card { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ HEADER ══ -->
+  <div class="hd" data-screen-label="Header">
+    <div>
+      <div class="hd__type">Biblioteca de bloques · Plantilla reutilizable</div>
+      <div class="hd__title">Disclaimer<br />Blocks</div>
+      <p class="hd__sub">Seis bloques breves para pie de documento. Copiar, pegar, adaptar.</p>
+    </div>
+    <div class="hd__right">
+      <span class="badge-tpl">Plantilla · Template</span>
+      <div class="hd__wm">Meridiana<span class="dot">.</span></div>
+    </div>
+  </div>
+
+  <!-- ══ INTRO ══ -->
+  <div class="intro" data-screen-label="Introducción">
+    <p>Este documento contiene los seis bloques de descargo estándar de <span class="ph" title="{{brand_name}}">Meridiana</span>. Cada bloque está diseñado para usarse de forma independiente o combinada al pie de brochures, listings, perfiles de propiedad o cualquier documento público.</p>
+    <p>Los bloques deben verse discretos: tipografía pequeña, color piedra, sin llamar la atención. Su función es informar, no advertir. La última sección muestra cómo se ven combinados en un pie de documento real.</p>
+  </div>
+
+  <!-- ══ 01 BLOQUES DE REFERENCIA ══ -->
+  <div class="section" data-screen-label="Bloques de referencia">
+    <div class="sec-hd">
+      <span class="sec-n">01</span>
+      <span class="sec-lbl">Bloques individuales · Reference blocks</span>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="block-list">
+
+      <!-- BLOQUE A -->
+      <div class="block-card">
+        <div class="block-card__label">
+          <span class="blbl">A · Información comercial</span>
+          <span class="btag">Uso: portada · brochure · listing</span>
+        </div>
+        <div class="block-card__content">
+          <p class="disc">
+            La información contenida en este documento tiene carácter referencial y no constituye una oferta vinculante. Los datos son proporcionados de buena fe por <span class="ph" title="{{brand_name}}">Meridiana</span> con base en la información disponible al momento de su elaboración, y están sujetos a cambios sin previo aviso.
+          </p>
+        </div>
+      </div>
+
+      <!-- BLOQUE B -->
+      <div class="block-card">
+        <div class="block-card__label">
+          <span class="blbl">B · Disponibilidad</span>
+          <span class="btag">Uso: brochure · listing · web</span>
+        </div>
+        <div class="block-card__content">
+          <p class="disc">
+            La disponibilidad de la propiedad está sujeta a confirmación al momento de la consulta. <span class="ph" title="{{brand_name}}">Meridiana</span> no garantiza la vigencia de la información contenida en este material una vez distribuido o publicado.
+          </p>
+        </div>
+      </div>
+
+      <!-- BLOQUE C -->
+      <div class="block-card">
+        <div class="block-card__label">
+          <span class="blbl">C · Medidas y precios</span>
+          <span class="btag">Uso: brochure · listing · ficha técnica</span>
+        </div>
+        <div class="block-card__content">
+          <p class="disc">
+            Las medidas indicadas son aproximadas y pueden variar respecto a la superficie registrada en escritura. El precio de publicación es referencial y puede modificarse sin previo aviso. Todo precio está sujeto a negociación privada entre las partes y no incluye gastos notariales, impuestos ni honorarios profesionales.
+          </p>
+        </div>
+      </div>
+
+      <!-- BLOQUE D -->
+      <div class="block-card">
+        <div class="block-card__label">
+          <span class="blbl">D · Imágenes y mobiliario</span>
+          <span class="btag">Uso: brochure · listing · portafolio</span>
+        </div>
+        <div class="block-card__content">
+          <p class="disc">
+            Las fotografías son de carácter referencial y representan el estado de la propiedad al momento de la sesión. El mobiliario, decoración y acabados visibles en las imágenes no necesariamente forman parte de la propiedad salvo que se indique expresamente en el expediente o en el contrato de compraventa.
+          </p>
+        </div>
+      </div>
+
+      <!-- BLOQUE E -->
+      <div class="block-card">
+        <div class="block-card__label">
+          <span class="blbl">E · Cita previa</span>
+          <span class="btag">Uso: brochure · señalética · listing</span>
+        </div>
+        <div class="block-card__content">
+          <p class="disc">
+            Las visitas a la propiedad se realizan exclusivamente con cita previa y previa coordinación con el asesor asignado. No se atienden visitas espontáneas. Para agendar, comuníquese directamente con <span class="ph" title="{{brand_name}}">Meridiana</span>.
+          </p>
+        </div>
+      </div>
+
+      <!-- BLOQUE F -->
+      <div class="block-card">
+        <div class="block-card__label">
+          <span class="blbl">F · Cierre de contacto</span>
+          <span class="btag">Uso: pie de cualquier documento público</span>
+        </div>
+        <div class="block-card__content">
+          <p class="disc">
+            Para mayor información comuníquese con <span class="ph" title="{{brand_name}}">Meridiana</span> directamente: <span class="ph" title="{{contact_email}}"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f3fffee4f1f3e4ffd0fdf5e2f9f4f9f1fef1befde8">[email&#160;protected]</a></span> · <span class="ph" title="{{contact_phone}}">+52 999 000 0000</span>. Mérida, Yucatán · <span class="ph" title="{{date}}">MMXXVI</span>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Usage notes -->
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:24px;">
+      <div class="usage-note">
+        <span class="un-mark">—</span>
+        <span class="un-txt"><strong>Selección:</strong> no es necesario usar los seis bloques en cada documento. Incluir solo los que apliquen. Un brochure de una propiedad amueblada necesita B, C y D. Un listing web necesita A, B y C. La señalética de obra solo necesita E.</span>
+      </div>
+      <div class="usage-note">
+        <span class="un-mark">—</span>
+        <span class="un-txt"><strong>Extensión:</strong> cada bloque puede acortarse eliminando la segunda frase si el espacio es muy limitado. La primera frase siempre es la más importante.</span>
+      </div>
+      <div class="usage-note">
+        <span class="un-mark">—</span>
+        <span class="un-txt"><strong>Tipografía:</strong> en documentos impresos usar mínimo 8pt. En pantalla, 10–11px. Color: <code style="font-size:11px; background:var(--paper-deep); padding:1px 5px;">var(--stone)</code> — nunca negro completo, nunca rojo.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 02 PIE COMBINADO (ejemplo aplicado) ══ -->
+  <div class="section--alt section" data-screen-label="Ejemplo aplicado">
+    <div class="sec-hd">
+      <span class="sec-n">02</span>
+      <span class="sec-lbl">Pie combinado · Combined footer example</span>
+      <span class="sec-rule"></span>
+    </div>
+    <p style="font-size:12.5px; color:var(--stone); margin-bottom:20px;">Así se ve al final de un brochure o listing. Bloques A + B + C + D + F combinados.</p>
+
+    <!-- The actual footer block as it would appear in a document -->
+    <div style="border:1px solid var(--paper-deep); background:var(--paper); padding:clamp(20px,4vw,36px);">
+      <div class="disc-footer">
+        <div class="disc-footer__rule"></div>
+        <div class="disc-block">
+          <div class="dlbl">Información comercial</div>
+          <div class="dtxt">La información contenida en este documento tiene carácter referencial y no constituye una oferta vinculante. Los datos están sujetos a cambios sin previo aviso.</div>
+        </div>
+        <div class="disc-block">
+          <div class="dlbl">Disponibilidad</div>
+          <div class="dtxt">La disponibilidad de la propiedad está sujeta a confirmación al momento de la consulta. <span class="ph" title="{{brand_name}}">Meridiana</span> no garantiza la vigencia de la información una vez distribuido este material.</div>
+        </div>
+        <div class="disc-block">
+          <div class="dlbl">Medidas y precio</div>
+          <div class="dtxt">Las medidas son aproximadas. El precio de publicación es referencial y puede modificarse sin previo aviso. No incluye gastos notariales ni impuestos.</div>
+        </div>
+        <div class="disc-block">
+          <div class="dlbl">Imágenes</div>
+          <div class="dtxt">El mobiliario y decoración en fotografías no forman parte de la propiedad salvo indicación expresa en el expediente o en el contrato de compraventa.</div>
+        </div>
+        <div class="disc-footer__contact">
+          <span class="contact-line"><span class="ph" title="{{contact_email}}"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7b1814150f1a180f143b161e09121f121a151a551603">[email&#160;protected]</a></span> · <span class="ph" title="{{contact_phone}}">+52 999 000 0000</span> · Mérida, Yucatán · <span class="ph" title="{{date}}">MMXXVI</span></span>
+          <span class="wm">Meridiana<span class="dot">.</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 03 PIE EN FONDO OSCURO ══ -->
+  <div class="footer-example" data-screen-label="Ejemplo fondo oscuro">
+    <div class="example-label">Variante sobre fondo oscuro · For dark backgrounds</div>
+    <div class="disc-footer">
+      <div class="disc-footer__rule"></div>
+      <div class="disc-block">
+        <div class="dlbl">Información comercial</div>
+        <div class="dtxt">Carácter referencial. No constituye oferta vinculante. Sujeto a cambios sin previo aviso.</div>
+      </div>
+      <div class="disc-block">
+        <div class="dlbl">Medidas y precio</div>
+        <div class="dtxt">Medidas aproximadas. Precio referencial, sujeto a modificación y negociación privada. No incluye gastos notariales.</div>
+      </div>
+      <div class="disc-block">
+        <div class="dlbl">Imágenes</div>
+        <div class="dtxt">Mobiliario y decoración de carácter referencial. No incluidos salvo indicación expresa.</div>
+      </div>
+      <div class="disc-footer__contact">
+        <span class="contact-line"><span class="ph-d" title="{{contact_email}}"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d2b1bdbca6b3b1a6bd92bfb7a0bbb6bbb3bcb3fcbfaa">[email&#160;protected]</a></span> · <span class="ph-d" title="{{contact_phone}}">+52 999 000 0000</span> · <span class="ph-d" title="{{date}}">MMXXVI</span></span>
+        <span class="wm">Meridiana<span class="dot">.</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="wm">Meridiana<span class="dot">.</span></span>
+    <span class="fn">template_disclaimer_blocks_20260614_v01</span>
+  </div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

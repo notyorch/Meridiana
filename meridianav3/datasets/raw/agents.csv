@@ -1,0 +1,16 @@
+agent_id,full_name,email,phone,role,seniority,specialty_zone,specialty_property_type,languages,commission_pct,manager_id,active
+AGT-01,Rodrigo Peón Ancona,rodrigo.peon@meridiana.mx,+52 999 112 0341,director,senior,Norte · Montejo · Temozón Norte,villa · casa · penthouse,español · inglés,4.5,AGT-01,sí
+AGT-02,Fernanda Cámara Solís,fernanda.camara@meridiana.mx,+52 999 234 8812,senior advisor,senior,Altabrisa · Yucatán Country Club · Privadas del Norte,casa · townhouse,español · inglés · francés,3.8,AGT-01,sí
+AGT-03,Sebastián Mena Uribe,sebastian.mena@meridiana.mx,+52 999 345 9901,advisor,mid,Centro Histórico · Itzimná · García Ginerés,depto · colonial · uso mixto,español · inglés,3.2,AGT-01,sí
+AGT-04,Valeria Rejón Duarte,valeria.rejon@meridiana.mx,+52 999 456 7723,advisor,mid,Municipios · Costa · Interior del Estado,terreno · casa · renta vacacional,español,3.0,AGT-02,sí
+AGT-05,Ignacio Barbachano Medina,ignacio.barbachano@meridiana.mx,+52 999 567 4412,junior advisor,junior,Chuburná · Vía Montejo · Benito Juárez Norte,depto · townhouse,español · inglés,2.5,AGT-02,sí
+AGT-06,Luciana Aznar Espejo,luciana.aznar@meridiana.mx,+52 999 678 5530,junior advisor,junior,Altabrisa · Norte Mérida,depto · casa,español,2.5,AGT-03,sí
+AGT-07,Maximiliano Escalante Pinto,maximiliano.escalante@meridiana.mx,+52 999 789 6641,senior advisor,senior,Temozón Norte · Cholul · Dzityá,villa · terreno,español · inglés,3.9,AGT-01,sí
+AGT-08,Isabela Molina Cervera,isabela.molina@meridiana.mx,+52 999 890 7752,advisor,mid,Montejo · García Ginerés · Itzimná,casa · villa,español · italiano,3.3,AGT-01,sí
+AGT-09,Tomás Herrera Ancona,tomas.herrera@meridiana.mx,+52 999 901 8863,marketing coordinator,staff,—,—,español · inglés,0.0,AGT-01,sí
+AGT-10,Camila Bolio Argáez,camila.bolio@meridiana.mx,+52 999 012 9974,operations manager,staff,—,—,español · inglés,0.0,AGT-01,sí
+AGT-11,Patricio Cervera Manzanilla,patricio.cervera@meridiana.mx,+52 999 123 1085,junior advisor,junior,Centro Histórico · San Sebastián,depto · loft,español,2.5,AGT-03,sí
+AGT-12,Renata Peón Gómez,renata.peon@meridiana.mx,+52 999 234 2196,advisor,mid,Progreso · Costa Yucatán,depto · casa de playa,español · inglés,3.1,AGT-02,sí
+AGT-13,Alejandro Zavala Esquivel,alejandro.zavala@meridiana.mx,+52 999 345 3307,senior advisor,senior,Conkal · Komchén · Interior Norte,hacienda · villa · terreno,español · inglés · alemán,4.0,AGT-01,sí
+AGT-14,Sofía Manzanilla Ávila,sofia.manzanilla@meridiana.mx,+52 999 456 4418,junior advisor,junior,Altabrisa · Norte Mérida,casa · townhouse,español,2.5,AGT-07,sí
+AGT-15,Emilio Dzul Montero,emilio.dzul@meridiana.mx,+52 999 567 5529,legal & compliance,staff,—,—,español · inglés · maya yucateco,0.0,AGT-01,sí

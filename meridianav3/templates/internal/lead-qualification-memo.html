@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<!--
+FRONTMATTER
+───────────────────────────────────────────────
+title: "Lead Qualification Memo — {{lead_name}}"
+doc_type: lead_qualification_memo
+category: internal
+audience: internal_team, agent
+purpose: "Documentar el perfil comercial de un lead y su nivel de avance para seguimiento interno."
+source:
+  - leads.csv
+  - interactions.csv
+  - agents.csv
+  - brand_board_v1
+status: template
+version: v01
+date: 2026-06-14
+entity: lead
+language: es
+tags:
+  - meridiana
+  - lead_memo
+  - calificacion
+  - interno
+summary: "Memo interno de calificación de lead. Campos fijos + sección narrativa. Uso exclusivo del equipo comercial."
+owner: "equipo comercial"
+related_docs:
+  - internal_viewing_summary
+  - internal_negotiation_notes
+doc_id: doc-leadmemo-001
+───────────────────────────────────────────────
+NAMING CONVENTION: internal_lead_qualification_{{lead_id}}_{{yyyymmdd}}_v01
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridiana — Lead Memo {{lead_id}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ─── TOKENS ─────────────────────────────── */
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --ink-soft:   #3D3529;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --gutter: clamp(28px, 5.5vw, 72px);
+    --inner: 820px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    background: var(--paper-deep);
+    font-family: var(--sans);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* ─── PLACEHOLDERS ───────────────────────── */
+  .ph {
+    color: var(--gold);
+    font-style: italic;
+    border-bottom: 1px dashed var(--gold);
+    padding-bottom: 1px;
+  }
+  .ph-on-dark {
+    color: var(--gold-dark);
+    font-style: italic;
+    border-bottom: 1px dashed var(--gold-dark);
+    padding-bottom: 1px;
+  }
+
+  /* ─── PAGE ───────────────────────────────── */
+  .page {
+    max-width: var(--inner);
+    margin: 32px auto;
+    background: var(--paper);
+    box-shadow: 0 4px 40px rgba(23,18,13,.18);
+  }
+  @media (max-width: 860px) { .page { margin: 0; box-shadow: none; } }
+
+  /* ─── MEMO HEADER ────────────────────────── */
+  .memo-hd {
+    background: var(--ink);
+    padding: clamp(22px, 4vw, 36px) var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px 32px;
+    align-items: start;
+  }
+  .memo-hd__left { display: flex; flex-direction: column; gap: 6px; }
+  .memo-hd__type {
+    font-size: 9px;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 600;
+  }
+  .memo-hd__title {
+    font-family: var(--serif);
+    font-size: clamp(22px, 3.6vw, 36px);
+    color: var(--paper);
+    line-height: .95;
+    letter-spacing: -.01em;
+  }
+  .memo-hd__sub {
+    font-size: 12px;
+    color: var(--stone);
+    margin-top: 4px;
+    letter-spacing: .04em;
+  }
+  .memo-hd__right {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
+  .badge-interno {
+    background: rgba(156,123,64,.18);
+    border: 1px solid rgba(184,145,84,.4);
+    color: var(--gold-dark);
+    font-size: 9px;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 10px;
+  }
+  .memo-hd__meta {
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: .08em;
+    text-align: right;
+    line-height: 1.55;
+  }
+  .memo-hd__brand {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: rgba(243,236,223,.35);
+    letter-spacing: -.008em;
+    margin-top: 4px;
+  }
+  .memo-hd__brand .dot { color: var(--gold-dark); opacity: .5; }
+
+  /* ─── META STRIP ─────────────────────────── */
+  .meta-strip {
+    background: var(--paper-mid);
+    border-bottom: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 580px) { .meta-strip { grid-template-columns: repeat(2, 1fr); } }
+  .meta-cell {
+    padding: clamp(12px, 2vw, 18px) clamp(14px, 2.5vw, 22px);
+    border-right: 1px solid var(--paper-deep);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-cell:last-child { border-right: 0; }
+  .meta-cell label {
+    font-size: 8.5px;
+    letter-spacing: .30em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 600;
+  }
+  .meta-cell .val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .meta-cell .val.score { font-family: var(--serif); font-size: 20px; }
+  .score-dots {
+    display: flex;
+    gap: 4px;
+    margin-top: 3px;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--paper-deep);
+    border: 1px solid rgba(131,125,114,.4);
+  }
+  .dot.on { background: var(--gold); border-color: var(--gold); }
+  .dot.half {
+    background: linear-gradient(to right, var(--gold) 50%, var(--paper-deep) 50%);
+    border-color: var(--gold);
+  }
+
+  /* status badge */
+  .status-badge {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 3px 9px;
+    border: 1px solid currentColor;
+    line-height: 1.4;
+  }
+  .status-badge.nuevo    { color: var(--stone); }
+  .status-badge.contacto { color: #5B7FA6; }
+  .status-badge.calificado { color: #4A7C5C; }
+  .status-badge.seguimiento { color: var(--gold); }
+  .status-badge.descartado { color: #A06060; }
+
+  /* ─── SECTION PATTERN ────────────────────── */
+  .section {
+    padding: clamp(26px, 4.5vw, 48px) var(--gutter);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .section--alt { background: var(--paper-mid); }
+  .section:last-of-type { border-bottom: 0; }
+
+  .sec-hd {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: clamp(18px, 3vw, 30px);
+  }
+  .sec-num { font-family: var(--serif); font-size: 12px; color: var(--gold); flex-shrink: 0; }
+  .sec-label {
+    font-weight: 700;
+    font-size: 9.5px;
+    letter-spacing: .30em;
+    text-transform: uppercase;
+    color: var(--stone);
+    white-space: nowrap;
+  }
+  .sec-rule { flex: 1; height: 1px; background: var(--paper-deep); }
+
+  /* ─── FIELD GRID ─────────────────────────── */
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--paper-deep);
+  }
+  .field-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 560px) {
+    .field-grid, .field-grid--3 { grid-template-columns: 1fr; }
+  }
+  .field {
+    padding: clamp(14px, 2.5vw, 22px) clamp(14px, 2.5vw, 20px);
+    border-right: 1px solid var(--paper-deep);
+    border-bottom: 1px solid var(--paper-deep);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .field:nth-child(2n) { border-right: 0; }
+  .field-grid--3 .field:nth-child(2n) { border-right: 1px solid var(--paper-deep); }
+  .field-grid--3 .field:nth-child(3n) { border-right: 0; }
+  .field--full {
+    grid-column: 1 / -1;
+    border-right: 0;
+  }
+  .field:last-child, .field--full:last-child { border-bottom: 0; }
+  @media (max-width: 560px) {
+    .field { border-right: 0; }
+  }
+  .field label {
+    font-size: 8.5px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .field .fval {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .field .fsub {
+    font-size: 11.5px;
+    color: var(--stone);
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  /* Budget row */
+  .budget-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .budget-range .bval {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -.01em;
+  }
+  .budget-range .bsep {
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: .08em;
+  }
+
+  /* ─── TAGS ───────────────────────────────── */
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--ink);
+    background: var(--paper-deep);
+    padding: 4px 10px;
+    border: 1px solid rgba(131,125,114,.35);
+  }
+  .tag.ph-tag {
+    color: var(--gold);
+    background: rgba(156,123,64,.08);
+    border-color: rgba(156,123,64,.4);
+    font-style: italic;
+  }
+
+  /* ─── SIGNALS ────────────────────────────── */
+  .signals { display: flex; flex-direction: column; gap: 0; }
+  .signal-item {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding: clamp(10px, 1.8vw, 16px) 0;
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .signal-item:last-child { border-bottom: 0; }
+  .sig-mark { font-size: 11px; color: var(--gold); font-weight: 700; text-align: center; }
+  .sig-mark.neg { color: var(--stone); }
+  .sig-text { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+  .sig-text .ph { font-size: inherit; }
+
+  /* ─── NOTES BLOCKS ───────────────────────── */
+  .note-block {
+    border-left: 2px solid var(--paper-deep);
+    padding-left: clamp(16px, 3vw, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .note-block.internal { border-left-color: var(--gold); }
+  .note-block label {
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .note-block.internal label { color: var(--gold); }
+  .note-block label .badge-small {
+    font-size: 8px;
+    letter-spacing: .22em;
+    padding: 2px 7px;
+    border: 1px solid currentColor;
+    font-weight: 700;
+    opacity: .7;
+  }
+  .note-block textarea-ph {
+    display: block;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    min-height: 52px;
+  }
+  .note-block .ph-line {
+    font-size: 13.5px;
+    color: var(--stone);
+    font-style: italic;
+    line-height: 1.65;
+  }
+
+  /* ─── NEXT STEP ──────────────────────────── */
+  .next-step {
+    background: var(--ink);
+    padding: clamp(24px, 4vw, 40px) var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px 40px;
+    align-items: center;
+  }
+  @media (max-width: 560px) { .next-step { grid-template-columns: 1fr; } }
+  .next-step__label {
+    font-size: 9px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .next-step__text {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2.4vw, 24px);
+    color: var(--paper);
+    line-height: 1.18;
+    letter-spacing: -.005em;
+  }
+  .next-step__agent { text-align: right; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  @media (max-width: 560px) { .next-step__agent { text-align: left; align-items: flex-start; } }
+  .next-step__agent .alabel {
+    font-size: 9px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .next-step__agent .aname {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--paper);
+    line-height: 1;
+  }
+  .next-step__agent .adate {
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: .08em;
+  }
+
+  /* ─── DOC FOOT ───────────────────────────── */
+  .doc-foot {
+    padding: 12px var(--gutter);
+    background: var(--paper-mid);
+    border-top: 1px solid var(--paper-deep);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .doc-foot .fnote {
+    font-size: 9.5px;
+    letter-spacing: .14em;
+    color: var(--stone);
+    font-style: italic;
+    font-family: var(--serif);
+  }
+  .doc-foot .fstamp {
+    font-size: 9px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: rgba(131,125,114,.6);
+    font-weight: 600;
+  }
+
+  /* ─── PRINT ──────────────────────────────── */
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+    .section { page-break-inside: avoid; }
+    .next-step { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ══════════ MEMO HEADER ══════════ -->
+  <div class="memo-hd" data-screen-label="Header">
+    <div class="memo-hd__left">
+      <div class="memo-hd__type">Meridiana · Memo interno · Lead</div>
+      <div class="memo-hd__title">Memo de<br />calificación</div>
+      <div class="memo-hd__sub"><span class="ph-on-dark" title="{{lead_name}}">{{Nombre del lead}}</span></div>
+    </div>
+    <div class="memo-hd__right">
+      <span class="badge-interno">Interno · Confidencial</span>
+      <div class="memo-hd__meta">
+        ID: <span class="ph-on-dark" title="{{lead_id}}">L-0000</span><br />
+        Fecha: <span class="ph-on-dark" title="{{date}}">2026-06-14</span><br />
+        Versión: v01
+      </div>
+      <div class="memo-hd__brand">Meridiana<span class="dot">.</span></div>
+    </div>
+  </div>
+
+  <!-- Meta strip -->
+  <div class="meta-strip" data-screen-label="Resumen rápido">
+    <div class="meta-cell">
+      <label>Estado · Status</label>
+      <div class="val">
+        <span class="status-badge seguimiento"><span class="ph" title="status del lead">Seguimiento</span></span>
+      </div>
+    </div>
+    <div class="meta-cell">
+      <label>Score · 1–5</label>
+      <div class="val score"><span class="ph" title="{{qualification_score}}">3</span> / 5</div>
+      <div class="score-dots">
+        <div class="dot on"></div>
+        <div class="dot on"></div>
+        <div class="dot on"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+    <div class="meta-cell">
+      <label>Origen · Source</label>
+      <div class="val"><span class="ph" title="{{lead_source}}">Referido</span></div>
+    </div>
+    <div class="meta-cell">
+      <label>Asesor asignado</label>
+      <div class="val"><span class="ph" title="{{assigned_agent_name}}">{{Nombre agente}}</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════ 01 — IDENTIFICACIÓN ══════════ -->
+  <div class="section" data-screen-label="Identificación">
+    <div class="sec-hd">
+      <span class="sec-num">01</span>
+      <span class="sec-label">Identificación del lead</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Nombre completo</label>
+        <div class="fval"><span class="ph" title="{{lead_name}}">{{Nombre completo}}</span></div>
+      </div>
+      <div class="field">
+        <label>Fuente / Origen</label>
+        <div class="fval"><span class="ph" title="{{lead_source}}">{{Referido · Web · Instagram · Otro}}</span></div>
+      </div>
+      <div class="field">
+        <label>Perfil de inversión</label>
+        <div class="fval"><span class="ph" title="{{investment_profile}}">{{Comprador final · Inversionista · Ambos}}</span></div>
+      </div>
+      <div class="field">
+        <label>Primer contacto</label>
+        <div class="fval"><span class="ph" title="{{first_contact_date}}">{{Fecha}}</span></div>
+        <div class="fsub"><span class="ph" title="Canal de primer contacto">{{Canal: llamada · WhatsApp · email}}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 02 — PRESUPUESTO ══════════ -->
+  <div class="section section--alt" data-screen-label="Presupuesto">
+    <div class="sec-hd">
+      <span class="sec-num">02</span>
+      <span class="sec-label">Presupuesto declarado</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Rango en MXN</label>
+        <div class="budget-range">
+          <span class="bval"><span class="ph" title="{{budget_min_mxn}}">$8,000,000</span></span>
+          <span class="bsep">—</span>
+          <span class="bval"><span class="ph" title="{{budget_max_mxn}}">$14,000,000</span></span>
+        </div>
+        <div class="fsub">MXN · Precio de compra</div>
+      </div>
+      <div class="field">
+        <label>Forma de compra</label>
+        <div class="fval"><span class="ph" title="{{payment_method}}">{{Contado · Crédito hipotecario · Por definir}}</span></div>
+        <div class="fsub"><span class="ph" title="Detalles de financiamiento">{{Banco · Monto del enganche · Por confirmar}}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 03 — BÚSQUEDA ══════════ -->
+  <div class="section" data-screen-label="Perfil de búsqueda">
+    <div class="sec-hd">
+      <span class="sec-num">03</span>
+      <span class="sec-label">Perfil de búsqueda</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="field-grid field-grid--3">
+      <div class="field">
+        <label>Municipio de interés</label>
+        <div class="fval"><span class="ph" title="{{desired_municipality}}">{{Municipio}}</span></div>
+      </div>
+      <div class="field">
+        <label>Colonias / Zonas</label>
+        <div class="fval">
+          <div class="tag-list">
+            <span class="tag ph-tag"><span class="ph" title="{{desired_neighborhoods}}">{{Colonia 1}}</span></span>
+            <span class="tag ph-tag">{{Colonia 2}}</span>
+            <span class="tag ph-tag">{{Colonia 3}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Tipo de propiedad</label>
+        <div class="fval">
+          <div class="tag-list">
+            <span class="tag ph-tag"><span class="ph" title="{{property_type_interest}}">{{Casa · Depto · Hacienda}}</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Recámaras mínimas</label>
+        <div class="fval"><span class="ph" title="{{bedrooms_min}}">{{3 · 4 · Indiferente}}</span></div>
+      </div>
+      <div class="field">
+        <label>Timeline de compra</label>
+        <div class="fval"><span class="ph" title="{{purchase_timeline}}">{{1–3 meses · 3–6 · +6 · Sin prisa}}</span></div>
+      </div>
+      <div class="field">
+        <label>Prioridades declaradas</label>
+        <div class="fval"><span class="ph" title="Prioridades del lead">{{Espacio · Zona · Precio · Diseño}}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 04 — SEÑALES ══════════ -->
+  <div class="section section--alt" data-screen-label="Señales de intención">
+    <div class="sec-hd">
+      <span class="sec-num">04</span>
+      <span class="sec-label">Señales de intención observadas</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="signals">
+      <div class="signal-item">
+        <span class="sig-mark">+</span>
+        <span class="sig-text"><span class="ph" title="Señal positiva 1">{{Señal de avance: ej. "Preguntó por gastos notariales" · "Quiere traer a su pareja a la próxima visita"}}</span></span>
+      </div>
+      <div class="signal-item">
+        <span class="sig-mark">+</span>
+        <span class="sig-text"><span class="ph" title="Señal positiva 2">{{Señal de avance: ej. "Ya definió zona" · "Tiene carta bancaria lista"}}</span></span>
+      </div>
+      <div class="signal-item">
+        <span class="sig-mark neg">−</span>
+        <span class="sig-text"><span class="ph" title="Señal de freno o duda">{{Señal de freno: ej. "Presupuesto no confirmado" · "Menciona que aún evalúa Monterrey"}}</span></span>
+      </div>
+      <div class="signal-item">
+        <span class="sig-mark neg">−</span>
+        <span class="sig-text"><span class="ph" title="Señal de freno o duda">{{Señal de freno adicional si aplica}}</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 05 — NOTAS ══════════ -->
+  <div class="section" data-screen-label="Notas">
+    <div class="sec-hd">
+      <span class="sec-num">05</span>
+      <span class="sec-label">Observaciones y notas</span>
+      <span class="sec-rule"></span>
+    </div>
+
+    <!-- Notas comerciales -->
+    <div class="note-block" style="margin-bottom: clamp(22px, 3.5vw, 36px);">
+      <label>Notas comerciales <span class="badge-small">Equipo</span></label>
+      <div class="ph-line"><span class="ph" title="{{notes_public}}">{{Contexto de la conversación, historial de contacto, detalles de interés sobre propiedades específicas. Compartible entre agentes. Sin juicios sobre el cliente.}}</span></div>
+    </div>
+
+    <!-- Notas internas -->
+    <div class="note-block internal">
+      <label>Notas internas <span class="badge-small">Privado · No compartir</span></label>
+      <div class="ph-line"><span class="ph" title="{{notes_internal}}">{{Observaciones internas del asesor: perfil real vs. declarado, señales de seriedad, contexto personal relevante para la estrategia comercial. No incluir en documentos públicos ni en comunicación con el cliente.}}</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════ PRÓXIMO PASO ══════════ -->
+  <div class="next-step" data-screen-label="Próximo paso">
+    <div>
+      <div class="next-step__label">Próximo paso · Next action</div>
+      <div class="next-step__text"><span class="ph-on-dark" title="Próximo paso acordado">{{Describir la acción concreta: visita agendada, llamada de seguimiento, envío de ficha, espera de respuesta. Con fecha si se acordó.}}</span></div>
+    </div>
+    <div class="next-step__agent">
+      <div class="alabel">Responsable</div>
+      <div class="aname"><span class="ph-on-dark" title="{{assigned_agent_name}}">{{Asesor}}</span></div>
+      <div class="adate"><span class="ph-on-dark" title="{{fecha_seguimiento}}">{{Fecha de seguimiento}}</span></div>
+    </div>
+  </div>
+
+  <!-- Doc footer -->
+  <div class="doc-foot">
+    <span class="fnote">internal_lead_qualification_<span class="ph" title="{{lead_id}}">L-0000</span>_20260614_v01</span>
+    <span class="fstamp">Interno · No distribuir</span>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>

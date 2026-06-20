@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!--
+FRONTMATTER
+───────────────────────────────────────────────
+title: "Seller FAQ — Meridiana"
+doc_type: seller_faq
+category: public
+audience: owner, lead
+purpose: "Explicar a propietarios cómo funciona la venta con Meridiana."
+source:
+  - owners.csv
+  - properties.csv
+  - brand_board_v1
+status: template
+version: v01
+date: 2026-06-14
+entity: owner
+language: es
+tags:
+  - meridiana
+  - seller_faq
+  - propietarios
+  - public
+summary: "Preguntas frecuentes para propietarios interesados en vender con Meridiana."
+owner: "equipo comercial"
+related_docs:
+  - public_company_profile_meridiana_20260614_v01
+  - public_buyer_faq_meridiana_20260614_v01
+doc_id: doc-sfaq-001
+───────────────────────────────────────────────
+NAMING CONVENTION: public_seller_faq_meridiana_20260614_v01
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{brand_name}} — Seller FAQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --gutter: clamp(44px, 9vw, 120px);
+    --inner: 820px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { background: var(--paper-deep); font-family: var(--sans); color: var(--ink); line-height: 1.5; }
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  .ph  { color: var(--gold);      font-style: italic; border-bottom: 1px dashed var(--gold);      padding-bottom: 1px; }
+  .ph-d{ color: var(--gold-dark); font-style: italic; border-bottom: 1px dashed var(--gold-dark); padding-bottom: 1px; }
+  .ph-block {
+    display: block; color: var(--stone); font-style: italic;
+    border: 1px dashed rgba(131,125,114,.45); padding: 13px 15px;
+    font-size: 12.5px; line-height: 1.5; margin-top: 8px;
+  }
+
+  .page {
+    max-width: var(--inner);
+    margin: 32px auto;
+    background: var(--paper);
+    box-shadow: 0 4px 40px rgba(23,18,13,.2);
+  }
+  @media (max-width: 860px) { .page { margin: 0; box-shadow: none; } }
+
+  /* ─── HEADER ─────────────────────────────── */
+  .hd {
+    background: var(--ink);
+    padding: clamp(44px, 8vw, 80px) var(--gutter) clamp(40px, 7vw, 72px);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+  }
+  @media (max-width: 600px) { .hd { grid-template-columns: 1fr; } }
+  .hd__left { display: flex; flex-direction: column; gap: 20px; }
+  .hd__eyebrow { font-weight: 600; font-size: 10px; letter-spacing: .38em; text-transform: uppercase; color: var(--stone); white-space: nowrap; }
+  .hd__title { font-family: var(--serif); font-size: clamp(36px, 7vw, 80px); line-height: .9; letter-spacing: -.01em; }
+  .hd__sub { font-family: var(--serif); font-size: clamp(16px, 1.8vw, 21px); line-height: 1.25; color: var(--stone); max-width: 32ch; font-style: italic; }
+  .hd__brand { font-family: var(--serif); font-size: clamp(22px, 4vw, 42px); line-height: .9; letter-spacing: -.01em; text-align: right; white-space: nowrap; }
+  .hd__brand .dot { color: var(--gold-dark); }
+  .hd__brand .label { display: block; font-family: var(--sans); font-weight: 600; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); text-align: right; margin-top: 10px; }
+
+  /* ─── INTRO ──────────────────────────────── */
+  .intro { padding: clamp(40px, 7vw, 70px) var(--gutter); border-bottom: 1px solid var(--paper-deep); }
+  .intro p { font-size: clamp(15px, 1.3vw, 17px); line-height: 1.72; color: var(--ink); max-width: 58ch; }
+  .intro p + p { margin-top: 1em; }
+  .intro .en { display: block; margin-top: .6em; color: var(--stone); font-style: italic; font-size: .9em; line-height: 1.55; }
+
+  /* ─── SECTION ────────────────────────────── */
+  .section { padding: clamp(48px, 8vw, 88px) var(--gutter); border-bottom: 1px solid var(--paper-deep); }
+  .section--alt { background: var(--paper-mid); }
+  .sec-hd { display: flex; align-items: center; gap: 18px; margin-bottom: clamp(28px, 4.5vw, 52px); }
+  .sec-num { font-family: var(--serif); font-size: 13px; color: var(--gold); flex-shrink: 0; }
+  .sec-label { font-weight: 600; font-size: 10px; letter-spacing: .34em; text-transform: uppercase; color: var(--stone); white-space: nowrap; }
+  .sec-rule { flex: 1; height: 1px; background: var(--paper-deep); }
+
+  /* ─── FAQ ────────────────────────────────── */
+  .faq-group { display: flex; flex-direction: column; gap: 0; }
+  .faq-group + .faq-group { margin-top: clamp(36px, 5vw, 56px); }
+  .faq-group__title { font-weight: 600; font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); padding-bottom: 14px; border-bottom: 1px solid var(--paper-deep); }
+  .faq-item { padding: clamp(22px, 3.5vw, 36px) 0; border-bottom: 1px solid var(--paper-deep); display: flex; flex-direction: column; gap: 12px; }
+  .faq-item:last-child { border-bottom: 0; }
+  .faq-q { font-family: var(--serif); font-size: clamp(18px, 2vw, 22px); line-height: 1.18; color: var(--ink); letter-spacing: -.005em; }
+  .faq-a { font-size: clamp(14px, 1.2vw, 15.5px); line-height: 1.7; color: #3D3529; max-width: 60ch; }
+  .faq-a .note { display: block; margin-top: .6em; color: var(--stone); font-style: italic; font-size: .93em; }
+  .faq-a strong { font-weight: 600; color: var(--ink); }
+
+  /* ─── PROCESS STEPS ──────────────────────── */
+  .process { list-style: none; display: flex; flex-direction: column; gap: 0; margin-top: clamp(24px, 4vw, 40px); }
+  .proc-item { display: grid; grid-template-columns: 32px 1fr; gap: 20px; align-items: start; padding: clamp(16px, 2.5vw, 24px) 0; border-bottom: 1px solid var(--paper-deep); }
+  .proc-item:last-child { border-bottom: 0; }
+  .proc-n { font-family: var(--serif); font-size: 20px; color: var(--gold); line-height: 1.1; padding-top: 1px; }
+  .proc-body h4 { font-family: var(--serif); font-weight: 400; font-size: clamp(16px, 1.6vw, 19px); color: var(--ink); margin-bottom: 5px; }
+  .proc-body p { font-size: 13.5px; line-height: 1.65; color: var(--stone); }
+
+  /* ─── CLOSING ────────────────────────────── */
+  .closing { background: var(--ink); color: var(--paper); padding: clamp(52px, 9vw, 96px) var(--gutter); display: flex; flex-direction: column; gap: clamp(32px, 5vw, 52px); }
+  .closing__top { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .closing__seal { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--gold-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+  .closing__seal::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 1px solid rgba(184,145,84,.3); }
+  .closing__seal .m { font-family: var(--serif); font-size: 36px; color: var(--paper); line-height: 1; }
+  .closing__headline { font-family: var(--serif); font-size: clamp(22px, 3.5vw, 36px); line-height: 1.1; letter-spacing: -.008em; }
+  .closing__headline .accent { color: var(--gold-dark); }
+  .closing__body { font-size: clamp(14px, 1.3vw, 16px); line-height: 1.7; color: rgba(243,236,223,.7); max-width: 52ch; }
+  .closing__contacts { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 28px 40px; padding-top: clamp(24px, 4vw, 36px); border-top: 1px solid rgba(131,125,114,.28); }
+  .cfield label { display: block; font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: var(--stone); margin-bottom: 7px; }
+  .cfield p { font-family: var(--serif); font-size: clamp(16px, 1.6vw, 18px); line-height: 1.3; color: var(--paper); }
+  .cfield p .ph-d { color: var(--gold-dark); border-bottom-color: var(--gold-dark); }
+  .closing__foot { font-size: 10px; letter-spacing: .14em; color: var(--stone); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: clamp(20px,3vw,32px); border-top: 1px solid rgba(131,125,114,.2); }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+    .hd { page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .faq-item { page-break-inside: avoid; }
+    .closing { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ HEADER ══ -->
+  <div class="hd" data-screen-label="Header">
+    <div class="hd__left">
+      <span class="hd__eyebrow">Preguntas frecuentes · Propietarios</span>
+      <div class="hd__title">Seller<br />FAQ</div>
+      <p class="hd__sub">Todo lo que conviene saber antes de confiar su propiedad a Meridiana.</p>
+    </div>
+    <div class="hd__brand">
+      <span class="ph-d" title="{{brand_name}}">Meridiana</span><span class="dot">.</span>
+      <span class="label"><span class="ph-d" title="{{city}}">Mérida · Yucatán</span></span>
+    </div>
+  </div>
+
+  <!-- ══ INTRO ══ -->
+  <div class="intro" data-screen-label="Introducción">
+    <p>
+      Este documento responde las preguntas más comunes de propietarios que están considerando vender su inmueble con <span class="ph" title="{{brand_name}}">Meridiana</span>. No es un contrato ni una promesa de resultados. Es una guía directa sobre cómo trabajamos, qué puede esperar de nosotros y qué no hacemos.
+      <span class="en">This document answers the most common questions from owners considering selling their property with Meridiana. It is not a contract or a promise of results — it is a direct guide on how we work and what you can expect.</span>
+    </p>
+    <p>
+      Si algo no está aquí, basta con preguntar. Las conversaciones directas siempre son mejor que los malentendidos silenciosos.
+      <span class="en">If something is not covered here, simply ask. Direct conversations are always better than silent misunderstandings.</span>
+    </p>
+  </div>
+
+  <!-- ══ 01 FAQ ══ -->
+  <div class="section" data-screen-label="Preguntas frecuentes">
+    <div class="sec-hd">
+      <span class="sec-num">01</span>
+      <span class="sec-label">Preguntas frecuentes · FAQ</span>
+      <span class="sec-rule"></span>
+    </div>
+
+    <!-- GROUP A -->
+    <div class="faq-group">
+      <div class="faq-group__title">Sobre la relación con Meridiana · About working together</div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo decide Meridiana si puede representar mi propiedad?</div>
+        <div class="faq-a">
+          No aceptamos todo lo que nos ofrecen. Evaluamos si la propiedad encaja con el tipo de inventario que manejamos, si el precio es razonable para el mercado y si hay condiciones claras para comercializarla. Si no podemos representarla bien, lo decimos desde el inicio.
+          <span class="note">We do not list every property offered to us. We assess whether it fits our inventory, whether the price is market-realistic, and whether conditions are clear for commercialization.</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Qué tipo de acuerdo formalizamos para trabajar juntos?</div>
+        <div class="faq-a">
+          Trabajamos con un mandato de comercialización por escrito. Define el precio de publicación, el plazo del acuerdo, las condiciones de la comisión y los términos de comunicación. Es un documento simple, no un contrato de cuarenta páginas.
+          <span class="note">We work with a written commercial mandate defining list price, agreement term, commission terms, and communication conditions. It is a straightforward document.</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Cuánto cobra Meridiana por su servicio?</div>
+        <div class="faq-a">
+          La comisión se acuerda antes de firmar el mandato y se cobra únicamente cuando la operación cierra. No hay cobros por adelantado ni por publicación. Si la propiedad no se vende, Meridiana no cobra.
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP B -->
+    <div class="faq-group">
+      <div class="faq-group__title">Sobre valuación y precio · Valuation &amp; pricing</div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo determinan el precio de publicación?</div>
+        <div class="faq-a">
+          Hacemos un análisis de propiedades comparables en la zona, considerando metraje, estado de conservación, antigüedad y condiciones del mercado actual. Le presentamos ese análisis al propietario y acordamos juntos el precio. <strong>No inflamos precios para ganar el mandato.</strong> Un precio fuera de mercado solo prolonga el tiempo de venta sin beneficio real.
+          <span class="note">We analyze comparable properties and present the results. We do not inflate prices to win the listing — an above-market price only extends time on market with no real benefit.</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Cuánto tiempo tarda en venderse una propiedad?</div>
+        <div class="faq-a">
+          Depende del precio, la zona, las condiciones del inmueble y el mercado en ese momento. No prometemos plazos. Lo que sí podemos decir es que las propiedades bien valuadas, bien documentadas y bien fotografiadas se mueven más rápido que las que no cumplen esas condiciones.
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP C -->
+    <div class="faq-group">
+      <div class="faq-group__title">Sobre publicación y visibilidad · Listing &amp; exposure</div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Dónde publican mi propiedad?</div>
+        <div class="faq-a">
+          Publicamos a través de nuestros canales propios, nuestra red de compradores activos y, cuando aplica, en portales seleccionados. <strong>No publicamos en todos lados por defecto.</strong> El alcance se define en función del perfil de comprador que buscamos para esa propiedad específica.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Puedo pedir que mi propiedad no aparezca en portales masivos?</div>
+        <div class="faq-a">
+          Sí. Muchos de nuestros propietarios prefieren una comercialización discreta. En ese caso operamos de forma reservada: presentamos la propiedad solo a compradores calificados de forma directa, sin publicación pública. Eso se acuerda en el mandato.
+          <span class="note">Yes. Many owners prefer discreet commercialization. We operate confidentially in those cases, presenting the property only to qualified buyers directly — no public listing. This is agreed in the mandate.</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Quién toma las fotografías de la propiedad?</div>
+        <div class="faq-a">
+          Trabajamos con fotógrafos que conocen nuestro estilo: luz natural, sin personas, sin filtros exagerados, preferiblemente en hora dorada de la mañana. La calidad fotográfica tiene impacto directo en el tiempo de venta y en el perfil de comprador que atrae.
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP D -->
+    <div class="faq-group">
+      <div class="faq-group__title">Compradores y visitas · Buyers &amp; showings</div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo filtran a los compradores antes de mostrar mi propiedad?</div>
+        <div class="faq-a">
+          Antes de coordinar una visita, confirmamos que el prospecto tiene presupuesto real, intención genuina y un perfil que encaja con la propiedad. No hacemos visitas de cortesía ni de exploración sin calificación previa. Su tiempo y la condición de su inmueble se respetan.
+          <span class="note">Before any showing, we confirm that the buyer has real budget, genuine intent, and a profile that fits the property. No courtesy visits, no unqualified exploration.</span>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Puedo estar presente durante las visitas?</div>
+        <div class="faq-a">
+          Puede, aunque en la mayoría de los casos recomendamos que el asesor conduzca el recorrido solo. La presencia del propietario puede cambiar la dinámica de la conversación y en ocasiones limita lo que el comprador expresa abiertamente. Si prefiere estar presente, lo coordinamos sin problema.
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP E -->
+    <div class="faq-group">
+      <div class="faq-group__title">Negociación y cierre · Negotiation &amp; closing</div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo funciona el proceso de negociación?</div>
+        <div class="faq-a">
+          Cuando hay una oferta, la comunicamos al propietario con el contexto completo: monto, condiciones, perfil del comprador y nuestra recomendación. La decisión siempre es del propietario. Mediamos con criterio, no con presión. Lo que ocurre en la negociación queda entre las partes.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">¿Quién cubre los gastos de escrituración?</div>
+        <div class="faq-a">
+          En México, los gastos notariales y el impuesto sobre la renta por enajenación corren habitualmente a cargo del vendedor, aunque esto puede negociarse. Le asesoramos sobre el impacto fiscal antes del cierre para que no haya sorpresas. Para cálculos específicos, recomendamos consultar a un contador.
+          <span class="note">In Mexico, notarial fees and capital gains tax typically fall on the seller, though this is negotiable. We advise on fiscal impact before closing. For specific calculations, we recommend consulting an accountant.</span>
+        </div>
+      </div>
+
+      <span class="ph-block" title="{{faq_items}}">Agregar preguntas adicionales según el contexto del propietario, zona o tipo de propiedad. Mantener respuestas entre 2 y 5 líneas. No prometer resultados ni plazos específicos.</span>
+    </div>
+  </div>
+
+  <!-- ══ 02 PROCESO ══ -->
+  <div class="section section--alt" data-screen-label="Cómo inicia el proceso">
+    <div class="sec-hd">
+      <span class="sec-num">02</span>
+      <span class="sec-label">Cómo trabajamos · How we work</span>
+      <span class="sec-rule"></span>
+    </div>
+    <p style="font-family:var(--serif); font-size:clamp(22px,2.8vw,30px); line-height:1.12; letter-spacing:-.008em; max-width:26ch; color:var(--ink);">
+      Sin prisas. Sin compromisos antes de entendernos.
+    </p>
+    <ol class="process">
+      <li class="proc-item">
+        <span class="proc-n">1</span>
+        <div class="proc-body">
+          <h4>Primera conversación</h4>
+          <p>Nos cuentas sobre la propiedad y tus expectativas. Sin formularios, sin compromisos. Solo una conversación para ver si tiene sentido trabajar juntos.</p>
+        </div>
+      </li>
+      <li class="proc-item">
+        <span class="proc-n">2</span>
+        <div class="proc-body">
+          <h4>Visita y análisis de mercado</h4>
+          <p>Visitamos la propiedad, hacemos el análisis comparativo y te presentamos nuestra propuesta de precio y estrategia de comercialización.</p>
+        </div>
+      </li>
+      <li class="proc-item">
+        <span class="proc-n">3</span>
+        <div class="proc-body">
+          <h4>Mandato de comercialización</h4>
+          <p>Si acordamos trabajar juntos, firmamos el mandato. Definimos precio, condiciones, alcance de la publicación y canales de comunicación.</p>
+        </div>
+      </li>
+      <li class="proc-item">
+        <span class="proc-n">4</span>
+        <div class="proc-body">
+          <h4>Fotografía y publicación</h4>
+          <p>Coordinamos la sesión fotográfica y preparamos el material de publicación. Revisas y apruebas antes de que salga cualquier información.</p>
+        </div>
+      </li>
+      <li class="proc-item">
+        <span class="proc-n">5</span>
+        <div class="proc-body">
+          <h4>Visitas, negociación y cierre</h4>
+          <p>Filtramos compradores, coordinamos visitas, comunicamos ofertas y acompañamos el proceso hasta la firma de escritura. Sin ruido, con discreción.</p>
+        </div>
+      </li>
+      <span class="ph-block" title="{{seller_process}}">Ajustar estos pasos según el proceso real de Meridiana con propietarios.</span>
+    </ol>
+  </div>
+
+  <!-- ══ CLOSING ══ -->
+  <div class="closing" data-screen-label="Contacto">
+    <div class="closing__top">
+      <div class="closing__seal"><span class="m">M</span></div>
+      <div class="closing__headline">
+        La conversación empieza<br />cuando usted quiera<span class="accent">.</span>
+      </div>
+    </div>
+    <p class="closing__body">
+      No hay formulario de captación. No hay compromiso por preguntar. Si está evaluando sus opciones, una conversación directa es el mejor punto de partida.
+      <span style="display:block; margin-top:.7em; font-style:italic; color:rgba(131,125,114,.9); font-size:.92em;">No capture form, no commitment for asking. If you are evaluating your options, a direct conversation is the best starting point.</span>
+    </p>
+    <div class="closing__contacts">
+      <div class="cfield">
+        <label>Correo · Email</label>
+        <p><span class="ph-d" title="{{contact_email}}"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="14777b7a607577607b547971667d707d757a753a796c">[email&#160;protected]</a></span></p>
+      </div>
+      <div class="cfield">
+        <label>Teléfono · Phone</label>
+        <p><span class="ph-d" title="{{contact_phone}}">+52 999 000 0000</span></p>
+      </div>
+      <div class="cfield">
+        <label>Ciudad · City</label>
+        <p><span class="ph-d" title="{{city}}">Mérida, Yucatán</span></p>
+      </div>
+    </div>
+    <div class="closing__foot">
+      <span>© MMXXVI <span class="ph-d" title="{{brand_name}}">Meridiana</span> · Todos los derechos reservados</span>
+      <span style="font-family:var(--serif); font-style:italic; letter-spacing:.04em;">public_seller_faq_meridiana_20260614_v01</span>
+    </div>
+  </div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

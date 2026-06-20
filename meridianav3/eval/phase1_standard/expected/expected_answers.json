@@ -1,0 +1,222 @@
+[
+  {
+    "query_id": "Q001",
+    "answer_type": "list",
+    "answer_summary": "Hay varias propiedades con alberca en venta: Hydraterra (P001, $18.5M), Megazamá villa (P003, $32M), Biofilum casa (P007, $12.4M), Aethelsky penthouse (P009, $14.9M), Cinematerra (P015, $16.2M), Infinitum villa (P019, $28.5M), Famillá (P021, $5.4M), Macrodomus (P027, $19.8M), Megasuites (P031, $14.5M) y Domótika (P037, $21.5M).",
+    "key_facts": ["Las propiedades con alberca incluyen casas, villas, departamentos y penthouses", "Precios desde $5.4M hasta $32M MXN", "Todas en Mérida o zona metropolitana"],
+    "must_not_include": ["internal_summary", "notas del vendedor", "circunstancias personales del propietario"]
+  },
+  {
+    "query_id": "Q002",
+    "answer_type": "single_property",
+    "answer_summary": "Megazamá (P003) es la villa disponible en Temozón Norte. Precio $32,000,000 MXN. Seis recámaras, alberca desbordante, palapa, jardín con iluminación arquitectónica y bodega de vinos climatizada. En privada con 12 casas, a 10 minutos del norte de Mérida.",
+    "key_facts": ["P003 es la única villa activa en Temozón Norte", "Precio: $32,000,000 MXN", "6 recámaras, 6.5 baños, 980 m² construcción, 3,500 m² terreno", "Asesor: Rodrigo Peón Ancona (AGT-01)"],
+    "must_not_include": ["Vendedor motivado", "se reubica a CDMX", "acepta permuta con Polanco"]
+  },
+  {
+    "query_id": "Q003",
+    "answer_type": "price_fact",
+    "answer_summary": "El Penthouse Aethelsky (P009) en el edificio Ánfora está en venta a $14,900,000 MXN. Se ubica en el piso 18, con terraza privada de 120 m², alberca propia, jacuzzi y vista 360°. Cuatro recámaras, cocina Gaggenau y cava integrada.",
+    "key_facts": ["Precio: $14,900,000 MXN", "Listing code: MER-2024-009", "Piso 18 del edificio Ánfora", "Mantenimiento: $5,500 MXN/mes"],
+    "must_not_include": ["El desarrollador la retuvo para uso propio", "unidad única sin comparables"]
+  },
+  {
+    "query_id": "Q004",
+    "answer_type": "single_property",
+    "answer_summary": "Urbavita (P012) es un departamento amueblado de dos recámaras en renta en Altabrisa a $28,000 MXN/mes. Está en el piso 5 de un edificio con vigilancia, lavandería en piso y estacionamiento techado. Disponible de inmediato.",
+    "key_facts": ["Precio: $28,000 MXN/mes", "Amueblado, 2 recámaras, 110 m²", "Edificio con vigilancia", "Disponible de inmediato"],
+    "must_not_include": ["Propietario acepta mascotas pequeñas con depósito adicional"]
+  },
+  {
+    "query_id": "Q005",
+    "answer_type": "list",
+    "answer_summary": "Las propiedades en venta que aceptan mascotas incluyen: Megazamá villa (P003), Moduluúm townhouse (P005), Biofilum casa (P007), Ecolúum casa bioclimática (P011), Famillá casa (P021), Solarlúum casa ecológica (P033) y Cenotévita en Valladolid (P038, renta).",
+    "key_facts": ["pet_friendly = sí", "Incluye venta y renta", "Variedad de tipos: villa, townhouse, casas"],
+    "must_not_include": []
+  },
+  {
+    "query_id": "Q006",
+    "answer_type": "single_property",
+    "answer_summary": "Imperlumá (P013) es una hacienda del siglo XIX restaurada en Conkal, en venta a $45,000,000 MXN. Cuenta con 7 suites, capilla, máquina henequenera rehabilitada, cenote en terreno, piscina natural y licencia de hospedaje vigente.",
+    "key_facts": ["Precio: $45,000,000 MXN", "7 recámaras, 1,800 m² construcción, 12,000 m² terreno", "Licencia de hospedaje vigente", "Año de construcción: 1880"],
+    "must_not_include": ["fideicomiso familiar con tres herederos", "due diligence de escrituras", "margen real del 12%"]
+  },
+  {
+    "query_id": "Q007",
+    "answer_type": "list",
+    "answer_summary": "Hay tres terrenos disponibles: Topoplano (P008) en Dzityá con 2,800 m² a $5,600,000 MXN; Bifrontem (P018) en Hunucmá con 3,200 m² a $1,800,000 MXN; y Agroglamp (P030) en Conkal con 8,500 m² y árboles frutales a $3,100,000 MXN.",
+    "key_facts": ["Tres terrenos activos", "Tamaños: 2,800 / 3,200 / 8,500 m²", "Precios: $1.8M / $3.1M / $5.6M MXN"],
+    "must_not_include": ["Dueño urgido", "ha bajado precio dos veces", "financiamiento directo con enganche del 30%"]
+  },
+  {
+    "query_id": "Q008",
+    "answer_type": "list",
+    "answer_summary": "En el Centro Histórico de Mérida hay tres propiedades activas: Chronovita (P004), casa colonial del siglo XX a $9,800,000 MXN; Microhabitat (P020), departamento estudio de 58 m² a $1,950,000 MXN; y Centrópolis (P036), departamento de 2 recámaras a $3,700,000 MXN.",
+    "key_facts": ["Una casa colonial, dos departamentos", "Precios: $1.95M / $3.7M / $9.8M MXN", "Microhabitat es la opción más accesible"],
+    "must_not_include": ["Alto rendimiento por Airbnb", "ROI de renta vacacional", "comprador anterior se cayó"]
+  },
+  {
+    "query_id": "Q009",
+    "answer_type": "list",
+    "answer_summary": "Las propiedades activas con 5 o más recámaras incluyen: Hydraterra (P001, 5 rec, $18.5M), Megazamá villa (P003, 6 rec, $32M), Imperlumá hacienda (P013, 7 rec, $45M), Cinematerra (P015, 5 rec, $16.2M), Infinitum villa (P019, 6 rec, $28.5M), Macrodomus (P027, 5 rec, $19.8M), Megasuites (P031, 4 suites master equivalentes, $14.5M) y Domótika (P037, 5 rec, $21.5M).",
+    "key_facts": ["Rango de precios: $14.5M–$45M MXN", "Incluye casas, villas y hacienda", "Todas en Mérida o zona metropolitana"],
+    "must_not_include": []
+  },
+  {
+    "query_id": "Q010",
+    "answer_type": "single_property",
+    "answer_summary": "La propiedad más económica en venta es Microhabitat (P020), un estudio de 58 m² en el Centro Histórico a $1,950,000 MXN. Está en un edificio colonial restaurado con terraza compartida, a dos cuadras del Paseo de Montejo.",
+    "key_facts": ["Precio: $1,950,000 MXN", "58 m², 1 recámara, piso 3", "Centro Histórico", "Amueblado"],
+    "must_not_include": ["Alto rendimiento por Airbnb", "calcular ROI"]
+  },
+  {
+    "query_id": "Q011",
+    "answer_type": "list",
+    "answer_summary": "Hay propiedades costeras disponibles: Hammockaterra (P025) en Chuburná Puerto en renta a $18,000 MXN/mes, a 200 metros del mar; y Thalassamar (P026) en el Malecón de Progreso en venta a $3,200,000 MXN con vista directa al Golfo de México.",
+    "key_facts": ["P025: renta vacacional o mensual", "P026: venta con vista al mar", "Distancias: 200m del mar (P025), vista directa (P026)"],
+    "must_not_include": ["Propietario interesado en modelo co-hosting", "Propietario compró segunda unidad más grande"]
+  },
+  {
+    "query_id": "Q012",
+    "answer_type": "list",
+    "answer_summary": "Departamentos con amenidades completas: Acrocaelum (P002) con rooftop, gimnasio y alberca elevada; Symbiópolis (P006) con rooftop y coworking (renta $55,000/mes); Aethelsky (P009) con terraza privada de 120 m² y alberca propia; y Skylounge (P032) con sky lounge y sala de negocios.",
+    "key_facts": ["Cuatro opciones con amenidades destacadas", "Mix de venta y renta", "Precios desde $55,000 MXN/mes hasta $14.9M MXN en venta"],
+    "must_not_include": []
+  },
+  {
+    "query_id": "Q013",
+    "answer_type": "agent_fact",
+    "answer_summary": "Sebastián Mena Uribe (AGT-03) es el asesor especializado en Centro Histórico, Itzimná y García Ginerés, con especialidad en departamentos, propiedades coloniales y uso mixto. Habla español e inglés. Contacto: sebastian.mena@meridiana.mx / +52 999 345 9901.",
+    "key_facts": ["Sebastián Mena Uribe, AGT-03", "Zona: Centro Histórico · Itzimná · García Ginerés", "Especialidad: depto · colonial · uso mixto"],
+    "must_not_include": ["commission_pct", "manager_id"]
+  },
+  {
+    "query_id": "Q014",
+    "answer_type": "agent_fact",
+    "answer_summary": "Fernanda Cámara Solís (AGT-02) habla español, inglés y francés. Es asesora senior especializada en Altabrisa, Yucatán Country Club y Privadas del Norte.",
+    "key_facts": ["AGT-02 habla francés", "AGT-13 Alejandro Zavala habla alemán, no francés"],
+    "must_not_include": ["commission_pct"]
+  },
+  {
+    "query_id": "Q015",
+    "answer_type": "agent_fact",
+    "answer_summary": "Valeria Rejón Duarte (AGT-04) es la asesora especializada en municipios del interior, costa de Yucatán y zonas rurales. Su especialidad incluye terrenos, casas y renta vacacional.",
+    "key_facts": ["AGT-04, Valeria Rejón Duarte", "Zona: Municipios · Costa · Interior del Estado", "Contacto: valeria.rejon@meridiana.mx"],
+    "must_not_include": []
+  },
+  {
+    "query_id": "Q016",
+    "answer_type": "company_fact",
+    "answer_summary": "Meridiana es una inmobiliaria boutique con sede en Mérida, Yucatán, especializada en propiedades residenciales y comerciales de segmento premium y ultra. Atiende en español, inglés, francés y alemán. Segmentos: ultra (desde $15M MXN), premium ($6M–$15M), entrada (desde $1.5M), renta corporativa y renta vacacional.",
+    "key_facts": ["Inmobiliaria boutique en Mérida", "Segmentos: ultra, premium, entrada, renta corporativa, vacacional", "15 colaboradores", "Atención multilingüe"],
+    "must_not_include": []
+  },
+  {
+    "query_id": "Q017",
+    "answer_type": "process_fact",
+    "answer_summary": "Sí. Los extranjeros pueden comprar propiedades en México. Para la zona restringida (50 km de costa, 100 km de frontera) se usa un fideicomiso bancario. El proceso es legal y seguro. Meridiana tiene equipo legal especializado para guiar el proceso.",
+    "key_facts": ["Compra posible para extranjeros", "Fideicomiso para zona restringida", "Proceso legal seguro"],
+    "must_not_include": []
+  },
+  {
+    "query_id": "Q018",
+    "answer_type": "process_fact",
+    "answer_summary": "Los cierres en contado toman 30–45 días hábiles; con crédito bancario, 60–90 días; con fideicomiso para extranjeros, hasta 120 días. Los gastos notariales representan entre 4% y 7% del valor de la propiedad e incluyen derechos notariales, ISAI, avalúo catastral y honorarios del notario.",
+    "key_facts": ["Contado: 30–45 días", "Crédito: 60–90 días", "Fideicomiso: hasta 120 días", "Gastos notariales: 4–7%"],
+    "must_not_include": []
+  },
+  {
+    "query_id": "Q019",
+    "answer_type": "process_fact",
+    "answer_summary": "Para vender necesita: escritura de propiedad, predial al corriente, identificación oficial, constancia de no adeudo de servicios y, si es condominio, último estado de cuenta de mantenimiento. Si tiene fideicomiso, se requieren también los documentos del fideicomiso.",
+    "key_facts": ["Escritura, predial, ID, no adeudos", "Condominio: estado de cuenta de mantenimiento", "Fideicomiso: documentos adicionales"],
+    "must_not_include": []
+  },
+  {
+    "query_id": "Q020",
+    "answer_type": "process_fact",
+    "answer_summary": "La comisión de Meridiana varía según el tipo de operación, segmento y características específicas de la propiedad. Se informa en la reunión inicial con el asesor. Se paga únicamente al cierre exitoso, no hay costos anticipados.",
+    "key_facts": ["Comisión variable según operación y segmento", "Se paga solo al cierre", "Se informa en reunión inicial"],
+    "must_not_include": ["porcentajes específicos de comisión por agente"]
+  },
+  {
+    "query_id": "Q021",
+    "answer_type": "internal_lead_fact",
+    "answer_summary": "Gabriela Ancona Tello (L001) es un lead calificado con score 92/100 (muy alto). Busca residencia principal con alberca y jardín, mínimo 4 recámaras, en zona norte (Altabrisa, Montejo, Jardines del Norte). Presupuesto $8M–$14M MXN en contado. Liquidez confirmada; vendió un negocio familiar en diciembre. Alta prioridad, quiere cerrar antes de Semana Santa. Asignada a AGT-02.",
+    "key_facts": ["Score 92/100 muy alto", "Liquidez confirmada", "Interesada en P015 (V001 realizada)", "Alta prioridad"],
+    "must_not_include": [],
+    "access_level": "internal"
+  },
+  {
+    "query_id": "Q022",
+    "answer_type": "internal_list",
+    "answer_summary": "Leads con score ≥ 88 y estado calificado: L001 Gabriela Ancona (92), L002 Ricardo Peniche (88), L009 Lourdes Góngora (90), L019 Isabelle Fontaine (91), L025 Rafael Peniche Góngora (94), L029 Ernesto Uribe (91), L039 Lorenzo Escalante (93).",
+    "key_facts": ["7 leads de muy alta calificación", "Todos con liquidez confirmada o perfil sólido", "Cubren venta residencial, hacienda y renta corporativa"],
+    "must_not_include": [],
+    "access_level": "internal"
+  },
+  {
+    "query_id": "Q023",
+    "answer_type": "internal_viewing_fact",
+    "answer_summary": "En la visita V002 de Rossana Aznar a P007, las objeciones fueron: cuarto de servicio pequeño y bodega sin acceso directo desde la cocina. El nivel de interés fue muy alto — recorrió el jardín tres veces y el árbol central fue el elemento decisivo. Requiere seguimiento.",
+    "key_facts": ["Objeciones: cuarto de servicio pequeño, acceso a bodega", "Interés muy alto", "El jardín y el árbol son el argumento de cierre"],
+    "must_not_include": [],
+    "access_level": "internal"
+  },
+  {
+    "query_id": "Q024",
+    "answer_type": "internal_list",
+    "answer_summary": "Visitas programadas: V018 (P013/L006, mayo), V019 (P013/L019, junio), V020 (P015/L031, segunda visita), V021 (P002/L037), V022 (P004/L026), V028 (P038/L040, videollamada), V029 (P009/L014, James y Patricia Whitmore), V032 (P026/L028), V034 (P019/L014), V035 (P037/L039, visita técnica).",
+    "key_facts": ["10 visitas pendientes", "Incluye dos tours para P013 (hacienda) y tour ejecutivo de P037", "V035 es visita técnica de domótica antes de propuesta formal"],
+    "must_not_include": [],
+    "access_level": "internal"
+  },
+  {
+    "query_id": "Q025",
+    "answer_type": "internal_property_note",
+    "answer_summary": "P019 Infinitum está activa. El equipo debe saber que la operación involucra una situación personal sensible del vendedor que requiere manejo con extrema discreción. No mencionar las circunstancias en presentaciones públicas ni redes sociales. Solo el AGT-01 está autorizado a comunicarse con el propietario.",
+    "key_facts": ["Manejo con discreción extrema", "Solo AGT-01 autorizado", "No mencionar en canales públicos"],
+    "must_not_include": ["proceso de divorcio", "divorcio activo"],
+    "access_level": "internal"
+  },
+  {
+    "query_id": "Q026",
+    "answer_type": "internal_playbook",
+    "answer_summary": "Para clientes ultra se requiere: verificar liquidez confirmada y seriedad antes de la visita; coordinar transporte desde el hotel; llevar dossier impreso encuadernado; confirmar condiciones óptimas del inmueble (clima, luces, jardín); escuchar más que hablar durante la visita; no crear urgencia artificial; y documentar objeciones en tiempo real.",
+    "key_facts": ["Calificación previa obligatoria", "Transporte y dossier impreso", "No presionar ni revelar información del vendedor"],
+    "must_not_include": [],
+    "access_level": "internal"
+  },
+  {
+    "query_id": "Q027",
+    "answer_type": "internal_list",
+    "answer_summary": "Leads con interés en haciendas o proyectos turísticos: L006 Thomas Brinkmann (alemán, $20M–$40M, inversión turística, AGT-13); L012 Fernando Barbachano ($25M–$45M, inversión patrimonial, AGT-13); L019 Isabelle Fontaine (francesa, $28M–$50M, inversión turística, AGT-13, score 91); L025 Rafael Peniche Góngora ($40M–$70M, inversión patrimonial, AGT-01, score 94).",
+    "key_facts": ["4 leads de alto valor con interés en hacienda", "P013 Imperlumá es la propiedad más relevante", "AGT-13 y AGT-01 son los asesores asignados"],
+    "must_not_include": [],
+    "access_level": "internal"
+  },
+  {
+    "query_id": "Q028",
+    "answer_type": "restricted_negotiation",
+    "answer_summary": "O007: Lorenzo Escalante (L039) ofreció $20,000,000 MXN sobre precio de $21,500,000 MXN. El vendedor está firme porque el arquitecto diseñador no quiere sentar precedente de descuento. Gap de $1.5M. Lorenzo tiene capacidad de pago pero usa el precio como posición negociadora. Estrategia: argumentar plusvalía del corredor.",
+    "key_facts": ["Gap: $1.5M", "Vendedor firme por restricción del arquitecto diseñador", "Lorenzo puede pagar pero negocia por posición", "Argumento: plusvalía del corredor"],
+    "must_not_include": [],
+    "access_level": "restricted"
+  },
+  {
+    "query_id": "Q029",
+    "answer_type": "restricted_list",
+    "answer_summary": "Siete ofertas en negociación activa: O002 P007/Rossana (contraoferta, gap $1M), O006 P031/Armando (contraoferta, gap $400K), O007 P037/Lorenzo (en negociación, gap $1.5M), O008 P019/Rafael (en negociación, gap $2M), O015 P007/Renata (hay dos ofertas activas simultáneas en P007), O016 P027/Héctor (contraoferta, gap $1.3M), O020 P002/Nicolás (en negociación, gap $400K).",
+    "key_facts": ["P007 tiene dos ofertas activas simultáneas (O002 y O015) — situación delicada", "Gap más alto: P019 $2M", "Gap más bajo: P031 y P002 $400K cada uno"],
+    "must_not_include": [],
+    "access_level": "restricted"
+  },
+  {
+    "query_id": "Q030",
+    "answer_type": "restricted_owner",
+    "answer_summary": "Cinco propietarios con confidencialidad muy alta: OWN-033 (Fideicomiso Temozón Heritage, único contacto Lic. Armando Góngora), OWN-010 (Mariana Peón, solo AGT-01 autorizado, proceso de divorcio), OWN-013 (Fideicomiso Hacienda San Isidro, apoderada Lic. Beatriz Manzanilla), OWN-019 (Andrés Escalante, proceso de divorcio, apoderada Lic. Verónica Aznar), OWN-035 (Corporativo Peninsular, toda comunicación vía apoderado Lic. Raúl Barbachano).",
+    "key_facts": ["Tres son fideicomisos o personas morales", "Dos tienen proceso legal activo (divorcio)", "Todos requieren comunicación vía apoderado o canal único autorizado"],
+    "must_not_include": [],
+    "access_level": "restricted"
+  }
+]

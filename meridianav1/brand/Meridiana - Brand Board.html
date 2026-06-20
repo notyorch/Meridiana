@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridiana — Brand Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    /* Cuatro colores. Eso es todo. */
+    --ink:      #17120D;   /* Negro carbón cálido — piedra caliza húmeda */
+    --ink-rise: #20190F;   /* mismo negro, un grado levantado para paneles */
+    --paper:    #F3ECDF;   /* Blanco roto — papel de carta */
+    --paper-deep:#EAE0CE;  /* crema un grado más profundo */
+    --gold:     #9C7B40;   /* Dorado apagado — bronce, miel oscura */
+    --gold-lift:#B89154;   /* el mismo dorado, sobre fondo oscuro */
+    --stone:    #837D72;   /* Gris piedra — secundarios, divisores */
+
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+    --edge: clamp(22px, 6vw, 120px);
+    --maxw: 1240px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    font-weight:400;
+    line-height:1.5;
+  }
+  ::selection{ background:var(--gold); color:var(--ink); }
+
+  /* ---------- helpers ---------- */
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 var(--edge); }
+  .section{ padding:clamp(72px,11vw,160px) 0; }
+  .micro{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:.30em;
+    text-transform:uppercase;
+  }
+  .micro.stone{ color:var(--stone); }
+  .micro.gold{ color:var(--gold-lift); }
+  .micro{ white-space:nowrap; }
+  .serif{ font-family:var(--serif); font-weight:400; }
+  .en{ color:var(--stone); font-style:italic; }
+  .hair{ height:1px; background:var(--stone); opacity:.32; border:0; }
+  .hair.gold{ background:var(--gold); opacity:.85; }
+
+  /* ============ COVER ============ */
+  .cover{
+    min-height:100vh;
+    display:flex; flex-direction:column;
+    justify-content:space-between;
+    padding:clamp(28px,4vw,52px) var(--edge);
+    position:relative;
+  }
+  .cover__top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:24px; flex-wrap:wrap;
+  }
+  .cover__top .right{ text-align:right; }
+  .cover__center{
+    flex:1;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:6vh 0;
+  }
+  .wordmark{
+    font-family:var(--serif);
+    font-weight:400;
+    line-height:.9;
+    letter-spacing:-.012em;
+    font-size:clamp(64px, 16.5vw, 268px);
+    color:var(--paper);
+  }
+  .wordmark .dot{ color:var(--gold-lift); }
+  .cover__rule{
+    width:min(420px,70vw);
+    margin:clamp(26px,3.4vw,46px) auto clamp(20px,2.4vw,34px);
+    height:1px; background:var(--gold);
+  }
+  .cover__sub{
+    font-family:var(--serif);
+    font-size:clamp(19px,2.3vw,30px);
+    letter-spacing:.02em;
+    color:var(--paper);
+  }
+  .cover__sub .en{ font-size:.82em; }
+  .cover__bottom{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:24px; flex-wrap:wrap;
+  }
+  .cover__claim{
+    font-family:var(--serif);
+    font-size:clamp(20px,2.5vw,33px);
+    line-height:1.18;
+    max-width:18ch;
+  }
+  .cover__claim .en{ font-size:.62em; display:block; margin-top:.5em; line-height:1.3; }
+
+  /* ============ generic content blocks ============ */
+  .lead-grid{ display:grid; grid-template-columns:minmax(0,1fr); gap:clamp(32px,5vw,72px); }
+  @media(min-width:860px){ .lead-grid{ grid-template-columns:0.42fr 0.58fr; align-items:start; } }
+
+  .kicker-row{ display:flex; align-items:center; gap:16px; margin-bottom:34px; }
+  .kicker-row .n{ font-family:var(--serif); font-size:15px; color:var(--gold-lift); }
+  .kicker-row .line{ flex:1; height:1px; background:var(--stone); opacity:.3; }
+
+  .display{
+    font-family:var(--serif);
+    font-weight:400;
+    line-height:1.02;
+    letter-spacing:-.01em;
+    font-size:clamp(34px,5.2vw,68px);
+  }
+  .body{
+    font-size:clamp(15px,1.15vw,17px);
+    line-height:1.62;
+    color:var(--paper);
+    max-width:46ch;
+  }
+  .body + .body{ margin-top:1.1em; }
+  .body .en{ display:block; margin-top:.7em; font-size:.92em; line-height:1.55; }
+  .muted{ color:var(--stone); }
+
+  /* ============ LOGOTYPE ============ */
+  .logo-grid{ display:grid; gap:18px; grid-template-columns:1fr; margin-top:8px; }
+  @media(min-width:760px){ .logo-grid{ grid-template-columns:1.35fr 1fr; } }
+  .panel{
+    border:1px solid rgba(131,125,114,.28);
+    position:relative;
+    display:flex; flex-direction:column; justify-content:space-between;
+    min-height:240px;
+    padding:26px 28px;
+  }
+  .panel .tag{ position:absolute; top:18px; left:22px; }
+  .panel .center{
+    flex:1; display:flex; align-items:center; justify-content:center;
+    text-align:center;
+  }
+  .panel.on-ink{ background:var(--ink-rise); color:var(--paper); }
+  .panel.on-paper{ background:var(--paper); color:var(--ink); }
+  .panel.on-paper .tag{ color:var(--stone); }
+
+  .lk{ font-family:var(--serif); line-height:.92; letter-spacing:-.01em; }
+  .lk-primary{ font-size:clamp(40px,6vw,76px); }
+  .lk-primary .ds{ color:var(--gold-lift); }
+  .lk-primary.dark .ds{ color:var(--gold); }
+  .lk-descriptor{
+    margin-top:14px;
+    font-family:var(--sans); font-weight:600;
+    font-size:11px; letter-spacing:.42em; text-transform:uppercase;
+  }
+  .panel.on-ink .lk-descriptor{ color:var(--stone); }
+  .panel.on-paper .lk-descriptor{ color:var(--stone); }
+
+  /* monogram seal */
+  .seal{
+    width:128px; height:128px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .seal::before{
+    content:""; position:absolute; inset:0; border-radius:50%;
+    border:1px solid var(--gold);
+  }
+  .seal::after{
+    content:""; position:absolute; inset:9px; border-radius:50%;
+    border:1px solid rgba(156,123,64,.4);
+  }
+  .seal .m{ font-family:var(--serif); font-size:74px; line-height:1; }
+  .panel.on-ink .seal .m{ color:var(--paper); }
+  .panel.on-paper .seal .m{ color:var(--ink); }
+
+  .clearspace .box{
+    --u: 16px;
+    position:relative;
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:calc(var(--u)*2);
+    outline:1px dashed rgba(131,125,114,.5);
+  }
+  .clearspace .mm{ font-family:var(--serif); font-size:64px; color:var(--ink); line-height:1; }
+
+  .logo-notes{
+    margin-top:34px;
+    display:grid; gap:26px 48px; grid-template-columns:1fr;
+  }
+  @media(min-width:680px){ .logo-notes{ grid-template-columns:repeat(3,1fr); } }
+  .note h4{ font-family:var(--sans); font-weight:600; font-size:13px; letter-spacing:.02em; margin-bottom:8px; }
+  .note p{ font-size:13.5px; line-height:1.55; color:var(--stone); }
+  .note .en{ display:block; margin-top:.45em; }
+
+  /* ============ COLOR ============ */
+  .swatches{ display:grid; gap:0; grid-template-columns:1fr; margin-top:8px; border:1px solid rgba(131,125,114,.28); }
+  @media(min-width:760px){ .swatches{ grid-template-columns:repeat(4,1fr); } }
+  .sw{
+    min-height:340px;
+    padding:22px 22px 26px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    border-right:1px solid rgba(131,125,114,.22);
+  }
+  .sw:last-child{ border-right:0; }
+  @media(max-width:759px){ .sw{ border-right:0; border-bottom:1px solid rgba(131,125,114,.22); min-height:200px; } }
+  .sw__name{ font-family:var(--serif); font-size:27px; line-height:1; }
+  .sw__name .en{ display:block; font-size:13px; font-style:italic; margin-top:6px; }
+  .sw__meta{ font-family:var(--sans); }
+  .sw__hex{ font-size:13px; letter-spacing:.12em; font-weight:600; }
+  .sw__role{ font-size:11.5px; line-height:1.45; margin-top:10px; opacity:.8; }
+  .sw--ink{ background:var(--ink); color:var(--paper); }
+  .sw--paper{ background:var(--paper); color:var(--ink); }
+  .sw--gold{ background:var(--gold); color:var(--ink); }
+  .sw--stone{ background:var(--stone); color:var(--ink); }
+  .ratio-note{ margin-top:22px; font-size:12px; color:var(--stone); letter-spacing:.02em; }
+
+  /* ============ TYPE ============ */
+  .type-hero{ font-family:var(--serif); line-height:.86; letter-spacing:-.02em; }
+  .type-hero .big{ font-size:clamp(110px,22vw,300px); display:block; }
+  .glyphline{
+    font-family:var(--serif);
+    font-size:clamp(26px,4vw,52px);
+    letter-spacing:.04em;
+    line-height:1.4;
+    color:var(--paper);
+    margin-top:8px;
+    word-spacing:.1em;
+  }
+  .glyphline .en{ color:var(--gold-lift); font-style:normal; }
+  .type-specimens{ display:grid; gap:40px; grid-template-columns:1fr; margin-top:54px; }
+  @media(min-width:820px){ .type-specimens{ grid-template-columns:1fr 1fr; } }
+  .spec h5{ display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid rgba(131,125,114,.35); padding-top:14px; margin-bottom:18px; }
+  .spec h5 .nm{ font-family:var(--serif); font-size:22px; }
+  .spec h5 .role{ font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--stone); }
+  .spec .sample-serif{ font-family:var(--serif); font-size:clamp(22px,2.6vw,32px); line-height:1.28; color:var(--paper); }
+  .spec .sample-sans{ font-size:15px; line-height:1.62; color:var(--paper); }
+  .spec .weights{ margin-top:16px; display:flex; flex-wrap:wrap; gap:18px; color:var(--stone); font-size:13px; }
+  .spec .weights b{ color:var(--paper); font-weight:600; }
+
+  /* ============ VOICE ============ */
+  .voice-quote{
+    font-family:var(--serif);
+    font-size:clamp(30px,4.4vw,60px);
+    line-height:1.12;
+    letter-spacing:-.01em;
+    max-width:20ch;
+  }
+  .voice-quote .en{ display:block; font-size:.42em; line-height:1.4; margin-top:.8em; max-width:40ch; }
+  .voice-cols{ display:grid; gap:30px; grid-template-columns:1fr; margin-top:54px; }
+  @media(min-width:760px){ .voice-cols{ grid-template-columns:1fr 1fr; gap:0; } }
+  .vcol{ padding:30px 34px; border:1px solid rgba(131,125,114,.28); }
+  .vcol:first-child{ border-right:0; }
+  @media(max-width:759px){ .vcol:first-child{ border-right:1px solid rgba(131,125,114,.28); border-bottom:0; } }
+  .vcol h4{ font-size:11px; letter-spacing:.28em; text-transform:uppercase; margin-bottom:20px; }
+  .vcol.yes h4{ color:var(--gold-lift); }
+  .vcol.no h4{ color:var(--stone); }
+  .vlist{ list-style:none; display:flex; flex-direction:column; gap:13px; }
+  .vlist li{ font-size:14.5px; line-height:1.5; color:var(--paper); padding-left:18px; position:relative; }
+  .vlist li::before{ content:""; position:absolute; left:0; top:.62em; width:7px; height:1px; background:var(--gold-lift); }
+  .vcol.no .vlist li{ color:var(--stone); }
+  .vcol.no .vlist li::before{ background:var(--stone); }
+  .vcol.no .vlist li s{ text-decoration:line-through; text-decoration-color:rgba(131,125,114,.7); }
+
+  .specimen-card{
+    margin-top:54px;
+    background:var(--paper); color:var(--ink);
+    padding:clamp(30px,5vw,60px);
+    display:grid; gap:30px; grid-template-columns:1fr;
+  }
+  @media(min-width:820px){ .specimen-card{ grid-template-columns:1.3fr 1fr; align-items:end; } }
+  .specimen-card .ph{
+    aspect-ratio:4/3; background:var(--ink);
+    display:flex; align-items:flex-end; padding:20px;
+    position:relative; overflow:hidden;
+  }
+  .specimen-card .ph .stamp{ font-family:var(--serif); font-size:40px; color:rgba(243,236,223,.16); position:absolute; top:16px; right:20px; }
+  .specimen-card .ph .cap{ color:var(--stone); font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
+  .specimen-card .listing .where{ font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--gold); }
+  .specimen-card .listing .ttl{ font-family:var(--serif); font-size:clamp(28px,3.4vw,40px); line-height:1.05; margin:12px 0 18px; }
+  .specimen-card .listing p{ font-size:15px; line-height:1.62; color:#4a443b; max-width:40ch; }
+  .specimen-card .listing .meta{ margin-top:20px; display:flex; gap:26px; font-size:12px; letter-spacing:.08em; color:var(--ink); }
+  .specimen-card .listing .meta span b{ display:block; font-family:var(--serif); font-size:24px; font-weight:400; letter-spacing:0; }
+
+  /* ============ FOOTER ============ */
+  .foot{ padding:clamp(60px,9vw,120px) 0 56px; text-align:center; }
+  .foot .seal{ margin:0 auto 28px; }
+  .foot .fm{ font-family:var(--serif); font-size:clamp(34px,7vw,84px); line-height:1; }
+  .foot .fm .dot{ color:var(--gold-lift); }
+  .foot .loc{ margin-top:18px; }
+  .foot .legal{ margin-top:42px; color:var(--stone); font-size:11px; letter-spacing:.14em; }
+
+  .index{ display:flex; gap:26px; flex-wrap:wrap; }
+  .index span{ color:var(--stone); }
+  .index span b{ color:var(--paper); font-weight:600; }
+</style>
+</head>
+<body>
+
+  <!-- ============================ COVER ============================ -->
+  <header class="cover" data-screen-label="Cover">
+    <div class="cover__top">
+      <div class="left">
+        <div class="micro stone">Manual de marca</div>
+        <div class="micro gold" style="margin-top:6px;">Brand Guidelines · v1.0</div>
+      </div>
+      <div class="right">
+        <div class="micro stone">Mérida · Yucatán</div>
+        <div class="micro stone" style="margin-top:6px;">MMXXVI</div>
+      </div>
+    </div>
+
+    <div class="cover__center">
+      <h1 class="wordmark">Meridiana</h1>
+      <div class="cover__rule"></div>
+      <p class="cover__sub">Inmobiliaria boutique &nbsp;·&nbsp; <span class="en">Boutique real estate</span></p>
+    </div>
+
+    <div class="cover__bottom">
+      <p class="cover__claim">
+        No vende metros cuadrados. Vende pertenencia.
+        <span class="en">It does not sell square meters. It sells belonging.</span>
+      </p>
+      <div class="micro stone" style="text-align:right;">Identidad esencial<br />Core identity</div>
+    </div>
+  </header>
+
+  <!-- ============================ IDEA ============================ -->
+  <section class="section" style="background:var(--ink-rise);">
+    <div class="wrap">
+      <div class="kicker-row">
+        <span class="n">01</span>
+        <span class="micro stone">La idea · The idea</span>
+        <span class="line"></span>
+      </div>
+      <div class="lead-grid">
+        <h2 class="display">El cliente no<br />busca una casa.<br /><span style="color:var(--gold-lift);">Busca confirmar<br />quién es.</span></h2>
+        <div>
+          <p class="body">
+            Meridiana opera en el silencio, no en el ruido del mercado. Describe, no presume. La marca se construye sobre una sola convicción: la calidad no necesita adjetivos.
+            <span class="en">Meridiana works in silence, not in the noise of the market. It describes; it does not boast. The brand rests on one conviction: quality needs no adjectives.</span>
+          </p>
+          <p class="body">
+            El negro es la declaración. La restricción es el lujo. Y el nombre, escrito con precisión, basta.
+            <span class="en">Black is the statement. Restraint is the luxury. And the name, set with precision, is enough.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ LOGOTYPE ============================ -->
+  <section class="section" data-screen-label="Logotipo">
+    <div class="wrap">
+      <div class="kicker-row">
+        <span class="n">02</span>
+        <span class="micro stone">Logotipo · Logotype</span>
+        <span class="line"></span>
+      </div>
+
+      <div class="lead-grid" style="margin-bottom:36px;">
+        <h2 class="display">Una palabra.<br />Alto contraste.<br />Nada más.</h2>
+        <div>
+          <p class="body">
+            El logotipo es la palabra «Meridiana» en una serif de alto contraste, con gruesos y delgados pronunciados. Sin íconos. Sin casas, techos, llaves ni mapas. Las inmobiliarias genéricas usan esos símbolos porque no confían en su nombre. Meridiana confía en el suyo.
+            <span class="en">The logotype is the word “Meridiana” in a high-contrast serif. No icons, no houses, keys or maps. Generic agencies use those symbols because they do not trust their name. Meridiana trusts its own.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="logo-grid">
+        <div class="panel on-ink">
+          <span class="micro stone tag">Principal · reverso</span>
+          <div class="center">
+            <div>
+              <div class="lk lk-primary">Meridian<span class="ds">a</span></div>
+              <div class="lk-descriptor">Inmobiliaria · Mérida</div>
+            </div>
+          </div>
+        </div>
+        <div class="panel on-paper">
+          <span class="micro tag">Principal · positivo</span>
+          <div class="center">
+            <div>
+              <div class="lk lk-primary dark" style="color:var(--ink);">Meridian<span class="ds">a</span></div>
+              <div class="lk-descriptor">Inmobiliaria · Mérida</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="logo-grid" style="margin-top:18px;">
+        <div class="panel on-ink">
+          <span class="micro stone tag">Monograma · sello</span>
+          <div class="center"><div class="seal"><span class="m">M</span></div></div>
+          <span class="micro stone" style="text-align:center;">Sellos · bordados · placas de metal</span>
+        </div>
+        <div class="panel on-paper">
+          <span class="micro tag">Área de respeto</span>
+          <div class="center clearspace">
+            <div class="box"><span class="mm">M</span></div>
+          </div>
+          <span class="micro" style="color:var(--stone); text-align:center;">Margen mínimo = 2× el ancho de la M</span>
+        </div>
+      </div>
+
+      <div class="logo-notes">
+        <div class="note">
+          <h4>El detalle dorado</h4>
+          <p>El dorado aparece con disciplina: en un solo trazo —aquí, el remate final—. Nunca como relleno, siempre como firma.
+          <span class="en">Gold appears with discipline: a single stroke. Never as fill — always as signature.</span></p>
+        </div>
+        <div class="note">
+          <h4>Color sobre fondo</h4>
+          <p>Sobre negro va en blanco crema. Sobre crema va en negro carbón. El dorado se reserva a piezas de alto impacto.
+          <span class="en">On black, cream. On cream, carbon. Gold is reserved for high-impact pieces.</span></p>
+        </div>
+        <div class="note">
+          <h4>El monograma</h4>
+          <p>La M, construida con la misma serif de alto contraste, vive en sellos, bordados y placas de metal en fachada.
+          <span class="en">The M, built from the same high-contrast serif, lives on seals, embroidery and façade plaques.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ COLOR ============================ -->
+  <section class="section" style="background:var(--ink-rise);" data-screen-label="Color">
+    <div class="wrap">
+      <div class="kicker-row">
+        <span class="n">03</span>
+        <span class="micro stone">Sistema de color · Colour system</span>
+        <span class="line"></span>
+      </div>
+
+      <div class="lead-grid" style="margin-bottom:40px;">
+        <h2 class="display">Cuatro colores.<br />La restricción<br />es el lujo.</h2>
+        <div>
+          <p class="body">
+            Un negro con temperatura cálida, casi carbón. Un blanco crema de papel de carta. Un dorado apagado, casi bronce, que firma sin gritar. Y un gris piedra para los segundos planos. Meridiana no usa más.
+            <span class="en">A warm-tempered near-carbon black. A cream white like quality letter paper. A muted, almost-bronze gold that signs without shouting. And a stone grey for the background. Meridiana uses nothing more.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="swatches">
+        <div class="sw sw--ink">
+          <div class="sw__name">Negro carbón<span class="en">Carbon black</span></div>
+          <div class="sw__meta">
+            <div class="sw__hex">#17120D</div>
+            <div class="sw__role">Color principal. Permanencia. La sombra de un corredor de hacienda.</div>
+          </div>
+        </div>
+        <div class="sw sw--paper">
+          <div class="sw__name">Blanco crema<span class="en">Cream paper</span></div>
+          <div class="sw__meta">
+            <div class="sw__hex">#F3ECDF</div>
+            <div class="sw__role">Contrapunto. Calidez sin caer en beige barato.</div>
+          </div>
+        </div>
+        <div class="sw sw--gold">
+          <div class="sw__name">Bronce apagado<span class="en">Muted gold</span></div>
+          <div class="sw__meta">
+            <div class="sw__hex">#9C7B40</div>
+            <div class="sw__role">La firma. Foil en frío, nunca relleno. Aparece con disciplina.</div>
+          </div>
+        </div>
+        <div class="sw sw--stone">
+          <div class="sw__name">Gris piedra<span class="en">Stone grey</span></div>
+          <div class="sw__meta">
+            <div class="sw__hex">#837D72</div>
+            <div class="sw__role">Segundos planos, divisores, texto secundario.</div>
+          </div>
+        </div>
+      </div>
+      <p class="ratio-note">Proporción de uso · Usage ratio — ░ Carbón 70 &nbsp;·&nbsp; Crema 22 &nbsp;·&nbsp; Piedra 6 &nbsp;·&nbsp; Bronce 2</p>
+    </div>
+  </section>
+
+  <!-- ============================ TYPOGRAPHY ============================ -->
+  <section class="section" data-screen-label="Tipografía">
+    <div class="wrap">
+      <div class="kicker-row">
+        <span class="n">04</span>
+        <span class="micro stone">Tipografía · Typography</span>
+        <span class="line"></span>
+      </div>
+
+      <div class="type-hero">
+        <span class="big">Aa</span>
+      </div>
+      <div class="glyphline">
+        A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z
+        <br /><span style="font-style:italic;">a b c d e f g h i j k l m n ñ o p q r s t u v w x y z</span>
+        <br />0 1 2 3 4 5 6 7 8 9 &nbsp; <span class="en">&amp; · — “ ”</span>
+      </div>
+
+      <div class="type-specimens">
+        <div class="spec">
+          <h5><span class="nm">Instrument Serif</span><span class="role">Display · logotipo · titulares</span></h5>
+          <p class="sample-serif">Planta baja con doble altura. Patio central con palapa de palma. El vacío comunica que el siguiente habitante eres tú.</p>
+          <div class="weights"><span><b>Regular</b></span><span><b>Italic</b></span><span class="muted">Alto contraste · gruesos y delgados pronunciados</span></div>
+        </div>
+        <div class="spec">
+          <h5><span class="nm">Hanken Grotesk</span><span class="role">Texto · datos · etiquetas</span></h5>
+          <p class="sample-sans">Un grotesco neutral y silencioso para datos de propiedad, etiquetas y cuerpo. Ordenado, con espacio generoso entre líneas. Nunca abarrotado. Acompaña a la serif sin competir con ella — la disciplina del despacho, no del anuncio.</p>
+          <div class="weights"><span><b>Light 300</b></span><span><b>Regular 400</b></span><span><b>Medium 500</b></span><span><b>Semibold 600</b></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ VOICE ============================ -->
+  <section class="section" style="background:var(--ink-rise);" data-screen-label="Voz">
+    <div class="wrap">
+      <div class="kicker-row">
+        <span class="n">05</span>
+        <span class="micro stone">Tono de voz · Tone of voice</span>
+        <span class="line"></span>
+      </div>
+
+      <blockquote class="voice-quote">
+        No convence con entusiasmo.<br />Convence con conocimiento.
+        <span class="en">It does not persuade with enthusiasm. It persuades with knowledge. Sure, brief, precise — like a good lawyer or a good doctor.</span>
+      </blockquote>
+
+      <div class="voice-cols">
+        <div class="vcol yes">
+          <h4>Meridiana dice</h4>
+          <ul class="vlist">
+            <li>Describe con precisión: «Cuatro recámaras. Patio central. Silencio.»</li>
+            <li>Frases breves, seguras, sin adorno.</li>
+            <li>Publica poco. Lo que publica es perfecto.</li>
+            <li>Una propiedad por semana. Una frase. Una foto.</li>
+          </ul>
+        </div>
+        <div class="vcol no">
+          <h4>Meridiana nunca</h4>
+          <ul class="vlist">
+            <li><s>«Exclusivo», «de ensueño», «oportunidad única».</s></li>
+            <li><s>«¡VENDIDO!» con globos.</s></li>
+            <li><s>Testimoniales con el cliente sonriendo.</s></li>
+            <li><s>Emojis. Descuentos en público. Superlativos.</s></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- applied specimen -->
+      <div class="specimen-card">
+        <div class="ph">
+          <span class="stamp">M</span>
+          <span class="cap">Fotografía · luz natural, hora dorada, sin personas</span>
+        </div>
+        <div class="listing">
+          <div class="where">Mérida · Centro</div>
+          <div class="ttl">Casa de los naranjos</div>
+          <p>Planta baja con doble altura. Patio central con palapa de palma y cenote privado. Cuatro recámaras. Silencio.</p>
+          <div class="meta">
+            <span><b>4</b>recámaras</span>
+            <span><b>320</b>m² const.</span>
+            <span><b>—</b>privado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER / SIGNATURE ============================ -->
+  <footer class="foot" data-screen-label="Firma">
+    <div class="wrap">
+      <div class="seal"><span class="m" style="font-family:var(--serif); font-size:74px; color:var(--paper);">M</span></div>
+      <div class="fm">Meridian<span class="dot">a</span></div>
+      <div class="loc micro gold">Mérida · Yucatán</div>
+      <hr class="hair" style="max-width:340px; margin:42px auto 0;" />
+      <div class="legal">© MMXXVI Meridiana · Identidad esencial · Brand foundations v1.0</div>
+    </div>
+  </footer>
+
+</body>
+</html>

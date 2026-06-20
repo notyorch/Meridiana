@@ -1,0 +1,150 @@
+property_id,feature_name,feature_category,feature_value,is_public
+P001,cenote privado,amenidad exterior,cenote natural en jardín posterior con acceso privado y escalinata de piedra caliza,sí
+P001,doble altura en sala,arquitectura interior,sala principal con doble altura de 6.5 metros,sí
+P001,cocina italiana,cocina,cocina con isla central y herrajes Blum importados de Italia,sí
+P001,seguridad 24h,seguridad,vigilancia privada en acceso con cámaras y guardia permanente,sí
+P001,cuarto de servicio independiente,distribución,cuarto de servicio con baño propio y entrada exterior independiente,sí
+P001,sistema de riego automatizado,exterior,riego por goteo con temporizador programable para jardín de 1200 m²,sí
+P002,rooftop con alberca elevada,amenidad edificio,rooftop comunitario con alberca elevada y vista panorámica a la ciudad,sí
+P002,sala de negocios,amenidad edificio,sala privada de reuniones con proyector y conexión de fibra óptica,sí
+P002,gimnasio equipado,amenidad edificio,gimnasio con equipo Technogym en piso 3 del edificio,sí
+P002,lobby doble altura,arquitectura edificio,lobby de acceso con doble altura y concierge en horario vespertino,sí
+P002,cocina amueblada,cocina,cocina con muebles de línea italiana equipada con electrodomésticos Bosch,sí
+P002,bodegas climatizadas,almacenamiento,bodega individual asignada por unidad con control de temperatura,sí
+P003,alberca desbordante,amenidad exterior,alberca tipo infinity con borde de piedra caliza natural,sí
+P003,palapa con asador,exterior,palapa de palma con área de asador en acero inoxidable y fregadero exterior,sí
+P003,bodega de vinos climatizada,interior premium,bodega de vinos con capacidad para 400 botellas y control de temperatura independiente,sí
+P003,cuarto de pánico,seguridad,cuarto de pánico con puerta blindada comunicación directa y UPS propio,no
+P003,jardín con iluminación arquitectónica,exterior,jardín de 3500 m² con sistema de iluminación LED empotrado en ruta y árboles,sí
+P003,cuatro cuartos de servicio,distribución,cuatro cuartos de servicio con baños propios y acceso independiente del área familiar,no
+P003,generador eléctrico,infraestructura,generador de 25 kVA con arranque automático que cubre 100% de la carga de la villa,sí
+P004,bóveda catalana original,arquitectura histórica,techos de bóveda catalana del siglo XX en estado original restaurado,sí
+P004,patio central con fuente,arquitectura histórica,patio central con fuente de cantera y vegetación tropical establecida,sí
+P004,pisos de mosaico original,acabados históricos,pisos de mosaico hidráulico original en toda la planta baja,sí
+P004,fachada protegida INAH,restricción legal,fachada catalogada por el INAH que limita modificaciones exteriores,no
+P004,pozo de agua,infraestructura,pozo de agua propio con bomba sumergible en buen estado,sí
+P005,terraza en azotea,amenidad exterior,terraza privada en azotea de 35 m² con asador y vista a la privada,sí
+P005,portón eléctrico con videoportero,seguridad,acceso a privada con portón eléctrico y videoportero por unidad,sí
+P005,cocina abierta,cocina,cocina integrada al área social con barra de granito negro,sí
+P006,balcón con vista a la ciudad,arquitectura exterior,balcón de 18 m² con vista al norte de Mérida desde piso 8,sí
+P006,coworking en edificio,amenidad edificio,área de coworking con mesas individuales y sala de juntas en planta baja,sí
+P006,cocina totalmente equipada,cocina,cocina amueblada con refrigerador vitrocerámica y lavaplatos incluidos,sí
+P006,parrilla en rooftop,amenidad edificio,área de parrilla con mesas de uso comunitario en azotea del edificio,sí
+P007,jardín maduro con árboles establecidos,exterior,jardín de 900 m² con árboles de más de 20 años incluyendo huaya y ceiba,sí
+P007,alberca de 12 metros,amenidad exterior,alberca rectangular de 12 metros con acabado en piedra y zona de chapoteadero,sí
+P007,estudio independiente,distribución,estudio separado del área principal con acceso propio y baño completo,sí
+P007,bodega de 40 m²,almacenamiento,bodega techada de 40 m² con estantería y acceso desde jardín lateral,sí
+P007,cuarto de servicio con baño,distribución,cuarto de servicio con baño propio dentro del cuerpo principal de la casa,sí
+P009,terraza privada de 120 m²,amenidad exterior,terraza exclusiva de la unidad con alberca propia de 6 metros y jacuzzi,sí
+P009,cocina Gaggenau,cocina,cocina equipada con electrodomésticos Gaggenau de línea profesional,sí
+P009,cava integrada,interior premium,cava de vinos integrada al diseño del comedor con capacidad para 200 botellas,sí
+P009,vista 360 grados,arquitectura exterior,vistas sin obstrucción en las cuatro orientaciones desde el piso 18,sí
+P009,jacuzzi en terraza,amenidad exterior,jacuzzi de fibra de vidrio con sistema de hidrojets y luz LED en terraza privada,sí
+P009,lobby con concierge,amenidad edificio,lobby de acceso con servicio de concierge en horario completo,sí
+P010,campo de golf frente,ubicación premium,propiedad con frente directo al hoyo 7 del campo de golf del Country Club,sí
+P010,sala de cine privada,interior premium,sala de cine de 10 lugares con proyector 4K sistema Dolby y butacas reclinables,sí
+P010,gimnasio privado,interior premium,gimnasio de uso exclusivo de la residencia con equipo de cardio y pesas,sí
+P010,cuarto de servicio con entrada independiente,distribución,cuarto de servicio con acceso exclusivo desde calle lateral sin cruzar área familiar,sí
+P010,acabados importados de Europa,acabados,pisos de porcelanato italiano griferías Grohe y carpintería de madera de roble europeo,sí
+P011,paneles solares,sustentabilidad,sistema fotovoltaico de 5 kWp que cubre el 80% del consumo eléctrico promedio,sí
+P011,cisterna de captación pluvial,sustentabilidad,cisterna subterránea de 20 mil litros con filtro para captación de agua de lluvia,sí
+P011,huerto orgánico,exterior,huerto de 120 m² con camas elevadas y sistema de riego por goteo,sí
+P011,orientación solar optimizada,arquitectura bioclimática,diseño orientado al norte para ventilación cruzada y reducción de ganancia de calor,sí
+P011,biodigestor,sustentabilidad,biodigestor compacto para tratamiento de aguas residuales y generación de biogás,no
+P013,cenote en terreno,amenidad exterior,cenote natural de 18 metros de diámetro en el terreno de la hacienda de uso privado,sí
+P013,capilla restaurada,arquitectura histórica,capilla del siglo XIX con cúpula de mampostería y piso de ladrillo pasado original,sí
+P013,máquina henequenera rehabilitada,patrimonio industrial,máquina original de desfibrado de henequén restaurada como pieza de exhibición,sí
+P013,siete suites con baño propio,distribución,siete suites independientes cada una con baño completo y vestidor,sí
+P013,licencia de hospedaje vigente,habilitación legal,licencia de uso turístico vigente ante la Secretaría de Turismo de Yucatán,no
+P013,piscina natural,amenidad exterior,piscina excavada en roca caliza con alimentación de agua subterránea,sí
+P013,árboles frutales establecidos,exterior,jardín con más de 30 árboles frutales de mango mamey naranja y tamarindo,sí
+P015,sala de cine privada,interior premium,sala de cine de ocho lugares con proyector laser y sistema de sonido surround 7.1,sí
+P015,sala de juegos,interior premium,sala de juegos independiente del área social con mesa de billar y zona de gaming,sí
+P015,alberca con cascada,amenidad exterior,alberca con elemento de cascada natural en piedra y zona de camastros,sí
+P015,iluminación LED arquitectónica,exterior,sistema de iluminación LED empotrado en caminos y vegetación del jardín,sí
+P015,generador eléctrico,infraestructura,generador de 20 kVA con arranque automático incluido en la venta,sí
+P015,estudio con baño,distribución,estudio en planta alta con baño completo propio y acceso privado desde escalera secundaria,sí
+P019,alberca infinita,amenidad exterior,alberca tipo infinity de 15 metros con borde de cantera sobre jardín de 2200 m²,sí
+P019,cocina de chef,cocina,cocina con campana industrial parrilla de seis quemadores y dos hornos de convección,sí
+P019,terraza con pergolado de madera,exterior,terraza cubierta de 80 m² con pergolado de madera de tzalam y piso de barro cocido,sí
+P019,cuarto de pánico,seguridad,cuarto de pánico con acceso biométrico comunicación satelital y provisiones para 72 horas,no
+P019,jardín de 2200 m²,exterior,jardín con diseño paisajístico firmado con palmas solitarias y vegetación nativa,sí
+P019,cuatro cuartos de servicio,distribución,cuatro cuartos de servicio con baños independientes acceso exterior y área de lavandería,no
+P022,oficina en planta alta,distribución,estudio privado en planta alta con escritorio empotrado libreros y vista al jardín,sí
+P022,jardín con alberca,amenidad exterior,jardín de 700 m² con alberca rectangular y área de descanso bajo palapa,sí
+P022,muebles de diseño importado,amueblado,mobiliario seleccionado por diseñador incluyendo piezas de Restoration Hardware y Kartell,sí
+P022,sistema de sonido integrado,tecnología,sistema de audio empotrado en sala comedor y terraza con control centralizado,sí
+P024,terraza de 90 m² con jacuzzi,amenidad exterior,terraza de dos niveles con jacuzzi de fibra de vidrio y zona de lounge con vista a la ciudad,sí
+P024,doble altura en sala,arquitectura interior,sala de doble altura de 5.5 metros con muro de cristal orientado al norte,sí
+P024,bodegas climatizadas,almacenamiento,bodega asignada por unidad con temperatura controlada para vinos o documentos,sí
+P024,lobby con concierge,amenidad edificio,lobby con servicio de concierge y recepción de paquetes en horario extendido,sí
+P027,estudio independiente con baño,distribución,estudio separado del cuerpo principal con baño completo y acceso privado desde jardín,sí
+P027,jardín con vegetación madura,exterior,jardín de 1050 m² con árboles de más de 15 años y caminos de piedra caliza,sí
+P027,alberca rectangular,amenidad exterior,alberca de 10 metros con acabado en cantera y zona de camastros en deck de madera,sí
+P027,tres cuartos de servicio,distribución,tres cuartos de servicio con baños propios distribuidos en planta baja y patio,sí
+P029,alberca comunitaria,amenidad privada,alberca de uso exclusivo para residentes de la privada con área de descanso,sí
+P029,área de juegos infantiles,amenidad privada,área de juegos cubierta dentro de la privada con piso de hule y equipo certificado,sí
+P031,cuatro suites master,distribución,cada recámara cuenta con baño completo de mármol y vestidor walk-in independiente,sí
+P031,cocina gourmet con isla,cocina,cocina con isla de cuarzo blanco doble tarjero y despensa climatizada,sí
+P031,sala de TV independiente,distribución,sala de televisión separada del área social principal con pantalla de 85 pulgadas,sí
+P031,palapa con alberca,amenidad exterior,palapa de palma natural con alberca de 8 metros y bar exterior con tarja,sí
+P031,generador eléctrico,infraestructura,generador de 22 kVA marca Kohler con transferencia automática y depósito para 48 horas,sí
+P035,contrato corporativo vigente,habilitación legal,contrato de arrendamiento activo con corporativo trasnacional hasta agosto 2025,no
+P035,amueblado de diseño,amueblado,mobiliario completo de diseño contemporáneo seleccionado para perfil ejecutivo,sí
+P035,alberca con área de descanso,amenidad exterior,alberca de 10 metros con camastros y zona de sombra bajo pérgola de acero,sí
+P037,muros de concreto aparente,arquitectura exterior,fachada y muros interiores de concreto aparente colado en sitio con textura natural,sí
+P037,espejo de agua en acceso,arquitectura exterior,espejo de agua de 12 metros de largo en acceso principal con iluminación submarina,sí
+P037,dobles alturas en sala y comedor,arquitectura interior,sala y comedor con dobles alturas de 5 metros que conectan visualmente ambos niveles,sí
+P037,alberca desbordante,amenidad exterior,alberca tipo infinity de 14 metros con borde al ras del jardín y zona de chapoteadero,sí
+P037,sistema domótico integrado,tecnología,automatización de iluminación clima accesos y riego con app y panel de control central,sí
+P037,palapa con bar exterior,exterior,palapa de estructura metálica con cubierta de palma barra equipada y parrilla empotrada,sí
+P038,cenote privado en patio,amenidad exterior,cenote de uso privado integrado al patio colonial con profundidad de 8 metros,sí
+P038,patio con hammocks,exterior,patio con vigas de madera originales hammocks colgantes y vegetación tropical,sí
+P038,estructura de mampostería original,arquitectura histórica,paredes de mampostería de piedra caliza del siglo XIX en excelente estado estructural,sí
+P038,restauración completa,acabados históricos,restauración integral realizada en 2018 respetando materiales y proporciones originales,sí
+P008,servicios en calle,infraestructura,agua luz y drenaje disponibles en frente del terreno,sí
+P008,dos frentes de acceso,ubicación,lote con acceso desde dos calles distintas lo que permite diseño de doble entrada,sí
+P008,terreno plano sin desniveles,topografía,terreno completamente plano sin cortes ni rellenos necesarios,sí
+P012,estacionamiento techado,infraestructura,cajón de estacionamiento techado asignado en planta baja del edificio,sí
+P012,área de lavandería en piso,servicios edificio,área de lavadoras y secadoras de uso compartido en el mismo piso,sí
+P012,vigilancia en acceso,seguridad,caseta de vigilancia con control de acceso peatonal y vehicular las 24 horas,sí
+P016,jardín privado de 80 m²,amenidad exterior,jardín privado exclusivo de la planta baja con bardas de privacidad,sí
+P016,cocina equipada exterior,exterior,área de lavado exterior techada con toma de agua y conexión para lavadora,sí
+P017,doble altura en sala,arquitectura interior,sala principal remodelada en 2020 con doble altura de 5 metros,sí
+P017,jardín lateral,exterior,jardín lateral de uso exclusivo de la propiedad con acceso desde sala,sí
+P017,estudio en planta alta,distribución,estudio privado en planta alta con ventana exterior y acceso desde pasillo principal,sí
+P018,pozo de agua propio,infraestructura,pozo de agua subterránea con bomba en funcionamiento incluido en la venta,sí
+P018,dos frentes de calle,ubicación,terreno esquinero con acceso desde dos calles de 8 metros de ancho,sí
+P020,terraza compartida,amenidad edificio,terraza comunitaria en azotea del edificio colonial con vista al Centro Histórico,sí
+P020,edificio colonial restaurado,arquitectura histórica,edificio del siglo XX restaurado con conservación de elementos originales en fachada,sí
+P021,alberca familiar,amenidad exterior,alberca de 8 metros en patio trasero con zona de chapoteadero para niños,sí
+P021,cuarto de servicio,distribución,cuarto de servicio con baño propio en planta baja contiguo a cocina,sí
+P021,vigilancia en acceso,seguridad,caseta de vigilancia con control de acceso en entrada del fraccionamiento,sí
+P021,jardín con árboles maduros,exterior,jardín posterior con árboles de más de 10 años que dan sombra a la alberca,sí
+P023,terraza en azotea,amenidad exterior,terraza privada de 40 m² en azotea con zona de asador y vista a la privada,sí
+P023,portón eléctrico,seguridad,acceso vehicular y peatonal con portón eléctrico y videocámara en entrada,sí
+P025,palapa con hammocks,exterior,palapa con estructura de madera y hammocks a 200 metros del mar,sí
+P025,jardín con árboles frutales,exterior,jardín de 600 m² con naranjos y limoneros establecidos,sí
+P025,estacionamiento para dos autos,infraestructura,cochera techada con capacidad para dos vehículos en área frontal,sí
+P026,balcón con vista al mar,arquitectura exterior,balcón de 25 m² con vista directa al Golfo de México desde piso 4,sí
+P026,alberca en azotea,amenidad edificio,alberca comunitaria en azotea del edificio con vista al mar,sí
+P026,totalmente amueblado,amueblado,mobiliario completo de estilo costero incluido en el precio de venta,sí
+P028,techo de doble altura,arquitectura interior,loft con techos de 4.5 metros con vigas metálicas de perfil industrial vistas,sí
+P028,baño de lujo,acabados,baño principal con regadera de lluvia piso de granito negro y muebles suspendidos,sí
+P028,cocina equipada,cocina,cocina con cubierta de concreto pulido herrajes negros y electrodomésticos de acero,sí
+P030,árboles frutales establecidos,exterior,terreno con más de 40 árboles de mango mamey naranja y ciruela establecidos,sí
+P030,pozo de agua propio,infraestructura,pozo de agua con caudal probado suficiente para uso agrícola y doméstico,sí
+P030,potencial glamping,vocación,superficie y topografía aptas para instalación de tiendas de glamping con servicios,sí
+P032,balcón orientado al norte,arquitectura exterior,balcón de 18 m² orientado al norte con menor exposición solar en tardes,sí
+P032,sky lounge,amenidad edificio,lounge en azotea con bar terraza de descanso y vistas elevadas a la ciudad,sí
+P032,sala de negocios,amenidad edificio,sala de reuniones privada con proyector y conexión de fibra en planta baja,sí
+P033,sistema solar off-grid,sustentabilidad,sistema fotovoltaico completo de 8 kWp con banco de baterías que cubre el 100% del consumo,sí
+P033,biodigestor,sustentabilidad,biodigestor para tratamiento autónomo de aguas residuales sin conexión a red municipal,no
+P033,huerto establecido,exterior,huerto de 200 m² con camas de madera vegetales anuales y sistema de riego,sí
+P034,patio central,arquitectura histórica,patio central con pozo original y vegetación tropical de más de 50 años,sí
+P034,traspatio de 2200 m²,exterior,traspatio posterior de 2200 m² con potencial para edificación adicional o proyecto turístico,sí
+P034,estructura de mampostería,arquitectura histórica,paredes de mampostería de piedra caliza de 60 centímetros de espesor en buen estado,sí
+P036,uso mixto permitido,habilitación legal,permiso de uso mixto habitacional y de oficinas según constancia de uso de suelo,sí
+P036,ubicación céntrica,ubicación,a dos cuadras del Palacio de Gobierno y a metros del Paseo de Montejo,sí
+P036,edificio restaurado,arquitectura histórica,edificio colonial restaurado con elementos originales conservados en fachada interior,sí
+P014,expediente cerrado,habilitación legal,propiedad vendida y escriturada en marzo 2024. Expediente completo en archivo notarial.,no

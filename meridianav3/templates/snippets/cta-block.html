@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<!--
+  snippets/cta-block.html
+  ─────────────────────────────────────────────
+  Bloque reutilizable de llamado a la acción.
+  Cuatro variantes: visita · ficha · info · llamada.
+  Dos fondos: oscuro (carbón) y claro (crema).
+  Copiar el bloque deseado al final de cualquier
+  documento público de Meridiana.
+  ─────────────────────────────────────────────
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridiana — CTA Block · Snippet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ─── TOKENS ─────────────────────────────── */
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--paper-deep);
+    font-family: var(--sans);
+    color: var(--ink);
+    padding: 40px clamp(16px, 5vw, 60px) 80px;
+  }
+
+  /* ─── SHOWCASE SHELL ─────────────────────── */
+  .showcase { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+
+  .showcase-hd {
+    background: var(--ink);
+    padding: 28px 36px 24px;
+    display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;
+    margin-bottom: 3px;
+  }
+  .showcase-hd .title { font-family: var(--serif); font-size: 28px; color: var(--paper); line-height: .9; letter-spacing: -.01em; }
+  .showcase-hd .title .dot { color: var(--gold-dark); }
+  .showcase-hd .sub { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); }
+
+  .variant-block { background: var(--paper); margin-bottom: 3px; overflow: hidden; }
+  .variant-label {
+    padding: 8px 18px;
+    background: var(--paper-mid);
+    border-bottom: 1px solid var(--paper-deep);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .variant-label .vlbl { font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--stone); font-weight: 700; }
+  .variant-label .vtag { font-size: 8px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; padding: 2px 8px; border: 1px solid rgba(131,125,114,.35); color: var(--stone); }
+
+  /* ═══════════════════════════════════════════
+     THE ACTUAL CTA COMPONENTS
+     (Copy everything inside .cta-* divs)
+  ═══════════════════════════════════════════ */
+
+  /* ─── BASE TOKENS (include once per doc) ─── */
+
+  /* Dark variant — for cream document closings */
+  .cta-dark {
+    background: var(--ink);
+    padding: clamp(36px, 6vw, 60px) clamp(32px, 6vw, 64px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3.5vw, 32px);
+  }
+  .cta-dark__rule {
+    width: clamp(36px, 6vw, 52px);
+    height: 1px;
+    background: var(--gold);
+    opacity: .8;
+  }
+  .cta-dark__title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4vw, 42px);
+    line-height: 1.02;
+    letter-spacing: -.012em;
+    color: var(--paper);
+  }
+  .cta-dark__title .accent { color: var(--gold-dark); }
+  .cta-dark__text {
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.68;
+    color: rgba(243,236,223,.65);
+    max-width: 48ch;
+  }
+  .cta-dark__body {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 30px);
+  }
+  .cta-dark__agent {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .cta-dark__agent .albl {
+    font-size: 8.5px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--stone);
+    font-weight: 600;
+  }
+  .cta-dark__agent .aname {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.2vw, 24px);
+    color: var(--paper);
+    line-height: 1;
+    letter-spacing: -.005em;
+  }
+  .cta-dark__agent .acontact {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .cta-dark__agent .acontact span {
+    font-size: 13px;
+    color: var(--stone);
+    letter-spacing: .02em;
+  }
+  .cta-dark__cta {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--paper);
+    border-bottom: 1px solid rgba(243,236,223,.35);
+    padding-bottom: 3px;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: border-color .2s;
+  }
+  .cta-dark__cta:hover { border-color: var(--gold-dark); color: var(--gold-dark); }
+  .cta-dark__footer {
+    padding-top: clamp(18px, 3vw, 26px);
+    border-top: 1px solid rgba(131,125,114,.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .cta-dark__footer .wm {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: rgba(243,236,223,.3);
+    letter-spacing: -.008em;
+  }
+  .cta-dark__footer .wm .dot { color: var(--gold-dark); opacity: .5; }
+  .cta-dark__footer .web {
+    font-size: 10px;
+    letter-spacing: .18em;
+    color: rgba(131,125,114,.5);
+    text-decoration: none;
+  }
+
+  /* Light variant — for dark backgrounds or standalone */
+  .cta-light {
+    background: var(--paper);
+    border-top: 1px solid var(--paper-deep);
+    padding: clamp(32px, 5.5vw, 54px) clamp(32px, 6vw, 64px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 3vw, 28px);
+  }
+  .cta-light__rule {
+    width: clamp(32px, 5vw, 48px);
+    height: 1px;
+    background: var(--gold);
+    opacity: .75;
+  }
+  .cta-light__title {
+    font-family: var(--serif);
+    font-size: clamp(24px, 3.6vw, 38px);
+    line-height: 1.04;
+    letter-spacing: -.01em;
+    color: var(--ink);
+  }
+  .cta-light__text {
+    font-size: clamp(13.5px, 1.2vw, 15.5px);
+    line-height: 1.68;
+    color: var(--stone);
+    max-width: 50ch;
+  }
+  .cta-light__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+  }
+  .cta-light__contacts { display: flex; flex-direction: column; gap: 4px; }
+  .cta-light__contacts span { font-size: 13px; color: var(--stone); }
+  .cta-light__contacts .aname {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2vw, 22px);
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 5px;
+  }
+  .cta-light__cta {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: .30em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .2s, border-color .2s;
+  }
+  .cta-light__cta:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* Minimal variant — compact, for tight spaces */
+  .cta-minimal {
+    padding: clamp(22px, 4vw, 38px) clamp(32px, 6vw, 64px);
+    background: var(--paper-mid);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--paper-deep);
+  }
+  .cta-minimal__left { display: flex; flex-direction: column; gap: 4px; }
+  .cta-minimal__title { font-family: var(--serif); font-size: clamp(18px, 2.4vw, 26px); line-height: 1.1; color: var(--ink); letter-spacing: -.008em; }
+  .cta-minimal__text { font-size: 13px; color: var(--stone); line-height: 1.5; }
+  .cta-minimal__right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .cta-minimal__contact { font-size: 12.5px; color: var(--stone); letter-spacing: .02em; text-align: right; }
+  .cta-minimal__cta {
+    font-size: 9px; letter-spacing: .28em; text-transform: uppercase; font-weight: 700;
+    color: var(--ink); border-bottom: 1px solid rgba(23,18,13,.35);
+    padding-bottom: 2px; text-decoration: none; white-space: nowrap;
+  }
+  .cta-minimal__cta:hover { color: var(--gold); border-color: var(--gold); }
+
+</style>
+</head>
+<body>
+
+<div class="showcase">
+
+  <!-- Header -->
+  <div class="showcase-hd">
+    <div>
+      <div class="title">CTA Block<span class="dot">.</span></div>
+      <div class="sub" style="margin-top:6px;">snippets/cta-block.html · 4 variantes · 2 fondos</div>
+    </div>
+    <div class="sub">Meridiana · MMXXVI</div>
+  </div>
+
+  <!-- ════ VARIANTE 1 — AGENDAR VISITA (dark) ════ -->
+  <div class="variant-block">
+    <div class="variant-label">
+      <span class="vlbl">Variante 1 · Agendar visita · Fondo oscuro</span>
+      <span class="vtag">Uso: cierre de brochure · listing longform</span>
+    </div>
+    <!-- ── COPY FROM HERE ── -->
+    <div class="cta-dark">
+      <div class="cta-dark__rule"></div>
+      <div class="cta-dark__body">
+        <div>
+          <div class="cta-dark__title">
+            {{cta_title}}<span class="accent">.</span>
+            <!-- Ejemplo: Coordina una visita. -->
+          </div>
+          <div class="cta-dark__text" style="margin-top:14px;">
+            {{cta_text}}
+            <!-- Ejemplo: Las visitas se coordinan con cita previa.
+                 Sin formularios, sin intermediarios. -->
+          </div>
+        </div>
+        <div class="cta-dark__agent">
+          <div class="albl">Asesor · Agent</div>
+          <div class="aname">{{agent_name}}</div>
+          <div class="acontact">
+            <span>{{agent_phone}}</span>
+            <span>{{agent_email}}</span>
+          </div>
+        </div>
+        <a href="/cdn-cgi/l/email-protection#176c6c767072796348727a767e7b6a6a" class="cta-dark__cta">
+          {{cta_button_text}} <!-- Ejemplo: Agendar visita · Book a viewing -->
+        </a>
+      </div>
+      <div class="cta-dark__footer">
+        <span class="wm">Meridiana<span class="dot">.</span></span>
+        <a href="{{website}}" class="cta-dark__footer web">{{website}}</a>
+      </div>
+    </div>
+    <!-- ── END COPY ── -->
+  </div>
+
+  <!-- ════ VARIANTE 2 — SOLICITAR FICHA (dark) ════ -->
+  <div class="variant-block">
+    <div class="variant-label">
+      <span class="vlbl">Variante 2 · Solicitar ficha completa · Fondo oscuro</span>
+      <span class="vtag">Uso: brochure resumido · portafolio digital</span>
+    </div>
+    <!-- ── COPY FROM HERE ── -->
+    <div class="cta-dark">
+      <div class="cta-dark__rule"></div>
+      <div class="cta-dark__body">
+        <div>
+          <div class="cta-dark__title">
+            {{cta_title}}<span class="accent">.</span>
+            <!-- Ejemplo: Solicita la ficha completa. -->
+          </div>
+          <div class="cta-dark__text" style="margin-top:14px;">
+            {{cta_text}}
+            <!-- Ejemplo: Este documento es una introducción.
+                 La ficha completa incluye planos, historial
+                 y condiciones detalladas. -->
+          </div>
+        </div>
+        <a href="/cdn-cgi/l/email-protection#c9b2b2a8aeaca7bd96aca4a8a0a5b4b4" class="cta-dark__cta">
+          {{cta_button_text}} <!-- Ejemplo: Recibir ficha completa -->
+        </a>
+      </div>
+      <div class="cta-dark__footer">
+        <span class="wm">Meridiana<span class="dot">.</span></span>
+        <a href="{{website}}" class="cta-dark__footer web">{{website}}</a>
+      </div>
+    </div>
+    <!-- ── END COPY ── -->
+  </div>
+
+  <!-- ════ VARIANTE 3 — MÁS INFORMACIÓN (light) ════ -->
+  <div class="variant-block">
+    <div class="variant-label">
+      <span class="vlbl">Variante 3 · Recibir más información · Fondo claro</span>
+      <span class="vtag">Uso: FAQ · company profile · agent profile</span>
+    </div>
+    <!-- ── COPY FROM HERE ── -->
+    <div class="cta-light">
+      <div class="cta-light__rule"></div>
+      <div class="cta-light__title">{{cta_title}}<!-- Ejemplo: La siguiente pregunta va directo a nosotros. --></div>
+      <div class="cta-light__text">
+        {{cta_text}}
+        <!-- Ejemplo: Sin formularios, sin asistentes automáticos.
+             Una llamada o mensaje es suficiente. -->
+      </div>
+      <div class="cta-light__row">
+        <div class="cta-light__contacts">
+          <div class="aname">{{agent_name}}</div>
+          <span>{{agent_phone}}</span>
+          <span>{{agent_email}}</span>
+        </div>
+        <a href="/cdn-cgi/l/email-protection#94efeff5f3f1fae0cbf1f9f5fdf8e9e9" class="cta-light__cta">
+          {{cta_button_text}} <!-- Ejemplo: Escribir ahora -->
+        </a>
+      </div>
+    </div>
+    <!-- ── END COPY ── -->
+  </div>
+
+  <!-- ════ VARIANTE 4 — COORDINAR LLAMADA (minimal) ════ -->
+  <div class="variant-block">
+    <div class="variant-label">
+      <span class="vlbl">Variante 4 · Coordinar llamada · Compacta</span>
+      <span class="vtag">Uso: pie de memo · listing web · correo</span>
+    </div>
+    <!-- ── COPY FROM HERE ── -->
+    <div class="cta-minimal">
+      <div class="cta-minimal__left">
+        <div class="cta-minimal__title">{{cta_title}}<!-- Ejemplo: Hablamos cuando quieras. --></div>
+        <div class="cta-minimal__text">
+          {{cta_text}}<!-- Ejemplo: {{agent_name}} · {{agent_phone}} -->
+        </div>
+      </div>
+      <div class="cta-minimal__right">
+        <div class="cta-minimal__contact">{{agent_email}}</div>
+        <a href="tel:{{agent_phone}}" class="cta-minimal__cta">
+          {{cta_button_text}} <!-- Ejemplo: Coordinar llamada -->
+        </a>
+      </div>
+    </div>
+    <!-- ── END COPY ── -->
+  </div>
+
+  <!-- ════ USAGE NOTES ════ -->
+  <div style="background:var(--paper); border-top:2px solid var(--ink); padding:24px 28px; display:flex; flex-direction:column; gap:12px;">
+    <div style="font-size:9px; letter-spacing:.30em; text-transform:uppercase; color:var(--stone); font-weight:700; margin-bottom:4px;">Notas de uso · Implementation notes</div>
+
+    <div style="display:flex; gap:12px; align-items:start;">
+      <span style="font-family:var(--serif); font-size:14px; color:var(--gold); flex-shrink:0;">—</span>
+      <span style="font-size:12.5px; line-height:1.6; color:var(--stone);"><strong style="color:var(--ink);">Selección:</strong> usar una sola variante por documento. La variante oscura cierra documentos en crema. La variante clara va en documentos con sección oscura o standalone.</span>
+    </div>
+    <div style="display:flex; gap:12px; align-items:start;">
+      <span style="font-family:var(--serif); font-size:14px; color:var(--gold); flex-shrink:0;">—</span>
+      <span style="font-size:12.5px; line-height:1.6; color:var(--stone);"><strong style="color:var(--ink);">Placeholders:</strong> reemplazar todos los <code style="font-size:11px; background:var(--paper-deep); padding:1px 5px;">{{doble llave}}</code> antes de distribuir. Nunca enviar con placeholders visibles.</span>
+    </div>
+    <div style="display:flex; gap:12px; align-items:start;">
+      <span style="font-family:var(--serif); font-size:14px; color:var(--gold); flex-shrink:0;">—</span>
+      <span style="font-size:12.5px; line-height:1.6; color:var(--stone);"><strong style="color:var(--ink);">Botón:</strong> el CTA es un enlace de texto, nunca un botón relleno de color. El href puede apuntar a <code style="font-size:11px; background:var(--paper-deep); padding:1px 5px;">mailto:</code>, <code style="font-size:11px; background:var(--paper-deep); padding:1px 5px;">tel:</code> o una URL. Un solo CTA por bloque.</span>
+    </div>
+    <div style="display:flex; gap:12px; align-items:start;">
+      <span style="font-family:var(--serif); font-size:14px; color:var(--gold); flex-shrink:0;">—</span>
+      <span style="font-size:12.5px; line-height:1.6; color:var(--stone);"><strong style="color:var(--ink);">Tono del texto:</strong> sin urgencia artificial. Sin "¡no te lo pierdas!", "oportunidad única" ni countdown. El tono es el de un buen abogado: seguro y directo.</span>
+    </div>
+
+    <div style="margin-top:8px; padding-top:14px; border-top:1px solid var(--paper-deep); font-size:9px; letter-spacing:.14em; color:var(--stone); font-family:var(--serif); font-style:italic; display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+      <span>snippets/cta-block.html · Meridiana · MMXXVI</span>
+      <span style="font-family:var(--sans); font-weight:600; letter-spacing:.22em; text-transform:uppercase; font-style:normal;">No distribuir</span>
+    </div>
+  </div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

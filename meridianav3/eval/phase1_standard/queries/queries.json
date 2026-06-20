@@ -1,0 +1,242 @@
+[
+  {
+    "query_id": "Q001",
+    "role": "client",
+    "category": "property_search",
+    "query": "¿Qué propiedades tienen alberca y están en venta en Mérida?",
+    "expected_doc_ids": ["kb-pub-p001", "kb-pub-p003", "kb-pub-p007", "kb-pub-p009", "kb-pub-p015", "kb-pub-p019", "kb-pub-p021", "kb-pub-p027", "kb-pub-p031", "kb-pub-p037"],
+    "notes": "Debe recuperar fichas públicas de propiedades con alberca. No debe incluir notas internas ni internal_summary."
+  },
+  {
+    "query_id": "Q002",
+    "role": "client",
+    "category": "property_search",
+    "query": "Busco una villa en Temozón Norte para comprar. ¿Qué tienen disponible?",
+    "expected_doc_ids": ["kb-pub-p003"],
+    "notes": "Solo P003 es villa activa en Temozón Norte. P013 está en Conkal, no Temozón."
+  },
+  {
+    "query_id": "Q003",
+    "role": "client",
+    "category": "property_search",
+    "query": "¿Cuánto cuesta el penthouse del edificio Ánfora?",
+    "expected_doc_ids": ["kb-pub-p009"],
+    "notes": "P009 Aethelsky, $14,900,000 MXN. Respuesta directa del frontmatter price."
+  },
+  {
+    "query_id": "Q004",
+    "role": "client",
+    "category": "property_search",
+    "query": "Quiero rentar un departamento amueblado en Altabrisa, ¿tienen algo disponible?",
+    "expected_doc_ids": ["kb-pub-p012"],
+    "notes": "P012 Urbavita, renta activa en Altabrisa, amueblado. P006 está en Chuburná de Hidalgo."
+  },
+  {
+    "query_id": "Q005",
+    "role": "client",
+    "category": "property_search",
+    "query": "¿Tienen propiedades pet-friendly en venta?",
+    "expected_doc_ids": ["kb-pub-p003", "kb-pub-p005", "kb-pub-p007", "kb-pub-p011", "kb-pub-p021", "kb-pub-p033", "kb-pub-p038"],
+    "notes": "Propiedades con pet_friendly = sí en venta activa. Incluye casas, villa y townhouse."
+  },
+  {
+    "query_id": "Q006",
+    "role": "client",
+    "category": "property_search",
+    "query": "¿Qué haciendas tienen disponibles?",
+    "expected_doc_ids": ["kb-pub-p013"],
+    "notes": "Solo P013 Imperlumá es hacienda activa. Precio $45,000,000 MXN."
+  },
+  {
+    "query_id": "Q007",
+    "role": "client",
+    "category": "property_search",
+    "query": "Busco terrenos en venta en Mérida o sus alrededores",
+    "expected_doc_ids": ["kb-pub-p008", "kb-pub-p018", "kb-pub-p030"],
+    "notes": "Tres terrenos activos: P008 en Dzityá, P018 en Hunucmá, P030 en Conkal."
+  },
+  {
+    "query_id": "Q008",
+    "role": "client",
+    "category": "property_search",
+    "query": "¿Tienen algo en el Centro Histórico de Mérida?",
+    "expected_doc_ids": ["kb-pub-p004", "kb-pub-p020", "kb-pub-p036"],
+    "notes": "Tres propiedades activas en Centro Histórico: P004 (casa), P020 (depto), P036 (depto)."
+  },
+  {
+    "query_id": "Q009",
+    "role": "client",
+    "category": "property_search",
+    "query": "Quiero una casa de más de 5 recámaras con jardín. ¿Qué opciones hay?",
+    "expected_doc_ids": ["kb-pub-p001", "kb-pub-p003", "kb-pub-p013", "kb-pub-p015", "kb-pub-p019", "kb-pub-p027", "kb-pub-p031", "kb-pub-p037"],
+    "notes": "Propiedades activas con bedrooms >= 5. Incluye casas y villas."
+  },
+  {
+    "query_id": "Q010",
+    "role": "client",
+    "category": "property_search",
+    "query": "¿Cuál es la propiedad más económica que tienen en venta?",
+    "expected_doc_ids": ["kb-pub-p020"],
+    "notes": "P020 Microhabitat, $1,950,000 MXN, la más barata en venta activa."
+  },
+  {
+    "query_id": "Q011",
+    "role": "client",
+    "category": "property_search",
+    "query": "¿Tienen propiedades cerca del mar o en la costa?",
+    "expected_doc_ids": ["kb-pub-p025", "kb-pub-p026", "kb-pub-p038"],
+    "notes": "P025 en Chuburná Puerto, P026 en Progreso con vista al mar, P038 en Valladolid (no costa pero turística)."
+  },
+  {
+    "query_id": "Q012",
+    "role": "client",
+    "category": "property_search",
+    "query": "¿Tienen departamentos con rooftop o amenidades completas?",
+    "expected_doc_ids": ["kb-pub-p002", "kb-pub-p006", "kb-pub-p009", "kb-pub-p032"],
+    "notes": "P002 rooftop y gimnasio, P006 rooftop con parrilla, P009 terraza propia 120m², P032 sky lounge."
+  },
+  {
+    "query_id": "Q013",
+    "role": "client",
+    "category": "agent_info",
+    "query": "¿Quién es el asesor especializado en propiedades coloniales y el Centro Histórico?",
+    "expected_doc_ids": ["AGT-03"],
+    "notes": "Sebastián Mena Uribe, specialty_zone: Centro Histórico · Itzimná · García Ginerés, specialty: depto · colonial · uso mixto."
+  },
+  {
+    "query_id": "Q014",
+    "role": "client",
+    "category": "agent_info",
+    "query": "¿Tienen asesores que hablen francés?",
+    "expected_doc_ids": ["AGT-02", "AGT-13"],
+    "notes": "Fernanda Cámara (español · inglés · francés) y Alejandro Zavala (español · inglés · alemán). Solo Fernanda habla francés. Alejandro no."
+  },
+  {
+    "query_id": "Q015",
+    "role": "client",
+    "category": "agent_info",
+    "query": "¿Quién maneja propiedades en la costa y municipios del interior de Yucatán?",
+    "expected_doc_ids": ["AGT-04"],
+    "notes": "Valeria Rejón Duarte, specialty_zone: Municipios · Costa · Interior del Estado."
+  },
+  {
+    "query_id": "Q016",
+    "role": "client",
+    "category": "company_info",
+    "query": "¿Qué es Meridiana y en qué se especializa?",
+    "expected_doc_ids": ["kb-pub-company-profile"],
+    "notes": "Debe recuperar el company profile. Respuesta general sobre la empresa."
+  },
+  {
+    "query_id": "Q017",
+    "role": "client",
+    "category": "process",
+    "query": "¿Puedo comprar una propiedad en Mérida si soy extranjero?",
+    "expected_doc_ids": ["kb-pub-faq-buyer"],
+    "notes": "FAQ compradores: sección sobre compra para extranjeros y fideicomiso."
+  },
+  {
+    "query_id": "Q018",
+    "role": "client",
+    "category": "process",
+    "query": "¿Cuánto duran los cierres y qué gastos notariales debo esperar?",
+    "expected_doc_ids": ["kb-pub-faq-buyer"],
+    "notes": "FAQ compradores: secciones de tiempo de cierre y gastos notariales (4-7%)."
+  },
+  {
+    "query_id": "Q019",
+    "role": "client",
+    "category": "process",
+    "query": "Quiero vender mi propiedad. ¿Qué documentos necesito tener en orden?",
+    "expected_doc_ids": ["kb-pub-faq-seller"],
+    "notes": "FAQ vendedores: sección de documentos necesarios para vendedor."
+  },
+  {
+    "query_id": "Q020",
+    "role": "client",
+    "category": "process",
+    "query": "¿Cuánto cobra Meridiana si quiero poner en venta mi casa?",
+    "expected_doc_ids": ["kb-pub-faq-seller"],
+    "notes": "FAQ vendedores: sección sobre comisión. La respuesta es que varía y se informa en reunión inicial."
+  },
+  {
+    "query_id": "Q021",
+    "role": "agent",
+    "category": "lead_info",
+    "query": "¿Cuál es el perfil de Gabriela Ancona Tello y qué propiedad le interesa?",
+    "expected_doc_ids": ["kb-int-l001"],
+    "notes": "L001, score 92, interesada en P015. Tiene liquidez confirmada tras venta de negocio familiar."
+  },
+  {
+    "query_id": "Q022",
+    "role": "agent",
+    "category": "lead_info",
+    "query": "¿Qué leads tienen score mayor a 85 y están en estado calificado?",
+    "expected_doc_ids": ["kb-int-l001", "kb-int-l002", "kb-int-l009", "kb-int-l019", "kb-int-l025", "kb-int-l029", "kb-int-l039"],
+    "notes": "Leads con qualification_score >= 88 (muy alto) y lead_status = calificado."
+  },
+  {
+    "query_id": "Q023",
+    "role": "agent",
+    "category": "viewing_info",
+    "query": "¿Cuáles fueron las principales objeciones en la visita de Rossana a P007?",
+    "expected_doc_ids": ["kb-int-v002"],
+    "notes": "V002: cuarto de servicio pequeño, bodega sin acceso directo desde cocina. Interés muy alto."
+  },
+  {
+    "query_id": "Q024",
+    "role": "agent",
+    "category": "viewing_info",
+    "query": "¿Qué visitas están programadas para las próximas semanas?",
+    "expected_doc_ids": ["kb-int-v018", "kb-int-v019", "kb-int-v020", "kb-int-v021", "kb-int-v022", "kb-int-v028", "kb-int-v029", "kb-int-v032", "kb-int-v034", "kb-int-v035"],
+    "notes": "Visitas con status = programada. Incluye tours de hacienda P013 y tour ejecutivo de P037."
+  },
+  {
+    "query_id": "Q025",
+    "role": "agent",
+    "category": "internal_property",
+    "query": "¿Cuál es el resumen interno de P019? ¿Hay algo que deba saber antes de mostrarla?",
+    "expected_doc_ids": ["kb-int-l019"],
+    "notes": "P019 tiene internal_summary sensible (vendedor en divorcio). Solo debe estar en docs internos, nunca en ficha pública."
+  },
+  {
+    "query_id": "Q026",
+    "role": "agent",
+    "category": "playbook",
+    "query": "¿Cuál es el protocolo de atención para clientes de segmento ultra?",
+    "expected_doc_ids": ["kb-int-playbook-lujo"],
+    "notes": "Playbook de servicio de lujo: secciones de preparación de visita ultra y calificación previa."
+  },
+  {
+    "query_id": "Q027",
+    "role": "agent",
+    "category": "lead_info",
+    "query": "¿Qué leads están interesados en haciendas o proyectos turísticos?",
+    "expected_doc_ids": ["kb-int-l006", "kb-int-l012", "kb-int-l019", "kb-int-l025"],
+    "notes": "L006 Thomas Brinkmann, L012 Fernando Barbachano, L019 Isabelle Fontaine, L025 Rafael Peniche — todos con interés en hacienda."
+  },
+  {
+    "query_id": "Q028",
+    "role": "director",
+    "category": "negotiation",
+    "query": "¿En qué estado está la negociación de P037 con Lorenzo Escalante?",
+    "expected_doc_ids": ["kb-res-o007"],
+    "notes": "O007: Lorenzo ofreció 20M, vendedor firme en 21.5M. Gap 1.5M. Restricción del arquitecto diseñador."
+  },
+  {
+    "query_id": "Q029",
+    "role": "director",
+    "category": "negotiation",
+    "query": "¿Cuántas ofertas están actualmente en negociación activa?",
+    "expected_doc_ids": ["kb-res-o002", "kb-res-o006", "kb-res-o007", "kb-res-o008", "kb-res-o015", "kb-res-o016", "kb-res-o020"],
+    "notes": "Ofertas con status: contraoferta activa, en negociación. Excluir aceptadas, rechazadas y cartas de intención."
+  },
+  {
+    "query_id": "Q030",
+    "role": "director",
+    "category": "owner_info",
+    "query": "¿Cuáles son los propietarios con nivel de confidencialidad muy alta y cómo se contactan?",
+    "expected_doc_ids": ["kb-res-own-033", "kb-res-own-010", "kb-res-own-013", "kb-res-own-019", "kb-res-own-035"],
+    "notes": "Cinco propietarios con confidencialidad muy alta. Todos tienen apoderado o restricción de contacto directo."
+  }
+]

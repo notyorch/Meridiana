@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<!--
+FRONTMATTER
+───────────────────────────────────────────────
+title: "Luxury Service Playbook — Meridiana"
+doc_type: premium_service_playbook
+category: internal
+audience: internal_team, agent
+purpose: "Unificar el estándar de atención premium entre todos los asesores de Meridiana."
+source:
+  - brand_board_v1
+  - public_company_profile_meridiana_20260614_v01
+status: final
+version: v01
+date: 2026-06-14
+entity: company
+language: es
+tags:
+  - meridiana
+  - playbook
+  - servicio
+  - interno
+  - operacion
+summary: "Manual de atención premium: principios, apertura, calificación, visitas, seguimiento, cierre y ejemplos."
+owner: "direccion"
+doc_id: doc-playbook-001
+───────────────────────────────────────────────
+NAMING CONVENTION: internal_premium_service_playbook_20260614_v01
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridiana — Luxury Service Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:        #17120D;
+    --paper:      #F3ECDF;
+    --paper-deep: #EAE0CE;
+    --paper-mid:  #F8F3EA;
+    --gold:       #9C7B40;
+    --gold-dark:  #B89154;
+    --stone:      #837D72;
+    --ink-soft:   #3D3529;
+    --serif: 'Instrument Serif', 'Times New Roman', serif;
+    --sans:  'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --gutter: clamp(28px, 6vw, 80px);
+    --inner: 820px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { background: var(--paper-deep); font-family: var(--sans); color: var(--ink); line-height: 1.5; }
+  ::selection { background: var(--gold); color: var(--ink); }
+
+  .ph  { color: var(--gold);      font-style: italic; border-bottom: 1px dashed var(--gold);      padding-bottom: 1px; }
+  .ph-d{ color: var(--gold-dark); font-style: italic; border-bottom: 1px dashed var(--gold-dark); padding-bottom: 1px; }
+
+  .page {
+    max-width: var(--inner);
+    margin: 32px auto;
+    background: var(--paper);
+    box-shadow: 0 4px 40px rgba(23,18,13,.18);
+  }
+  @media (max-width: 860px) { .page { margin: 0; box-shadow: none; } }
+
+  /* ─── COVER ──────────────────────────────── */
+  .cover {
+    background: var(--ink);
+    padding: clamp(52px, 9vw, 100px) var(--gutter) clamp(40px, 7vw, 72px);
+    min-height: 52vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 40px;
+  }
+  .cover__body { display: flex; flex-direction: column; gap: 0; justify-content: center; }
+  .cover__eyebrow { font-size: 9px; letter-spacing: .38em; text-transform: uppercase; color: var(--stone); font-weight: 600; margin-bottom: clamp(18px, 3vw, 30px); }
+  .cover__title { font-family: var(--serif); font-size: clamp(40px, 7.5vw, 88px); color: var(--paper); line-height: .88; letter-spacing: -.015em; }
+  .cover__title .accent { color: var(--gold-dark); }
+  .cover__rule { width: clamp(48px, 8vw, 80px); height: 1px; background: var(--gold); margin: clamp(22px, 3.5vw, 36px) 0 clamp(16px, 2.5vw, 24px); }
+  .cover__sub { font-family: var(--serif); font-style: italic; font-size: clamp(16px, 1.9vw, 21px); color: var(--stone); max-width: 32ch; line-height: 1.28; }
+  .cover__foot {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(131,125,114,.22);
+  }
+  .cover__foot .wm { font-family: var(--serif); font-size: 18px; color: rgba(243,236,223,.5); letter-spacing: -.008em; }
+  .cover__foot .wm .dot { color: var(--gold-dark); opacity: .6; }
+  .cover__foot .meta { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--stone); text-align: right; }
+  .badge-int {
+    font-size: 8.5px; letter-spacing: .30em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 9px;
+    background: rgba(156,123,64,.14);
+    border: 1px solid rgba(184,145,84,.38);
+    color: var(--gold-dark);
+  }
+
+  /* ─── INDEX ──────────────────────────────── */
+  .index-bar {
+    background: var(--paper-mid);
+    padding: clamp(18px, 3vw, 28px) var(--gutter);
+    border-bottom: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px 16px;
+  }
+  @media (max-width: 560px) { .index-bar { grid-template-columns: repeat(2, 1fr); } }
+  .idx-item { display: flex; align-items: baseline; gap: 8px; }
+  .idx-n { font-family: var(--serif); font-size: 13px; color: var(--gold); flex-shrink: 0; }
+  .idx-lbl { font-size: 10px; letter-spacing: .04em; color: var(--stone); line-height: 1.3; }
+
+  /* ─── SECTION ────────────────────────────── */
+  .section {
+    padding: clamp(36px, 6vw, 64px) var(--gutter);
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .section--alt { background: var(--paper-mid); }
+  .section--dark { background: var(--ink); color: var(--paper); }
+  .sec-hd {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: clamp(24px, 4vw, 40px);
+  }
+  .sec-n { font-family: var(--serif); font-size: 13px; color: var(--gold); flex-shrink: 0; }
+  .sec-lbl { font-weight: 700; font-size: 10px; letter-spacing: .30em; text-transform: uppercase; color: var(--stone); white-space: nowrap; }
+  .sec-rule { flex: 1; height: 1px; background: var(--paper-deep); }
+  .section--dark .sec-lbl { color: var(--stone); }
+  .section--dark .sec-rule { background: rgba(131,125,114,.28); }
+
+  .body-text { font-size: clamp(14px, 1.2vw, 16px); line-height: 1.72; color: var(--ink-soft); max-width: 60ch; text-wrap: pretty; }
+  .body-text + .body-text { margin-top: 1em; }
+  .section--dark .body-text { color: rgba(243,236,223,.72); }
+
+  /* ─── PRINCIPLES ─────────────────────────── */
+  .principles { display: flex; flex-direction: column; gap: 0; }
+  .principle {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 18px 24px;
+    align-items: start;
+    padding: clamp(20px, 3.5vw, 32px) 0;
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .principle:last-child { border-bottom: 0; }
+  .principle .pn { font-family: var(--serif); font-size: 20px; color: var(--gold); line-height: 1; padding-top: 4px; }
+  .principle .pbody {}
+  .principle .ptitle { font-family: var(--serif); font-size: clamp(18px, 2.2vw, 24px); color: var(--ink); line-height: 1.1; margin-bottom: 8px; letter-spacing: -.005em; }
+  .principle .pdesc { font-size: 13.5px; line-height: 1.65; color: var(--stone); max-width: 54ch; }
+
+  /* ─── RULE LISTS ─────────────────────────── */
+  .rule-list { display: flex; flex-direction: column; gap: 0; }
+  .rule-item {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 12px; align-items: baseline;
+    padding: clamp(10px, 1.8vw, 16px) 0;
+    border-bottom: 1px solid var(--paper-deep);
+  }
+  .rule-item:last-child { border-bottom: 0; }
+  .rule-mark { font-size: 16px; color: var(--gold); line-height: 1; text-align: center; }
+  .rule-text { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+  .rule-text strong { font-weight: 600; color: var(--ink); }
+  .rule-text em { font-style: italic; color: var(--stone); font-size: .93em; }
+
+  /* ─── SÍ / NO CALLOUTS ───────────────────── */
+  .callout-grid { display: flex; flex-direction: column; gap: 10px; }
+  .callout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--paper-deep);
+  }
+  @media (max-width: 520px) { .callout { grid-template-columns: 1fr; } }
+  .callout__no, .callout__si {
+    padding: clamp(14px, 2.5vw, 22px) clamp(16px, 3vw, 24px);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .callout__no { border-right: 1px solid var(--paper-deep); background: var(--paper-mid); }
+  @media (max-width: 520px) { .callout__no { border-right: 0; border-bottom: 1px solid var(--paper-deep); } }
+  .callout__si { background: var(--paper); }
+  .callout__no .clbl { font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase; font-weight: 700; color: #7A3F30; margin-bottom: 2px; }
+  .callout__si .clbl { font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase; font-weight: 700; color: #4A7C5C; margin-bottom: 2px; }
+  .callout__no .ctxt { font-size: 13.5px; line-height: 1.58; color: var(--stone); font-style: italic; }
+  .callout__si .ctxt { font-size: 13.5px; line-height: 1.58; color: var(--ink); }
+  .callout__no .ctxt del { text-decoration: line-through; text-decoration-color: rgba(122,63,48,.45); }
+
+  /* ─── EDITORIAL QUOTE ────────────────────── */
+  .editorial-q {
+    border-left: 2px solid var(--gold);
+    padding-left: clamp(18px, 3vw, 28px);
+    margin: clamp(24px, 4vw, 40px) 0;
+  }
+  .editorial-q p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.8vw, 30px);
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -.005em;
+    max-width: 30ch;
+  }
+  .section--dark .editorial-q p { color: var(--paper); }
+  .section--dark .editorial-q { border-left-color: var(--gold-dark); }
+
+  /* ─── AVOIDANCE LIST ─────────────────────── */
+  .avoid-list { display: flex; flex-direction: column; gap: 0; }
+  .avoid-item {
+    display: grid; grid-template-columns: 20px 1fr;
+    gap: 12px; align-items: baseline;
+    padding: clamp(10px, 1.8vw, 16px) 0;
+    border-bottom: 1px solid rgba(131,125,114,.2);
+  }
+  .avoid-item:last-child { border-bottom: 0; }
+  .avoid-mark { font-size: 14px; color: var(--stone); line-height: 1; text-align: center; font-weight: 700; }
+  .avoid-text { font-size: 14px; line-height: 1.58; color: rgba(243,236,223,.7); }
+  .avoid-text strong { color: var(--paper); font-weight: 600; }
+
+  /* ─── FOOT ───────────────────────────────── */
+  .foot {
+    background: var(--ink);
+    padding: 12px var(--gutter);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 6px;
+  }
+  .foot .wm { font-family: var(--serif); font-size: 15px; color: rgba(243,236,223,.35); letter-spacing: -.008em; }
+  .foot .wm .dot { color: var(--gold-dark); opacity: .45; }
+  .foot .fn { font-size: 9px; letter-spacing: .14em; color: var(--stone); font-style: italic; font-family: var(--serif); }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+    .cover { min-height: 60vh; page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .principle { page-break-inside: avoid; }
+    .callout { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ COVER ══ -->
+  <div class="cover" data-screen-label="Portada">
+    <div class="cover__body">
+      <div class="cover__eyebrow">Manual de atención · Uso interno del equipo</div>
+      <div class="cover__title">Luxury<br />Service<br />Playboo<span class="accent">k</span></div>
+      <div class="cover__rule"></div>
+      <p class="cover__sub"><span class="ph-d" title="{{brand_name}}">Meridiana</span> — Cómo se atiende, cómo se habla y cómo se trabaja aquí.</p>
+    </div>
+    <div class="cover__foot">
+      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <span class="badge-int">Interno · Solo equipo</span>
+        <span class="cover__foot wm" style="padding:0; border:0;">Meridiana<span class="dot">.</span></span>
+      </div>
+      <div class="meta">MMXXVI · v01</div>
+    </div>
+  </div>
+
+  <!-- ══ INDEX ══ -->
+  <div class="index-bar" data-screen-label="Índice">
+    <div class="idx-item"><span class="idx-n">01</span><span class="idx-lbl">Principios de servicio</span></div>
+    <div class="idx-item"><span class="idx-n">02</span><span class="idx-lbl">Apertura y primer contacto</span></div>
+    <div class="idx-item"><span class="idx-n">03</span><span class="idx-lbl">Calificación sin presión</span></div>
+    <div class="idx-item"><span class="idx-n">04</span><span class="idx-lbl">Coordinación de visitas</span></div>
+    <div class="idx-item"><span class="idx-n">05</span><span class="idx-lbl">Seguimiento</span></div>
+    <div class="idx-item"><span class="idx-n">06</span><span class="idx-lbl">Cierre de comunicación</span></div>
+    <div class="idx-item"><span class="idx-n">07</span><span class="idx-lbl">Qué evitar</span></div>
+    <div class="idx-item"><span class="idx-n">08</span><span class="idx-lbl">Ejemplos prácticos</span></div>
+  </div>
+
+  <!-- ══ 01 PRINCIPIOS ══ -->
+  <div class="section" data-screen-label="Principios de servicio">
+    <div class="sec-hd">
+      <span class="sec-n">01</span>
+      <span class="sec-lbl">Principios de servicio</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="principles">
+      <div class="principle">
+        <div class="pn">I</div>
+        <div class="pbody">
+          <div class="ptitle">Escucha antes de proponer.</div>
+          <div class="pdesc"><span class="ph" title="{{service_principles}} I">Ningún asesor debería mostrar una propiedad antes de entender con precisión qué busca la persona. No el número de recámaras: el tipo de vida que quiere confirmar. La propuesta viene después de la escucha, no al mismo tiempo.</span></div>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">II</div>
+        <div class="pbody">
+          <div class="ptitle">La discreción no es opcional.</div>
+          <div class="pdesc"><span class="ph" title="{{service_principles}} II">Lo que dice un cliente en una conversación no sale de esa conversación. Lo que ocurre en una negociación no se comenta con otro cliente. La discreción es parte del producto que vendemos, igual que la propiedad.</span></div>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">III</div>
+        <div class="pbody">
+          <div class="ptitle">Sé el criterio, no el catálogo.</div>
+          <div class="pdesc"><span class="ph" title="{{service_principles}} III">Un asesor de Meridiana no muestra todo lo que tiene disponible. Muestra lo que encaja. Esa selección editorial — proponer una o tres opciones reales, no veinte posibles — es lo que diferencia el servicio boutique del servicio masivo.</span></div>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">IV</div>
+        <div class="pbody">
+          <div class="ptitle">No hay urgencia artificial.</div>
+          <div class="pdesc"><span class="ph" title="{{service_principles}} IV">Nunca se presiona al cliente con frases como "hay otro interesado" o "la oferta vence mañana" si no es estrictamente verdad. La urgencia falsa puede cerrar una venta. También destruye la confianza que sostiene una relación de largo plazo.</span></div>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">V</div>
+        <div class="pbody">
+          <div class="ptitle">Conoce más de lo que muestras.</div>
+          <div class="pdesc"><span class="ph" title="{{service_principles}} V">Conoce cada propiedad por dentro y por fuera. Conoce la zona, el mercado comparativo, el historial del inmueble. El cliente nota cuando el asesor sabe y cuando improvisa. La autoridad no se declara: se demuestra con información precisa y sin titubeos.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 02 APERTURA ══ -->
+  <div class="section section--alt" data-screen-label="Apertura y primer contacto">
+    <div class="sec-hd">
+      <span class="sec-n">02</span>
+      <span class="sec-lbl">Apertura y primer contacto</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="editorial-q">
+      <p>"El primer minuto no es para presentar propiedades. Es para presentarse."</p>
+    </div>
+    <div class="rule-list">
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>Saluda por el nombre.</strong> Siempre. Sin excepciones. Si no recuerdas el nombre, búscalo antes de la llamada.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>La primera pregunta es sobre la persona, no sobre la propiedad.</strong> <em>¿Cómo llegó a nosotros? ¿Cuánto tiempo lleva pensando en esto?</em> Eso abre la conversación de forma natural.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>No menciones precio en los primeros tres minutos.</strong> Si el cliente lo menciona, recíbelo sin reaccionar exageradamente y continúa conociendo qué busca.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>No envíes propiedades en el primer contacto</strong> a menos que el cliente lo pida explícitamente. <em>Primero la conversación. Después la propuesta.</em></span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><span class="ph" title="{{communication_rules}} — apertura adicional">{{Regla adicional de apertura si aplica al contexto de Meridiana.}}</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 03 CALIFICACIÓN ══ -->
+  <div class="section" data-screen-label="Calificación sin presión">
+    <div class="sec-hd">
+      <span class="sec-n">03</span>
+      <span class="sec-lbl">Calificación sin presión</span>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="body-text">Calificar un lead significa entender si hay presupuesto real, intención genuina y perfil que encaje con el inventario. Esto se hace en conversación, no en interrogatorio.</p>
+
+    <div class="callout-grid" style="margin-top: clamp(20px, 3.5vw, 32px);">
+      <div class="callout">
+        <div class="callout__no">
+          <span class="clbl">No hacer</span>
+          <span class="ctxt"><del>¿Cuánto es su presupuesto máximo?</del></span>
+        </div>
+        <div class="callout__si">
+          <span class="clbl">Sí hacer</span>
+          <span class="ctxt">¿Qué rango le permite moverse con comodidad? Así puedo mostrarte opciones que tengan sentido real.</span>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout__no">
+          <span class="clbl">No hacer</span>
+          <span class="ctxt"><del>¿Ya tiene aprobado su crédito hipotecario?</del></span>
+        </div>
+        <div class="callout__si">
+          <span class="clbl">Sí hacer</span>
+          <span class="ctxt">¿Está pensando en financiamiento o lo maneja de contado? Eso me ayuda a entender los tiempos.</span>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout__no">
+          <span class="clbl">No hacer</span>
+          <span class="ctxt"><del>¿Para cuándo quiere comprar?</del></span>
+        </div>
+        <div class="callout__si">
+          <span class="clbl">Sí hacer</span>
+          <span class="ctxt">¿Hay alguna fecha importante para usted — una mudanza, un contrato que vence, algo así? O ¿está explorando sin prisa?</span>
+        </div>
+      </div>
+    </div>
+    <p class="body-text" style="margin-top: clamp(20px,3vw,30px); font-size:13px; color:var(--stone);">
+      <span class="ph" title="{{communication_rules}} — calificación adicional">Si después de dos conversaciones no hay claridad sobre presupuesto o intención, registra el lead como seguimiento y no inviertas más tiempo de visita hasta tener esa claridad. Agregar reglas adicionales si aplica.</span>
+    </p>
+  </div>
+
+  <!-- ══ 04 VISITAS ══ -->
+  <div class="section section--alt" data-screen-label="Coordinación de visitas">
+    <div class="sec-hd">
+      <span class="sec-n">04</span>
+      <span class="sec-lbl">Coordinación de visitas</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="rule-list">
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>Visita la propiedad antes de llevar al cliente.</strong> Si no puedes responder preguntas básicas sobre el inmueble, no estás listo para la visita.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>Llega cinco minutos antes.</strong> Sin excepciones. Si el propietario estará presente, coordina que el espacio esté ordenado y en silencio.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>No hagas el recorrido hablando todo el tiempo.</strong> Deja que el cliente sienta el espacio. Habla cuando pregunten o cuando haya algo relevante que señalar.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>No traigas más de una propiedad por sesión</strong> a menos que el cliente lo haya pedido. Las visitas de relleno generan confusión, no decisiones.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>Al terminar, no presiones por una respuesta.</strong> Di: <em>"Tómate el tiempo que necesitas. Cuando tengas preguntas, aquí estoy."</em></span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><span class="ph" title="{{visit_rules}} adicional">{{Regla adicional de visita según protocolo de Meridiana.}}</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 05 SEGUIMIENTO ══ -->
+  <div class="section" data-screen-label="Seguimiento">
+    <div class="sec-hd">
+      <span class="sec-n">05</span>
+      <span class="sec-lbl">Seguimiento</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="editorial-q">
+      <p>"Un seguimiento bien hecho es el que el cliente no siente como seguimiento."</p>
+    </div>
+    <div class="rule-list" style="margin-top: clamp(16px,2.5vw,26px);">
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>Uno o dos contactos máximo.</strong> Si no hay respuesta después del segundo intento en dos semanas, espera. El silencio también es una señal. <span class="ph" title="{{follow_up_rules}}"></span></span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>El seguimiento tiene que tener razón de ser.</strong> No escribas solo para "saber si ya pensaron". Escribe cuando tengas algo concreto: una propiedad nueva que encaje, una actualización del mercado, una respuesta del propietario.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>Registra el contacto en el sistema.</strong> Cada interacción va en el CRM con fecha, canal y resumen. No confíes en la memoria.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><strong>No uses plantillas de seguimiento evidentes.</strong> El cliente sabe cuándo recibe un mensaje genérico. Si no tienes tiempo de escribir algo personalizado, no lo envíes todavía.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 06 CIERRE DE COMUNICACIÓN ══ -->
+  <div class="section section--alt" data-screen-label="Cierre de comunicación">
+    <div class="sec-hd">
+      <span class="sec-n">06</span>
+      <span class="sec-lbl">Cierre de comunicación</span>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="body-text">Cerrar la comunicación no significa perder el lead. Significa respetar el ritmo del cliente.</p>
+    <div class="rule-list" style="margin-top: clamp(16px,2.5vw,26px);">
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text">Cuando el cliente dice "voy a pensarlo", responde: <em>"Perfecto. Cuando tengas preguntas o quieras ver algo más, me avisas."</em> Sin fecha límite artificial.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text">Si el cliente decide no avanzar, agradece la conversación sin dramatismo. <em>"Gracias por el tiempo. Si en algún momento cambia el plan, aquí estaremos."</em> Punto.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text">No trates de re-abrir conversaciones cerradas con descuentos o urgencias. Eso contradice directamente lo que Meridiana representa.</span>
+      </div>
+      <div class="rule-item">
+        <span class="rule-mark">—</span>
+        <span class="rule-text"><span class="ph" title="{{communication_rules}} — cierre">{{Agregar protocolo específico de cierre si aplica.}}</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 07 QUÉ EVITAR ══ -->
+  <div class="section--dark section" data-screen-label="Qué evitar">
+    <div class="sec-hd">
+      <span class="sec-n" style="color:var(--gold-dark);">07</span>
+      <span class="sec-lbl">Qué evitar sin excepción</span>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="avoid-list">
+      <div class="avoid-item">
+        <span class="avoid-mark">✕</span>
+        <span class="avoid-text"><strong>Usar superlativos.</strong> "Exclusivo", "de ensueño", "inigualable", "oportunidad única". Esas palabras las usa todo el mundo. Y quien las usa demasiado, no tiene nada real que decir.</span>
+      </div>
+      <div class="avoid-item">
+        <span class="avoid-mark">✕</span>
+        <span class="avoid-text"><strong>Crear urgencia falsa.</strong> "Hay otro interesado", "el propietario quiere cerrar esta semana". Solo si es verdad. Si es una táctica, no tiene lugar aquí.</span>
+      </div>
+      <div class="avoid-item">
+        <span class="avoid-mark">✕</span>
+        <span class="avoid-text"><strong>Comentar sobre otras negociaciones o clientes.</strong> Si el cliente sabe que hablas de otros, sabe que hablarás de él. La discreción no tiene excepciones simpáticas.</span>
+      </div>
+      <div class="avoid-item">
+        <span class="avoid-mark">✕</span>
+        <span class="avoid-text"><strong>Responder sin saber.</strong> Si no tienes la información, di: <em>"Voy a verificarlo y te confirmo hoy."</em> No improvises datos de propiedad, zona, precios o trámites.</span>
+      </div>
+      <div class="avoid-item">
+        <span class="avoid-mark">✕</span>
+        <span class="avoid-text"><strong>Negociar en público o por canales no seguros.</strong> Las condiciones de una oferta no se discuten por WhatsApp con el cliente si hay riesgo de que terceros lean la conversación.</span>
+      </div>
+      <div class="avoid-item">
+        <span class="avoid-mark">✕</span>
+        <span class="avoid-text"><span class="ph" title="{{dont_do_list}}">{{Agregar restricciones adicionales según contexto operativo de Meridiana.}}</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 08 EJEMPLOS ══ -->
+  <div class="section" data-screen-label="Ejemplos prácticos">
+    <div class="sec-hd">
+      <span class="sec-n">08</span>
+      <span class="sec-lbl">Ejemplos de trato correcto</span>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="body-text" style="margin-bottom: clamp(20px,3.5vw,34px);">Situaciones reales. Respuesta incorrecta vs. respuesta de Meridiana.</p>
+
+    <div class="callout-grid">
+      <div class="callout">
+        <div class="callout__no">
+          <span class="clbl">No · Genérico</span>
+          <span class="ctxt"><del>Tenemos propiedades increíbles en esa zona. ¡Cuándo podemos agendar una cita?</del></span>
+        </div>
+        <div class="callout__si">
+          <span class="clbl">Sí · Meridiana</span>
+          <span class="ctxt">Conozco bien esa zona. Cuéntame más sobre qué tipo de espacio estás buscando y te digo con honestidad qué tenemos que encaje.</span>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout__no">
+          <span class="clbl">No · Genérico</span>
+          <span class="ctxt"><del>¡Esta propiedad se va a ir rápido! Ya hay dos personas interesadas. ¿Me das el ok para separar?</del></span>
+        </div>
+        <div class="callout__si">
+          <span class="clbl">Sí · Meridiana</span>
+          <span class="ctxt">Es una propiedad con mucho mérito. Cuando estés listo para avanzar, me avisas y coordinamos el siguiente paso. Sin prisa de mi parte.</span>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout__no">
+          <span class="clbl">No · Genérico</span>
+          <span class="ctxt"><del>El otro cliente al que le mostré esta propiedad dijo que era perfecta pero al final no tenía presupuesto.</del></span>
+        </div>
+        <div class="callout__si">
+          <span class="clbl">Sí · Meridiana</span>
+          <span class="ctxt">No hablo de otras conversaciones. Pero sí te puedo decir lo que sé de esta propiedad y por qué creo que encaja con lo que buscas.</span>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout__no">
+          <span class="clbl">No · Genérico</span>
+          <span class="ctxt"><del>No sé exactamente cuántos metros tiene el patio, pero debe ser grande. Luego te confirmo.</del></span>
+        </div>
+        <div class="callout__si">
+          <span class="clbl">Sí · Meridiana</span>
+          <span class="ctxt">No tengo ese dato de memoria. Lo verifico en el expediente y te escribo hoy antes de las 5.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="wm">Meridiana<span class="dot">.</span></span>
+    <span class="fn">internal_premium_service_playbook_20260614_v01</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Meridiana — Catálogo de Propiedades</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:   #17120D; --paper: #F3ECDF; --paper-deep: #EAE0CE;
+  --paper-mid: #F8F3EA; --gold: #9C7B40; --gold-d: #B89154;
+  --stone: #837D72; --bg: #0C0906;
+  --serif: 'Instrument Serif','Times New Roman',serif;
+  --sans:  'Hanken Grotesk',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;scroll-behavior:smooth}
+body{background:var(--bg);font-family:var(--sans);color:var(--paper);line-height:1.5;min-height:100vh}
+::selection{background:var(--gold);color:var(--ink)}
+
+/* ── HEADER ── */
+.hdr{
+  position:sticky;top:0;z-index:50;
+  background:rgba(12,9,6,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(131,125,114,.18);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,4vw,56px);height:60px;gap:20px;
+}
+.hdr__wm{font-family:var(--serif);font-size:22px;letter-spacing:-.01em;color:var(--paper);white-space:nowrap}
+.hdr__wm .dot{color:var(--gold-d)}
+.hdr__count{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--stone);white-space:nowrap}
+.hdr__count span{color:var(--gold-d);font-weight:600}
+
+/* ── HERO ── */
+.hero{padding:clamp(52px,9vw,100px) clamp(20px,6vw,80px) clamp(36px,6vw,64px);border-bottom:1px solid rgba(131,125,114,.15)}
+.hero__label{font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:var(--stone);margin-bottom:16px}
+.hero__title{font-family:var(--serif);font-size:clamp(48px,10vw,120px);line-height:.88;letter-spacing:-.02em;color:var(--paper)}
+.hero__title .accent{color:var(--gold-d)}
+.hero__sub{margin-top:20px;font-size:clamp(14px,1.3vw,16px);color:var(--stone);max-width:50ch;line-height:1.65}
+
+/* ── FILTER BAR ── */
+.filters{
+  position:sticky;top:60px;z-index:40;
+  background:rgba(12,9,6,.96);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(131,125,114,.15);
+  padding:14px clamp(20px,4vw,56px);
+  display:flex;flex-direction:column;gap:10px;
+}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filter-row .label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(131,125,114,.55);margin-right:2px;white-space:nowrap}
+.pill{
+  font-size:10px;letter-spacing:.12em;font-weight:600;
+  padding:5px 12px;border:1px solid rgba(131,125,114,.3);
+  color:var(--stone);background:transparent;cursor:pointer;
+  transition:all .18s;white-space:nowrap;font-family:var(--sans);
+}
+.pill:hover{border-color:rgba(184,145,84,.5);color:rgba(243,236,223,.8)}
+.pill.active{border-color:var(--gold);color:var(--gold-d);background:rgba(156,123,64,.1)}
+.search-wrap{position:relative;flex:1;min-width:160px;max-width:280px}
+.search-wrap input{
+  width:100%;background:rgba(131,125,114,.08);border:1px solid rgba(131,125,114,.25);
+  color:var(--paper);font-family:var(--sans);font-size:11px;letter-spacing:.04em;
+  padding:6px 12px 6px 28px;outline:none;
+  transition:border-color .2s;
+}
+.search-wrap input::placeholder{color:rgba(131,125,114,.5)}
+.search-wrap input:focus{border-color:rgba(184,145,84,.45)}
+.search-wrap .search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--stone);font-size:11px;pointer-events:none}
+.filter-meta{display:flex;align-items:center;justify-content:space-between;padding-top:4px}
+.result-count{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone)}
+.result-count b{color:var(--gold-d)}
+.toggle-inactive{font-size:10px;letter-spacing:.14em;color:rgba(131,125,114,.55);background:none;border:none;cursor:pointer;font-family:var(--sans);padding:0;transition:color .18s}
+.toggle-inactive:hover,.toggle-inactive.on{color:var(--gold-d)}
+
+/* ── GRID ── */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:2px;
+  padding:2px;
+}
+
+/* ── CARD ── */
+.card{
+  background:var(--paper);cursor:pointer;
+  transition:transform .22s,box-shadow .22s;
+  position:relative;
+  display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 48px rgba(0,0,0,.55);z-index:2}
+.card--inactive{opacity:.52}
+.card--inactive:hover{opacity:.72}
+.card--hidden{display:none}
+
+/* photo area */
+.card__photo{
+  position:relative;aspect-ratio:4/3;
+  background:var(--ink);overflow:hidden;flex-shrink:0;
+}
+.card__name-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:clamp(52px,8vw,88px);
+  color:rgba(243,236,223,.055);text-align:center;padding:12px;
+  line-height:.88;letter-spacing:-.02em;
+  pointer-events:none;user-select:none;overflow:hidden;
+  word-break:break-word;
+}
+.card__photo-top{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card__photo-bottom{position:absolute;bottom:12px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:flex-end}
+.card__status{font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;padding:3px 9px;border:1px solid currentColor}
+.st-activa{color:var(--gold-d);border-color:rgba(184,145,84,.45)}
+.st-apartada{color:#D4A975;border-color:rgba(212,169,117,.4)}
+.st-vendida{color:var(--stone);border-color:rgba(131,125,114,.35)}
+.st-rentada{color:#87AFA8;border-color:rgba(135,175,168,.35)}
+.st-borrador{color:rgba(131,125,114,.6);border-color:rgba(131,125,114,.2)}
+.card__tier{font-size:11px;color:rgba(184,145,84,.7)}
+.card__listing-type{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:rgba(131,125,114,.55);font-weight:600}
+.card__code{font-size:9px;letter-spacing:.16em;color:rgba(131,125,114,.4)}
+
+/* card body */
+.card__body{padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card__location{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.card__commercial{font-family:var(--serif);font-size:22px;line-height:1;letter-spacing:-.01em;color:var(--ink)}
+.card__title{font-size:12px;line-height:1.4;color:var(--stone);margin-top:1px}
+.card__price{font-family:var(--serif);font-size:20px;color:var(--ink);letter-spacing:-.01em;margin-top:4px}
+.card__price .unit{font-size:12px;color:var(--stone);font-family:var(--sans);letter-spacing:.04em;font-weight:400}
+.card__footer{display:flex;justify-content:space-between;align-items:flex-end;margin-top:8px;padding-top:10px;border-top:1px solid var(--paper-deep)}
+.card__stats{font-size:11px;color:var(--stone);letter-spacing:.04em}
+.card__cta{font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--ink);border-bottom:1px solid rgba(23,18,13,.3);padding-bottom:1px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+
+/* ── MODAL ── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(12,9,6,.72);backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(580px,100vw);background:var(--paper);
+  overflow-y:auto;overflow-x:hidden;
+  transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  z-index:101;display:flex;flex-direction:column;
+}
+.modal.open{transform:translateX(0)}
+
+.modal__photo{
+  position:relative;aspect-ratio:16/9;
+  background:var(--ink);flex-shrink:0;overflow:hidden;
+}
+.modal__name-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:clamp(80px,16vw,140px);
+  color:rgba(243,236,223,.045);text-align:center;padding:16px;
+  line-height:.88;letter-spacing:-.02em;pointer-events:none;user-select:none;
+}
+.modal__close{
+  position:absolute;top:16px;right:16px;
+  width:36px;height:36px;background:rgba(12,9,6,.6);
+  border:1px solid rgba(131,125,114,.3);color:var(--stone);
+  font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  z-index:2;transition:background .2s,color .2s;font-family:var(--sans);
+}
+.modal__close:hover{background:rgba(12,9,6,.85);color:var(--paper)}
+.modal__photo-meta{
+  position:absolute;bottom:14px;left:16px;right:16px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+
+.modal__body{padding:clamp(24px,5vw,40px);display:flex;flex-direction:column;gap:0;flex:1}
+.modal__location{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px}
+.modal__name{font-family:var(--serif);font-size:clamp(32px,6vw,52px);line-height:.9;letter-spacing:-.015em;color:var(--ink);margin-bottom:10px}
+.modal__title{font-size:14px;color:var(--stone);line-height:1.5;margin-bottom:20px}
+.modal__price-row{display:flex;align-items:baseline;gap:14px;padding:16px 0;border-top:1px solid var(--paper-deep);border-bottom:1px solid var(--paper-deep);margin-bottom:24px}
+.modal__price{font-family:var(--serif);font-size:clamp(26px,5vw,38px);color:var(--ink);letter-spacing:-.015em;line-height:1}
+.modal__price .unit{font-size:13px;color:var(--stone);font-family:var(--sans);letter-spacing:.04em}
+.modal__maint{font-size:11px;color:var(--stone);align-self:flex-end;padding-bottom:3px}
+
+.modal__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--paper-deep);margin-bottom:24px}
+.modal__stat{padding:14px 16px;border-right:1px solid var(--paper-deep);display:flex;flex-direction:column;gap:3px}
+.modal__stat:last-child{border-right:0}
+.modal__stat label{font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--stone);font-weight:600}
+.modal__stat .sv{font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1}
+.modal__stat .sv .unit{font-size:11px;color:var(--stone);font-family:var(--sans)}
+
+.modal__section{margin-bottom:20px}
+.modal__section h4{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.modal__section p{font-size:14px;line-height:1.68;color:#3D3529;text-wrap:pretty}
+
+.modal__meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--paper-deep);margin-bottom:24px}
+.modal__mf{padding:12px 14px;border-right:1px solid var(--paper-deep);border-bottom:1px solid var(--paper-deep);display:flex;flex-direction:column;gap:3px}
+.modal__mf:nth-child(2n){border-right:0}
+.modal__mf:nth-last-child(-n+2){border-bottom:0}
+.modal__mf label{font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--stone);font-weight:600}
+.modal__mf .mv{font-size:13px;color:var(--ink);font-weight:500}
+
+.modal__cta-row{margin-top:auto;padding-top:24px;border-top:1px solid var(--paper-deep);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-primary{background:var(--ink);color:var(--paper);padding:13px 24px;font-size:9px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;font-family:var(--sans);border:none;cursor:pointer;text-decoration:none;display:inline-block;white-space:nowrap;transition:background .2s}
+.btn-primary:hover{background:#2A211A}
+.btn-sec{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--stone);text-decoration:none;border-bottom:1px solid rgba(131,125,114,.4);padding-bottom:2px;white-space:nowrap}
+
+/* ── FOOTER ── */
+.footer{padding:clamp(48px,8vw,80px) clamp(20px,4vw,56px) 40px;border-top:1px solid rgba(131,125,114,.15);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+.footer__wm{font-family:var(--serif);font-size:clamp(32px,6vw,60px);line-height:.9;letter-spacing:-.015em;color:rgba(243,236,223,.35)}
+.footer__wm .dot{color:rgba(184,145,84,.5)}
+.footer__info{text-align:right}
+.footer__info p{font-size:11px;color:rgba(131,125,114,.55);letter-spacing:.08em;line-height:1.7}
+.footer__doc{margin-top:32px;width:100%;padding-top:20px;border-top:1px solid rgba(131,125,114,.15);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer__doc span{font-size:9px;letter-spacing:.16em;color:rgba(131,125,114,.35);font-family:var(--serif);font-style:italic}
+
+/* ── EMPTY STATE ── */
+.empty{display:none;padding:80px 40px;text-align:center;grid-column:1/-1}
+.empty.show{display:block}
+.empty p{font-family:var(--serif);font-size:22px;color:rgba(131,125,114,.4)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr__wm">Meridiana<span class="dot">.</span></div>
+  <div class="hdr__count">Mostrando <span id="countDisplay">38</span> propiedades</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__label">Catálogo · Mérida y Yucatán · MMXXVI</div>
+  <h1 class="hero__title">Propiedades<span class="accent">.</span></h1>
+  <p class="hero__sub">Inventario selecto de Meridiana. Residencias, villas, departamentos, terrenos y haciendas en Mérida y la región yucateca.</p>
+</section>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filter-row">
+    <span class="label">Tipo</span>
+    <button class="pill active" data-filter="type" data-val="all">Todos</button>
+    <button class="pill" data-filter="type" data-val="casa">Casa</button>
+    <button class="pill" data-filter="type" data-val="depto">Depto</button>
+    <button class="pill" data-filter="type" data-val="villa">Villa</button>
+    <button class="pill" data-filter="type" data-val="townhouse">Townhouse</button>
+    <button class="pill" data-filter="type" data-val="terreno">Terreno</button>
+  </div>
+  <div class="filter-row">
+    <span class="label">Operación</span>
+    <button class="pill active" data-filter="listing" data-val="all">Todas</button>
+    <button class="pill" data-filter="listing" data-val="venta">Venta</button>
+    <button class="pill" data-filter="listing" data-val="renta">Renta</button>
+    <span class="label" style="margin-left:14px">Tier</span>
+    <button class="pill active" data-filter="tier" data-val="all">Todos</button>
+    <button class="pill" data-filter="tier" data-val="ultra">Ultra</button>
+    <button class="pill" data-filter="tier" data-val="premium">Premium</button>
+    <button class="pill" data-filter="tier" data-val="entrada">Entrada</button>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="searchInput" placeholder="Nombre, zona, colonia…" autocomplete="off"/>
+    </div>
+  </div>
+  <div class="filter-meta">
+    <div class="result-count"><b id="countResult">38</b> propiedades</div>
+    <button class="toggle-inactive" id="toggleInactive">Incluir inactivas</button>
+  </div>
+</div>
+
+<!-- GRID -->
+<main>
+  <div class="grid" id="grid">
+    <div class="empty" id="emptyState"><p>Sin resultados para esta búsqueda.</p></div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__wm">Meridiana<span class="dot">.</span></div>
+  <div class="footer__info">
+    <p>Mérida · Yucatán</p>
+    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d2b1bdbca6b3b1a6bd92bfb7a0bbb6bbb3bcb3fcbfaa">[email&#160;protected]</a></p>
+    <p>+52 999 000 0000</p>
+  </div>
+  <div class="footer__doc">
+    <span>Meridiana — Catálogo de Propiedades · MMXXVI</span>
+    <span>internal_property_catalog_20260614_v01</span>
+  </div>
+</footer>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="overlay">
+  <div class="modal" id="modal">
+    <div class="modal__photo" id="modalPhoto">
+      <div class="modal__name-bg" id="modalNameBg"></div>
+      <button class="modal__close" id="modalClose">✕</button>
+      <div class="modal__photo-meta">
+        <span class="card__status" id="modalStatus"></span>
+        <span class="card__code" style="color:rgba(131,125,114,.5); font-size:9px; letter-spacing:.18em;" id="modalCode"></span>
+      </div>
+    </div>
+    <div class="modal__body">
+      <div class="modal__location" id="modalLocation"></div>
+      <div class="modal__name" id="modalName"></div>
+      <div class="modal__title" id="modalTitle"></div>
+      <div class="modal__price-row">
+        <div class="modal__price" id="modalPrice"></div>
+        <div class="modal__maint" id="modalMaint"></div>
+      </div>
+      <div class="modal__stats" id="modalStats"></div>
+      <div class="modal__section" id="modalDesc">
+        <h4>Descripción</h4>
+        <p id="modalDescText"></p>
+      </div>
+      <div class="modal__meta-grid" id="modalMeta"></div>
+      <div class="modal__cta-row">
+        <a href="Meridiana — Property Brochure.html" target="_blank" class="btn-primary">Ver brochure →</a>
+        <a href="#" class="btn-sec" id="modalEmail">Solicitar información</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const PROPS = [
+  {id:'P001',code:'MER-2024-001',name:'Hydraterra',title:'Residencia en Montecristo con cenote privado',type:'casa',listing:'venta',status:'activa',price:18500000,maint:4500,beds:5,baths:5.5,parking:3,sqm:620,lot:1200,year:2019,furnished:false,pets:false,nbhd:'Montecristo',muni:'Mérida',tier:'ultra',days:12,desc:'Residencia de cinco recámaras con doble altura en sala principal. Cenote privado en jardín posterior. Cocina italiana con isla central. Cuarto de servicio independiente. Seguridad 24 horas.'},
+  {id:'P002',code:'MER-2024-002',name:'Acrocaelum',title:'Departamento en Torre Cúspide con vista panorámica',type:'depto',listing:'venta',status:'activa',price:7200000,maint:3800,beds:3,baths:3,parking:2,sqm:198,lot:0,year:2022,furnished:true,pets:false,nbhd:'Altabrisa',muni:'Mérida',tier:'premium',days:27,desc:'Departamento en piso 14 con vista a la ciudad. Tres recámaras con walk-in closet. Amenidades: rooftop, gimnasio, sala de negocios y alberca elevada.'},
+  {id:'P003',code:'MER-2024-003',name:'Megazamá',title:'Villa contemporánea en Temozón Norte',type:'villa',listing:'venta',status:'activa',price:32000000,maint:6000,beds:6,baths:6.5,parking:4,sqm:980,lot:3500,year:2021,furnished:false,pets:true,nbhd:'Temozón Norte',muni:'Mérida',tier:'ultra',days:8,desc:'Villa de seis recámaras en privada con 12 casas. Alberca desbordante, palapa, jardín con iluminación arquitectónica. Bodega de vinos climatizada. A 10 minutos del norte de Mérida.'},
+  {id:'P004',code:'MER-2024-004',name:'Chronovita',title:'Casa colonial restaurada en el Centro Histórico',type:'casa',listing:'venta',status:'activa',price:9800000,maint:0,beds:4,baths:3.5,parking:2,sqm:480,lot:620,year:1920,furnished:false,pets:false,nbhd:'Centro Histórico',muni:'Mérida',tier:'premium',days:45,desc:'Casa colonial del siglo XX completamente restaurada. Techos de bóveda catalana, pisos de mosaico original, patio central con vegetación tropical. Fachada protegida por INAH.'},
+  {id:'P005',code:'MER-2024-005',name:'Moduluúm',title:'Townhouse en Privada Santa Gertrudis',type:'townhouse',listing:'venta',status:'activa',price:4100000,maint:1800,beds:3,baths:2.5,parking:2,sqm:210,lot:180,year:2023,furnished:false,pets:true,nbhd:'Santa Gertrudis Copó',muni:'Mérida',tier:'entrada',days:18,desc:'Townhouse de tres niveles en privada de ocho unidades. Acabados de primera, terraza en azotea con asador. Excelente conectividad al norte de la ciudad.'},
+  {id:'P006',code:'MER-2024-006',name:'Symbiópolis',title:'Departamento de lujo en Courtyard Mérida Norte',type:'depto',listing:'renta',status:'activa',price:55000,maint:2200,beds:2,baths:2,parking:1,sqm:145,lot:0,year:2020,furnished:true,pets:false,nbhd:'Chuburná de Hidalgo',muni:'Mérida',tier:'premium',days:5,desc:'Departamento amueblado de dos recámaras con balcón. Edificio con lobby de doble altura, coworking y rooftop con parrilla. Disponible inmediato.'},
+  {id:'P007',code:'MER-2024-007',name:'Biofilum',title:'Residencia en García Ginerés con alberca y jardín',type:'casa',listing:'venta',status:'activa',price:12400000,maint:0,beds:4,baths:4,parking:3,sqm:520,lot:900,year:2005,furnished:false,pets:true,nbhd:'García Ginerés',muni:'Mérida',tier:'premium',days:33,desc:'Casa de cuatro recámaras en zona consolidada y arbolada. Alberca de 12 metros, jardín maduro, estudio independiente. Tres cuartos de servicio. Bodega de 40 m².'},
+  {id:'P008',code:'MER-2024-008',name:'Topoplano',title:'Terreno en Dzityá para desarrollo residencial',type:'terreno',listing:'venta',status:'activa',price:5600000,maint:0,beds:0,baths:0,parking:0,sqm:0,lot:2800,year:0,furnished:false,pets:false,nbhd:'Dzityá',muni:'Mérida',tier:'entrada',days:60,desc:'Terreno de 2800 m² en zona de crecimiento hacia el poniente. Servicios en calle. Uso de suelo habitacional. Ideal para desarrollo de seis a ocho casas.'},
+  {id:'P009',code:'MER-2024-009',name:'Aethelsky',title:'Penthouse en el exclusivo edificio Ánfora',type:'depto',listing:'venta',status:'activa',price:14900000,maint:5500,beds:4,baths:4.5,parking:3,sqm:380,lot:0,year:2023,furnished:true,pets:false,nbhd:'Norte Mérida',muni:'Mérida',tier:'ultra',days:21,desc:'Penthouse de cuatro recámaras en el piso más alto del edificio Ánfora. Terraza privada de 120 m² con alberca propia, jacuzzi y vista 360°. Cocina Gaggenau. Cava integrada.'},
+  {id:'P010',code:'MER-2024-010',name:'Regallá',title:'Casa en Yucatán Country Club',type:'casa',listing:'venta',status:'apartada',price:22000000,maint:8000,beds:5,baths:5,parking:4,sqm:750,lot:1100,year:2017,furnished:false,pets:false,nbhd:'Yucatán Country Club',muni:'Mérida',tier:'ultra',days:0,desc:'Residencia frente al campo de golf. Cinco recámaras, sala de cine, gimnasio privado, cuarto de servicio con entrada independiente. Acabados importados de Europa.'},
+  {id:'P011',code:'MER-2024-011',name:'Ecolúum',title:'Casa en Cholul con huerto y diseño bioclimático',type:'casa',listing:'venta',status:'activa',price:6700000,maint:0,beds:3,baths:3,parking:2,sqm:310,lot:1400,year:2018,furnished:false,pets:true,nbhd:'Cholul',muni:'Mérida',tier:'entrada',days:40,desc:'Casa de diseño bioclimático con orientación solar optimizada. Huerto orgánico, cisterna de captación pluvial, paneles solares. Tres recámaras con acabados naturales.'},
+  {id:'P012',code:'MER-2024-012',name:'Urbavita',title:'Departamento en renta en Altabrisa amueblado',type:'depto',listing:'renta',status:'activa',price:28000,maint:1500,beds:2,baths:2,parking:1,sqm:110,lot:0,year:2019,furnished:true,pets:false,nbhd:'Altabrisa',muni:'Mérida',tier:'entrada',days:3,desc:'Departamento amueblado de dos recámaras en edificio con vigilancia. Área de lavandería en piso, estacionamiento techado. A cinco minutos de Plaza Altabrisa.'},
+  {id:'P013',code:'MER-2024-013',name:'Imperlumá',title:'Hacienda San Isidro restaurada en Conkal',type:'villa',listing:'venta',status:'activa',price:45000000,maint:0,beds:7,baths:7,parking:6,sqm:1800,lot:12000,year:1880,furnished:false,pets:false,nbhd:'Conkal',muni:'Conkal',tier:'ultra',days:90,desc:'Hacienda del siglo XIX restaurada con máxima fidelidad histórica. Siete suites, capilla, máquina henequenera rehabilitada, cenote en terreno, piscina natural. Licencia de hospedaje vigente.'},
+  {id:'P014',code:'MER-2024-014',name:'Duópolis',title:'Townhouse doble en Privada Lagos del Norte',type:'townhouse',listing:'venta',status:'vendida',price:3850000,maint:1600,beds:3,baths:2.5,parking:2,sqm:195,lot:160,year:2022,furnished:false,pets:false,nbhd:'Chuburná de Hidalgo',muni:'Mérida',tier:'entrada',days:0,desc:'Townhouse en esquina con mayor área de jardín. Tres recámaras, acabados de línea media-alta. Privada con 16 unidades y área de juegos infantiles.'},
+  {id:'P015',code:'MER-2024-015',name:'Cinematerra',title:'Residencia en Jardines del Norte con cine privado',type:'casa',listing:'venta',status:'activa',price:16200000,maint:3000,beds:5,baths:5,parking:3,sqm:680,lot:980,year:2016,furnished:false,pets:false,nbhd:'Jardines del Norte',muni:'Mérida',tier:'ultra',days:22,desc:'Residencia de cinco recámaras con sala de cine de ocho lugares, estudio, sala de juegos y alberca con cascada. Jardín con iluminación LED arquitectónica. Generador eléctrico.'},
+  {id:'P016',code:'MER-2024-016',name:'Terralúum',title:'Departamento planta baja con jardín privado',type:'depto',listing:'renta',status:'rentada',price:32000,maint:0,beds:2,baths:2,parking:1,sqm:130,lot:80,year:2021,furnished:true,pets:true,nbhd:'Itzimná',muni:'Mérida',tier:'entrada',days:0,desc:'Planta baja con jardín privado de 80 m². Dos recámaras, cocina equipada, área de lavado exterior. Permite mascotas. Barrio tranquilo cerca del parque Itzimná.'},
+  {id:'P017',code:'MER-2024-017',name:'Domusvía',title:'Casa en Vía Montejo frente a avenida principal',type:'casa',listing:'venta',status:'activa',price:8900000,maint:0,beds:4,baths:3,parking:2,sqm:380,lot:520,year:2001,furnished:false,pets:false,nbhd:'Vía Montejo',muni:'Mérida',tier:'premium',days:55,desc:'Casa de cuatro recámaras en zona céntrica del norte. Remodelada en 2020. Sala amplia con doble altura, jardín lateral, estudio en planta alta. Cerca de centros comerciales y clínicas.'},
+  {id:'P018',code:'MER-2024-018',name:'Bifrontem',title:'Terreno con frente doble en Hunucmá',type:'terreno',listing:'venta',status:'activa',price:1800000,maint:0,beds:0,baths:0,parking:0,sqm:0,lot:3200,year:0,furnished:false,pets:false,nbhd:'Hunucmá',muni:'Hunucmá',tier:'entrada',days:120,desc:'Terreno de 3200 m² con dos frentes de calle. Plano, sin construcción. Servicios básicos disponibles. Zona de crecimiento hacia el poniente del estado.'},
+  {id:'P019',code:'MER-2024-019',name:'Infinitum',title:'Villa en Privada Alturas del Norte con alberca infinita',type:'villa',listing:'venta',status:'activa',price:28500000,maint:7500,beds:6,baths:6,parking:4,sqm:1100,lot:2200,year:2020,furnished:true,pets:false,nbhd:'Norte Mérida',muni:'Mérida',tier:'ultra',days:14,desc:'Villa de seis recámaras con alberca infinita y jardín de 1500 m². Cocina de chef con equipamiento de restaurante. Terraza con pergolado de madera. Cuarto de pánico.'},
+  {id:'P020',code:'MER-2024-020',name:'Microhabitat',title:'Departamento estudio en el Centro para inversión',type:'depto',listing:'venta',status:'activa',price:1950000,maint:800,beds:1,baths:1,parking:0,sqm:58,lot:0,year:2018,furnished:true,pets:false,nbhd:'Centro Histórico',muni:'Mérida',tier:'entrada',days:38,desc:'Estudio de 58 m² con terraza compartida en edificio colonial restaurado. Ideal para renta turística de corto plazo. A dos cuadras del Paseo de Montejo.'},
+  {id:'P021',code:'MER-2024-021',name:'Famillá',title:'Casa en Fraccionamiento Las Américas',type:'casa',listing:'venta',status:'activa',price:5400000,maint:900,beds:4,baths:3,parking:2,sqm:280,lot:400,year:2012,furnished:false,pets:true,nbhd:'Las Américas',muni:'Mérida',tier:'entrada',days:48,desc:'Casa de cuatro recámaras en fraccionamiento consolidado. Alberca, jardín con árboles maduros, cuarto de servicio. Vigilancia en acceso principal. Zona escolar cercana.'},
+  {id:'P022',code:'MER-2024-022',name:'Domusaudio',title:'Residencia ejecutiva en Benito Juárez Norte',type:'casa',listing:'renta',status:'activa',price:75000,maint:0,beds:4,baths:4,parking:3,sqm:450,lot:700,year:2014,furnished:true,pets:false,nbhd:'Benito Juárez Norte',muni:'Mérida',tier:'premium',days:10,desc:'Residencia amueblada disponible para ejecutivos en asignación temporal. Cuatro recámaras, oficina, cuarto de servicio, jardín y alberca. Muebles de diseño importado.'},
+  {id:'P023',code:'MER-2024-023',name:'Silvavita',title:'Townhouse en Privada Paseos del Bosque',type:'townhouse',listing:'venta',status:'activa',price:4600000,maint:2100,beds:3,baths:3,parking:2,sqm:225,lot:190,year:2023,furnished:false,pets:false,nbhd:'Cholul',muni:'Mérida',tier:'entrada',days:16,desc:'Townhouse de tres niveles con terraza en azotea. Acabados de primera, cocina abierta, sala amplia. Privada con portón eléctrico y área verde central.'},
+  {id:'P024',code:'MER-2024-024',name:'Zamacaelum',title:'Penthouse doble en edificio Tulum Residences',type:'depto',listing:'venta',status:'borrador',price:11500000,maint:4200,beds:3,baths:3.5,parking:2,sqm:295,lot:0,year:2024,furnished:false,pets:false,nbhd:'Norte Mérida',muni:'Mérida',tier:'ultra',days:0,desc:'Penthouse de dos niveles en edificio nuevo entrega 2024. Tres recámaras, sala doble altura, terraza de 90 m² con jacuzzi. Edificio con lobby concierge y bodegas climatizadas.'},
+  {id:'P025',code:'MER-2024-025',name:'Hammockaterra',title:'Casa en Chuburná Puerto para fin de semana',type:'casa',listing:'renta',status:'activa',price:18000,maint:0,beds:3,baths:2,parking:2,sqm:180,lot:600,year:2008,furnished:false,pets:true,nbhd:'Chuburná Puerto',muni:'Progreso',tier:'entrada',days:7,desc:'Casa de playa de tres recámaras a 200 metros del mar. Palapa, jardín, estacionamiento para dos autos. Renta por temporadas o mensual. A 45 minutos de Mérida.'},
+  {id:'P026',code:'MER-2024-026',name:'Thalassamar',title:'Departamento en Progreso con vista al mar',type:'depto',listing:'venta',status:'activa',price:3200000,maint:600,beds:2,baths:2,parking:1,sqm:95,lot:0,year:2015,furnished:true,pets:false,nbhd:'Centro Progreso',muni:'Progreso',tier:'entrada',days:70,desc:'Departamento con vista directa al Golfo de México. Dos recámaras, balcón de 25 m², alberca en azotea. Totalmente amueblado con estilo costero.'},
+  {id:'P027',code:'MER-2024-027',name:'Macrodomus',title:'Residencia en Itzimná zona exclusiva',type:'casa',listing:'venta',status:'activa',price:19800000,maint:0,beds:5,baths:5.5,parking:4,sqm:720,lot:1050,year:2018,furnished:false,pets:false,nbhd:'Itzimná',muni:'Mérida',tier:'ultra',days:29,desc:'Residencia de cinco recámaras en Itzimná, colonia de las más cotizadas del norte histórico. Jardín maduro, cuarto de servicio con baño, estudio independiente y alberca.'},
+  {id:'P028',code:'MER-2024-028',name:'Altolof',title:'Loft industrial en colonia San Sebastián',type:'depto',listing:'renta',status:'activa',price:22000,maint:500,beds:1,baths:1,parking:1,sqm:85,lot:0,year:2022,furnished:true,pets:false,nbhd:'San Sebastián',muni:'Mérida',tier:'entrada',days:25,desc:'Loft de doble altura con diseño industrial. Techos de 4.5 m, vigas metálicas vistas, cocina equipada, baño de lujo. Zona emergente creativa cerca del centro.'},
+  {id:'P029',code:'MER-2024-029',name:'Comunitá',title:'Casa en Privada Real Montejo de cuatro recámaras',type:'casa',listing:'venta',status:'activa',price:9200000,maint:2500,beds:4,baths:4,parking:3,sqm:410,lot:560,year:2013,furnished:false,pets:false,nbhd:'Montejo',muni:'Mérida',tier:'premium',days:36,desc:'Casa de cuatro recámaras en privada cerrada con alberca comunitaria y área de juegos. Acabados de lujo medio-alto. Cuarto de servicio, jardín y estudio.'},
+  {id:'P030',code:'MER-2024-030',name:'Agroglamp',title:'Terreno en Conkal para glamping y uso agropecuario',type:'terreno',listing:'venta',status:'activa',price:3100000,maint:0,beds:0,baths:0,parking:0,sqm:0,lot:8500,year:0,furnished:false,pets:false,nbhd:'Conkal',muni:'Conkal',tier:'entrada',days:85,desc:'Terreno de 8500 m² con árboles frutales establecidos y pozo. Uso actual agropecuario. Potencial para glamping, retiro o proyecto ecoturístico. Sin restricciones de construcción.'},
+  {id:'P031',code:'MER-2024-031',name:'Megasuites',title:'Residencia en Altabrisa con cuatro suites master',type:'casa',listing:'venta',status:'activa',price:14500000,maint:3500,beds:4,baths:4,parking:3,sqm:580,lot:850,year:2015,furnished:false,pets:false,nbhd:'Altabrisa',muni:'Mérida',tier:'ultra',days:18,desc:'Cuatro suites master con baño y vestidor propios. Cocina gourmet con isla y alacena, sala de TV independiente, estudio, alberca y palapa. Generador incluido.'},
+  {id:'P032',code:'MER-2024-032',name:'Skylounge',title:'Departamento en torre El Referente Piso 12',type:'depto',listing:'venta',status:'activa',price:6100000,maint:3200,beds:3,baths:2.5,parking:2,sqm:172,lot:0,year:2021,furnished:false,pets:false,nbhd:'La Ceiba',muni:'Mérida',tier:'premium',days:41,desc:'Departamento de tres recámaras en torre con amenidades completas: alberca, sky lounge, sala de negocios y lobby con conserjería. Cocina abierta, balcón de 18 m².'},
+  {id:'P033',code:'MER-2024-033',name:'Solarlúum',title:'Casa ecológica en Umán con sistema off-grid',type:'casa',listing:'venta',status:'activa',price:4200000,maint:0,beds:3,baths:2,parking:2,sqm:240,lot:1100,year:2020,furnished:false,pets:true,nbhd:'Umán',muni:'Umán',tier:'entrada',days:67,desc:'Casa con sistema solar completo, biodigestor, captación de agua pluvial y huerto. Tres recámaras de amplitud media. Completamente independiente de red eléctrica.'},
+  {id:'P034',code:'MER-2024-034',name:'Patioá',title:'Casa en Dzán para proyecto turístico',type:'casa',listing:'venta',status:'activa',price:2800000,maint:0,beds:4,baths:2,parking:3,sqm:320,lot:2200,year:1960,furnished:false,pets:false,nbhd:'Dzán',muni:'Dzán',tier:'entrada',days:110,desc:'Casa antigua de cuatro cuartos con patio central, pozo y traspatio de 2200 m². Estructura sólida. Requiere intervención arquitectónica. Potencial turístico alto.'},
+  {id:'P035',code:'MER-2024-035',name:'Corpovilla',title:'Villa rentada a empresa trasnacional en Montejo',type:'villa',listing:'renta',status:'rentada',price:120000,maint:0,beds:5,baths:5,parking:4,sqm:750,lot:1200,year:2010,furnished:true,pets:false,nbhd:'García Ginerés',muni:'Mérida',tier:'ultra',days:0,desc:'Villa de cinco recámaras amueblada con contrato corporativo vigente. Propietario recibe renta puntual vía transferencia internacional. Gestión activa por Meridiana.'},
+  {id:'P036',code:'MER-2024-036',name:'Centrópolis',title:'Departamento en Mérida Centro para uso mixto',type:'depto',listing:'venta',status:'activa',price:3700000,maint:700,beds:2,baths:2,parking:1,sqm:118,lot:0,year:2016,furnished:false,pets:false,nbhd:'Centro Histórico',muni:'Mérida',tier:'entrada',days:52,desc:'Departamento de dos recámaras en edificio restaurado en el corazón del Centro Histórico. A metros del Palacio de Gobierno. Uso habitacional o de oficinas.'},
+  {id:'P037',code:'MER-2024-037',name:'Domótika',title:'Residencia minimalista en privada Cielo Norte',type:'casa',listing:'venta',status:'activa',price:21500000,maint:5000,beds:5,baths:5,parking:3,sqm:810,lot:1300,year:2022,furnished:false,pets:false,nbhd:'Norte Mérida',muni:'Mérida',tier:'ultra',days:9,desc:'Residencia de diseño minimalista mexicano. Cinco recámaras, muros de concreto aparente, dobles alturas, espejo de agua en acceso. Palapa con bar y alberca desbordante.'},
+  {id:'P038',code:'MER-2024-038',name:'Cenotévita',title:'Casa en Valladolid colonial para renta vacacional',type:'casa',listing:'renta',status:'activa',price:14000,maint:0,beds:3,baths:2,parking:1,sqm:210,lot:380,year:1890,furnished:false,pets:true,nbhd:'Centro Valladolid',muni:'Valladolid',tier:'entrada',days:31,desc:'Casa colonial en Valladolid totalmente restaurada. Tres recámaras, patio con cenote de uso privado, hammocks y vegetación tropical. A dos horas de Mérida y 45 minutos de Tulum.'}
+];
+
+/* ── HELPERS ── */
+function fmtPrice(p, listing) {
+  if (p === 0) return '<span class="unit">Precio a consultar</span>';
+  if (listing === 'renta') {
+    return '$' + p.toLocaleString('es-MX') + '<span class="unit"> /mes</span>';
+  }
+  if (p >= 1000000) {
+    const m = p / 1000000;
+    const s = Number.isInteger(m) ? m.toString() : m.toFixed(1);
+    return '$' + s + '<span class="unit"> m MXN</span>';
+  }
+  return '$' + p.toLocaleString('es-MX');
+}
+
+function fmtStats(p) {
+  if (p.type === 'terreno') return p.lot.toLocaleString() + ' m² terreno';
+  const parts = [];
+  if (p.beds > 0) parts.push(p.beds + ' rec');
+  if (p.baths > 0) parts.push(p.baths + ' b');
+  if (p.sqm > 0) parts.push(p.sqm.toLocaleString() + ' m²');
+  return parts.join(' · ');
+}
+
+const STATUS_LABEL = {activa:'Activa',apartada:'Apartada',vendida:'Vendida',rentada:'Rentada',borrador:'Borrador'};
+const TIER_MARK = {ultra:'◆',premium:'◇',entrada:''};
+
+/* ── RENDER ── */
+function renderCard(p) {
+  const inactive = ['vendida','rentada','borrador'].includes(p.status);
+  return `<div class="card${inactive?' card--inactive':''}" 
+       data-type="${p.type}" data-listing="${p.listing}" 
+       data-tier="${p.tier}" data-status="${p.status}"
+       data-search="${(p.name+' '+p.nbhd+' '+p.muni+' '+p.title).toLowerCase()}"
+       data-id="${p.id}" onclick="openModal('${p.id}')">
+    <div class="card__photo">
+      <div class="card__name-bg">${p.name}</div>
+      <div class="card__photo-top">
+        <span class="card__status st-${p.status}">${STATUS_LABEL[p.status]}</span>
+        ${TIER_MARK[p.tier] ? `<span class="card__tier">${TIER_MARK[p.tier]}</span>` : ''}
+      </div>
+      <div class="card__photo-bottom">
+        <span class="card__listing-type">${p.listing.toUpperCase()}</span>
+        <span class="card__code">${p.code}</span>
+      </div>
+    </div>
+    <div class="card__body">
+      <div class="card__location">${p.nbhd} · ${p.muni}</div>
+      <div class="card__commercial">${p.name}</div>
+      <div class="card__title">${p.title}</div>
+      <div class="card__price">${fmtPrice(p.price, p.listing)}</div>
+      <div class="card__footer">
+        <div class="card__stats">${fmtStats(p)}</div>
+        <span class="card__cta">Ver ficha →</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ── MODAL ── */
+function openModal(id) {
+  const p = PROPS.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('modalNameBg').textContent = p.name;
+  document.getElementById('modalStatus').textContent = STATUS_LABEL[p.status];
+  document.getElementById('modalStatus').className = `card__status st-${p.status}`;
+  document.getElementById('modalCode').textContent = p.code;
+  document.getElementById('modalLocation').textContent = p.nbhd + ' · ' + p.muni + ', Yucatán';
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalPrice').innerHTML = fmtPrice(p.price, p.listing);
+  document.getElementById('modalMaint').textContent = p.maint > 0 ? '+ $' + p.maint.toLocaleString('es-MX') + '/mes mantenimiento' : '';
+
+  const stats = p.type === 'terreno'
+    ? `<div class="modal__stat"><label>Terreno</label><div class="sv">${p.lot.toLocaleString()}<span class="unit"> m²</span></div></div>
+       <div class="modal__stat"><label>Tipo</label><div class="sv" style="font-size:16px">Terreno</div></div>
+       <div class="modal__stat"><label>Año</label><div class="sv" style="font-size:16px">${p.year || '—'}</div></div>`
+    : `<div class="modal__stat"><label>Recámaras</label><div class="sv">${p.beds}</div></div>
+       <div class="modal__stat"><label>Baños</label><div class="sv">${p.baths}</div></div>
+       <div class="modal__stat"><label>Const.</label><div class="sv">${p.sqm}<span class="unit"> m²</span></div></div>`;
+  document.getElementById('modalStats').innerHTML = stats;
+  document.getElementById('modalDescText').textContent = p.desc;
+
+  const meta = [
+    ['Tipo',p.type.charAt(0).toUpperCase()+p.type.slice(1)],
+    ['Operación',p.listing.charAt(0).toUpperCase()+p.listing.slice(1)],
+    ['Tier',p.tier.charAt(0).toUpperCase()+p.tier.slice(1)],
+    ['Año',p.year || '—'],
+    ['Terreno',p.lot > 0 ? p.lot.toLocaleString()+' m²' : '—'],
+    ['Cajones',p.parking || '—'],
+    ['Amueblado',p.furnished ? 'Sí' : 'No'],
+    ['Mascotas',p.pets ? 'Sí' : 'No'],
+  ].map(([l,v]) => `<div class="modal__mf"><label>${l}</label><div class="mv">${v}</div></div>`).join('');
+  document.getElementById('modalMeta').innerHTML = meta;
+  document.getElementById('modalEmail').href = `mailto:contacto@meridiana.mx?subject=Información: ${p.name} (${p.code})`;
+
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('overlay').addEventListener('click', e => { if (e.target === document.getElementById('overlay')) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ── FILTER STATE ── */
+const state = { type:'all', listing:'all', tier:'all', search:'', showInactive:false };
+
+function applyFilters() {
+  const cards = document.querySelectorAll('.card');
+  let visible = 0;
+  cards.forEach(card => {
+    const inactive = ['vendida','rentada','borrador'].includes(card.dataset.status);
+    const typeOk   = state.type    === 'all' || card.dataset.type    === state.type;
+    const listOk   = state.listing === 'all' || card.dataset.listing === state.listing;
+    const tierOk   = state.tier    === 'all' || card.dataset.tier    === state.tier;
+    const inactOk  = state.showInactive || !inactive;
+    const searchOk = !state.search || card.dataset.search.includes(state.search);
+    const show = typeOk && listOk && tierOk && inactOk && searchOk;
+    card.classList.toggle('card--hidden', !show);
+    if (show) visible++;
+  });
+  document.getElementById('countResult').textContent = visible;
+  document.getElementById('countDisplay').textContent = visible;
+  document.getElementById('emptyState').classList.toggle('show', visible === 0);
+}
+
+/* pill clicks */
+document.querySelectorAll('.pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    document.querySelectorAll(`.pill[data-filter="${filter}"]`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state[filter] = btn.dataset.val;
+    applyFilters();
+  });
+});
+
+/* search */
+document.getElementById('searchInput').addEventListener('input', e => {
+  state.search = e.target.value.toLowerCase().trim();
+  applyFilters();
+});
+
+/* toggle inactive */
+document.getElementById('toggleInactive').addEventListener('click', function() {
+  state.showInactive = !state.showInactive;
+  this.classList.toggle('on', state.showInactive);
+  this.textContent = state.showInactive ? 'Ocultar inactivas' : 'Incluir inactivas';
+  applyFilters();
+});
+
+/* ── INIT ── */
+const grid = document.getElementById('grid');
+const empty = document.getElementById('emptyState');
+PROPS.forEach(p => {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = renderCard(p);
+  grid.insertBefore(tmp.firstElementChild, empty);
+});
+applyFilters();
+</script>
+</body>
+</html>

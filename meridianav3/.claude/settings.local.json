@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import csv; print\\('csv ok'\\)\")",
+      "Bash(python3 *)",
+      "Read(//home/yorch/Documentos/helm-hackathon/synthetic-data/**)",
+      "Bash(cp -r meridianav1 meridianav3)"
+    ]
+  }
+}
